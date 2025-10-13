@@ -1,9 +1,10 @@
-import { dirname } from "path";
-import { fileURLToPath } from "url";
+import path from "node:path";
+import { fileURLToPath } from "node:url";
 import { FlatCompat } from "@eslint/eslintrc";
+import unicorn from "eslint-plugin-unicorn";
 
 const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
+const __dirname = path.dirname(__filename);
 
 const compat = new FlatCompat({
   baseDirectory: __dirname,
@@ -11,6 +12,14 @@ const compat = new FlatCompat({
 
 const eslintConfig = [
   ...compat.extends("next/core-web-vitals", "next/typescript"),
+  {
+    plugins: {
+      unicorn,
+    },
+    rules: {
+      ...unicorn.configs.recommended.rules,
+    },
+  },
   {
     ignores: [
       "node_modules/**",
