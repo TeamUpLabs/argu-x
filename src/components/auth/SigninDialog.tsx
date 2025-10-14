@@ -9,6 +9,7 @@ import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import { useCallback, useState } from "react";
 import { useUserStore } from "@/store/userStore";
+import { toast } from "sonner";
 
 interface SigninDialogProps {
   isLogin: boolean | undefined;
@@ -19,18 +20,16 @@ export default function SigninDialog({ isLogin, setIsLogin }: SigninDialogProps)
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState("");
   const setToken = useUserStore((state) => state.setToken);
   const setUser = useUserStore((state) => state.setUser);
 
   const handleLogin = useCallback(async () => {
     if (!email || !password) {
-      setError("Please enter both email and password");
+      toast.error("Please enter both email and password");
       return;
     }
 
     setIsLoading(true);
-    setError("");
 
     try {
       const response = await fetch('/api/login', {
@@ -46,12 +45,15 @@ export default function SigninDialog({ isLogin, setIsLogin }: SigninDialogProps)
       if (response.ok && data.success) {
         setToken(data.token); // 로그인 성공 시 토큰 저장
         setUser(data.user); // 로그인 성공 시 사용자 정보 저장
-        setIsLogin(undefined); // 로그인 성공 시 다이얼로그 닫기
+        setIsLogin(undefined); // 로그인 성공 시 다이얼로그 닫기,
+        setEmail("");
+        setPassword("");
+        toast.success("Login successful");
       } else {
-        setError(data.message || "Login failed");
+        toast.error(data.message || "Login failed");
       }
     } catch {
-      setError("Network error occurred");
+      toast.error("Network error occurred");
     } finally {
       setIsLoading(false);
     }
@@ -59,7 +61,7 @@ export default function SigninDialog({ isLogin, setIsLogin }: SigninDialogProps)
 
   return (
     <Dialog open={isLogin === true} onOpenChange={() => setIsLogin(undefined)}>
-      <DialogContent className="sm:max-w-[425px]">
+      <DialogContent>
         <DialogHeader className="space-y-3">
           <DialogTitle className="text-2xl font-semibold text-center">Sign In</DialogTitle>
         </DialogHeader>
@@ -86,9 +88,6 @@ export default function SigninDialog({ isLogin, setIsLogin }: SigninDialogProps)
               onChange={(e) => setPassword(e.target.value)}
             />
           </div>
-          {error && (
-            <div className="text-sm text-red-500 text-center">{error}</div>
-          )}
           <Button
             onClick={handleLogin}
             className="w-full h-11 mt-2"

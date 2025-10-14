@@ -1,8 +1,9 @@
 "use client";
 
-import Link from "next/link";
 import Image from "next/image";
 import { useUserStore } from "@/store/userStore";
+import { toast } from "sonner";
+import { useRouter } from "next/navigation";
 
 interface Debate {
   id: number;
@@ -36,9 +37,18 @@ export default function DebateCard({ debate }: DebateCardProps) {
   const prosRatio = debate.pros.count / (debate.pros.count + debate.cons.count) * 100;
   const consRatio = 100 - prosRatio;
   const { isAuthenticated } = useUserStore();
+  const router = useRouter();
+
+  const handleDebateClick = () => {
+    if (isAuthenticated()) {
+      router.push(`/sparring/${debate.id}`);
+    } else {
+      toast.error("로그인 후 토론을 확인할 수 있습니다.");
+    }
+  };
 
   return (
-    <Link href="#" className="card-flip-container aspect-[9/16]">
+    <div className="card-flip-container aspect-[9/16] cursor-pointer" onClick={handleDebateClick}>
       <div className="card-flip-inner">
         {/* 앞면 */}
         <div className="card-face bg-muted backdrop-blur-sm shadow-lg">
@@ -87,6 +97,6 @@ export default function DebateCard({ debate }: DebateCardProps) {
           </div>
         </div>
       </div>
-    </Link>
+    </div>
   )
 }
