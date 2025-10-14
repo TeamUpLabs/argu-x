@@ -7,7 +7,7 @@ export default function Home() {
     <div className="min-h-screen flex flex-col">
       <DefaultHeader fixed />
       <main className="flex-1 py-10">
-        <div className="max-w-7xl mx-auto grid grid-cols-4 gap-4">
+        <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
           {debates.map((debate, index) => (
             <DebateCard key={index} debate={debate} />
           ))}
