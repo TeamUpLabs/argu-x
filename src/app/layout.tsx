@@ -15,7 +15,7 @@ export default function RootLayout({
           defaultTheme="light"
         >
           {children}
-          <Toaster position="top-center" />
+          <Toaster closeButton />
         </ThemeProvider>
       </body>
     </html>
