@@ -160,4 +160,68 @@
   .card-back {
     transform: rotateY(180deg);
   }
+
+  /* 카드 확대 애니메이션 스타일 */
+  .animate-expand {
+    animation: cardExpand 0.6s ease-out forwards;
+  }
+
+  .animate-fade-in {
+    animation: fadeIn 0.3s ease-out forwards;
+  }
+
+  .animate-fade-out {
+    animation: fadeOut 0.3s ease-out forwards;
+  }
+
+  .animate-scale-up {
+    animation: scaleUp 0.6s ease-out forwards;
+  }
+
+  @keyframes cardExpand {
+    0% {
+      transform: scale(1) translateZ(0);
+      border-radius: 2.5rem;
+      z-index: 10;
+    }
+    50% {
+      transform: scale(1.2) translateZ(0);
+      border-radius: 2rem;
+      z-index: 10;
+    }
+    100% {
+      transform: scale(1.5) translateZ(0);
+      border-radius: 1rem;
+      z-index: 10;
+    }
+  }
+
+  @keyframes fadeIn {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+
+  @keyframes fadeOut {
+    0% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0;
+    }
+  }
+
+  @keyframes scaleUp {
+    0% {
+      transform: scale(0.8);
+      opacity: 0;
+    }
+    100% {
+      transform: scale(1);
+      opacity: 1;
+    }
+  }
 }
