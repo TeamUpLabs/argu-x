@@ -18,6 +18,12 @@ const eslintConfig = [
     },
     rules: {
       ...unicorn.configs.recommended.rules,
+      "unicorn/filename-case": ["error", { case: "camelCase" }],
+      "unicorn/prevent-abbreviations": ["error", { 
+        replacements: {
+          "utils": "utilities",
+        }
+       }],
     },
   },
   {
