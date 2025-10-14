@@ -2,7 +2,7 @@
 
 import Logo from "@/components/common/Logo";
 import { InputGroup, InputGroupAddon, InputGroupInput } from "@/components/ui/input-group";
-import AuthButtons from "@/components/common/AuthButtons";
+import AuthButtons from "@/components/auth/AuthButtons";
 import { Search, TrendingUp, ChevronLeft, ChevronRight } from "lucide-react";
 import ThemeToggle from "@/components/common/ThemeToggle";
 import Link from "next/link";
@@ -142,7 +142,7 @@ export default function DefaultHeader() {
             const isActive = pathname === item.href || pathname === item.href + '/';
 
             return (
-              <Link href={item.href} key={item.name} className={`flex items-center gap-2 px-2.5 py-1 hover:text-foreground flex-1 text-center ${isActive ? "text-foreground" : "text-muted-foreground"}`}>
+              <Link href={item.href} key={item.name} className={`flex flex-1 items-center gap-2 px-2.5 py-1 hover:text-foreground text-sm text-center ${isActive ? "text-foreground" : "text-muted-foreground"}`}>
                 {item.icon}
                 {item.name}
               </Link>
