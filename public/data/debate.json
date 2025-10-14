@@ -92,5 +92,52 @@
         }
       ]
     }
+  },
+  {
+    "id": 3,
+    "title": "임산부 배려석 꼭 비워둬야할까?",
+    "img": "/data/images/round3.png",
+    "pros": {
+      "title": "꼭 비워둬야한다",
+      "count": 45,
+      "users": [
+        {
+          "id": 1,
+          "name": "User 1",
+          "voted_at": "2023-01-01"
+        },
+        {
+          "id": 2,
+          "name": "User 2",
+          "voted_at": "2023-01-02"
+        },
+        {
+          "id": 3,
+          "name": "User 3",
+          "voted_at": "2023-01-03"
+        }
+      ]
+    },
+    "cons": {
+      "title": "앉아도 된다",
+      "count": 55,
+      "users": [
+        {
+          "id": 4,
+          "name": "User 4",
+          "voted_at": "2023-01-04"
+        },
+        {
+          "id": 5,
+          "name": "User 5",
+          "voted_at": "2023-01-05"
+        },
+        {
+          "id": 6,
+          "name": "User 6",
+          "voted_at": "2023-01-06"
+        }
+      ]
+    }
   }
 ]
