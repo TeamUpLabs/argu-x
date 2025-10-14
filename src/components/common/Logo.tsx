@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { useTheme } from "next-themes";
 import { useEffect, useState } from "react";
+import Link from "next/link";
 
 const sizes = {
   xs: "w-16 h-5",
@@ -24,7 +25,7 @@ export default function Logo({ size = "md" }: LogoProps) {
 
   if (!mounted) {
     return (
-      <div className={`${sizes[size]} flex items-center`}>
+      <Link href="/" className={`${sizes[size]} flex items-center`}>
         <Image
           src="/assets/logo/argu_x_logo.svg"
           alt="ArguX logo"
@@ -33,12 +34,12 @@ export default function Logo({ size = "md" }: LogoProps) {
           className="w-full h-full object-contain"
           style={{ width: "auto", height: "auto" }}
         />
-      </div>
+      </Link>
     );
   }
 
   return (
-    <div className={`${sizes[size]} flex items-center`}>
+    <Link href="/" className={`${sizes[size]} flex items-center`}>
       <Image
         src={theme === "dark" ? "/assets/logo/argu_x_logo_dark.svg" : "/assets/logo/argu_x_logo.svg"}
         alt="ArguX logo"
@@ -47,6 +48,6 @@ export default function Logo({ size = "md" }: LogoProps) {
         className="w-full h-full object-contain"
         style={{ width: "auto", height: "auto" }}
       />
-    </div>
+    </Link>
   );
 }
