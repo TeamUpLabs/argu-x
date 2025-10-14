@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { useTheme } from "next-themes";
+import { useEffect, useState } from "react";
 
 const sizes = {
   xs: "w-16 h-5",
@@ -15,6 +16,26 @@ interface LogoProps {
 
 export default function Logo({ size = "md" }: LogoProps) {
   const { theme } = useTheme();
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  if (!mounted) {
+    return (
+      <div className={`${sizes[size]} flex items-center`}>
+        <Image
+          src="/assets/logo/argu_x_logo.svg"
+          alt="ArguX logo"
+          width={2000}
+          height={609}
+          className="w-full h-full object-contain"
+          style={{ width: "auto", height: "auto" }}
+        />
+      </div>
+    );
+  }
 
   return (
     <div className={`${sizes[size]} flex items-center`}>
