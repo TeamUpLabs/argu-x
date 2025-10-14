@@ -2,9 +2,11 @@ import Image from "next/image";
 import { useTheme } from "next-themes";
 
 const sizes = {
-  sm: { width: 80, height: 24.36 },
-  md: { width: 100, height: 30.45 },
-  lg: { width: 120, height: 36.54 },
+  xs: "w-16 h-5",
+  sm: "w-20 h-6",
+  md: "w-24 h-[30px]",
+  lg: "w-28 h-8",
+  xl: "w-32 h-10",
 };
 
 interface LogoProps {
@@ -15,13 +17,15 @@ export default function Logo({ size = "md" }: LogoProps) {
   const { theme } = useTheme();
 
   return (
-    <Image
-      src={theme === "dark" ? "/assets/logo/argu_x_logo_dark.svg" : "/assets/logo/argu_x_logo.svg"}
-      alt="ArguX logo"
-      width={sizes[size].width}
-      height={sizes[size].height}
-      priority
-      className="object-contain"
-    />
+    <div className={`${sizes[size]} flex items-center`}>
+      <Image
+        src={theme === "dark" ? "/assets/logo/argu_x_logo_dark.svg" : "/assets/logo/argu_x_logo.svg"}
+        alt="ArguX logo"
+        width={2000}
+        height={609}
+        className="w-full h-full object-contain"
+        style={{ width: "auto", height: "auto" }}
+      />
+    </div>
   );
 }
