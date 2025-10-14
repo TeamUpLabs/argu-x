@@ -5,10 +5,20 @@ import SigninDialog from "./SigninDialog";
 import SignupDialog from "./SignupDialog";
 import Image from "next/image";
 import { DropdownMenu, DropdownMenuTrigger, DropdownMenuContent, DropdownMenuLabel, DropdownMenuSeparator } from "@/components/ui/dropdown-menu";
+import { useHydration } from "@/store/userStore";
 
 export default function AuthButtons() {
   const { isAuthenticated, user, logout } = useUserStore();
   const [isLogin, setIsLogin] = useState<boolean | undefined>();
+  const { _hasHydrated } = useUserStore();
+
+  // 하이드레이션이 완료될 때까지 인증 상태를 표시하지 않음
+  useHydration();
+
+  // 하이드레이션이 완료되지 않으면 빈 공간을 반환
+  if (!_hasHydrated) {
+    return <div className="flex items-center gap-2"></div>;
+  }
 
   return (
     <>
@@ -16,7 +26,7 @@ export default function AuthButtons() {
         {isAuthenticated() ? (
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
-              <div className="w-10 h-10 rounded-full bg-muted flex items-center justify-center cursor-pointer">
+              <button className="w-10 h-10 rounded-full bg-muted flex items-center justify-center cursor-pointer border-none bg-transparent p-0">
                 <Image
                   src={user?.avatar || 'https://randomuser.me/api/portraits/men/1.jpg'}
                   alt={user?.name || user?.email || 'U'}
@@ -24,7 +34,7 @@ export default function AuthButtons() {
                   height={40}
                   className="rounded-full"
                 />
-              </div>
+              </button>
             </DropdownMenuTrigger>
             <DropdownMenuContent>
               <DropdownMenuLabel>

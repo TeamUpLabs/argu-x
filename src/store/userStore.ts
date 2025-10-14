@@ -1,5 +1,6 @@
 import { create } from "zustand";
 import { devtools, persist, createJSONStorage } from "zustand/middleware";
+import { useEffect } from "react";
 
 type State = {
   Token: string | undefined;
@@ -10,12 +11,14 @@ type State = {
   } | undefined;
   isAuthenticated: () => boolean;
   debug: () => { token: string | undefined; isAuth: boolean };
+  _hasHydrated: boolean;
 }
 
 type Action = {
   setToken: (token: string) => void;
   setUser: (user: { email: string; name?: string; avatar?: string }) => void;
   logout: () => void;
+  setHasHydrated: (state: boolean) => void;
 }
 
 export const useUserStore = create<State & Action>()(
@@ -24,6 +27,7 @@ export const useUserStore = create<State & Action>()(
       (set, get) => ({
         Token: undefined,
         user: undefined,
+        _hasHydrated: false,
         setToken: (token: string) => set({ Token: token }),
         setUser: (user: { email: string; name?: string; avatar?: string }) => set({ user }),
         logout: () => set({ Token: undefined, user: undefined }),
@@ -35,12 +39,21 @@ export const useUserStore = create<State & Action>()(
           const token = get().Token;
           return { token, isAuth: !!token };
         },
+        setHasHydrated: (state: boolean) => set({ _hasHydrated: state }),
       }),
       {
         name: "user-storage",
         storage: createJSONStorage(() => localStorage),
-        skipHydration: true, // 서버사이드에서 hydration을 건너뜁니다
       }
     )
   )
-)
+);
+
+// 클라이언트 사이드에서만 실행되는 하이드레이션 완료 훅
+export function useHydration() {
+  const setHasHydrated = useUserStore((state) => state.setHasHydrated);
+  
+  useEffect(() => {
+    setHasHydrated(true);
+  }, [setHasHydrated]);
+}
