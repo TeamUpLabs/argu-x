@@ -3,7 +3,7 @@
 import Image from "next/image";
 import { useUserStore } from "@/store/userStore";
 import { toast } from "sonner";
-import { useRouter } from "next/navigation";
+import { useRouter, usePathname } from "next/navigation";
 import { useState, useRef, useEffect } from "react";
 import { Debate } from "@/types/Debate";
 import { getFrontImageBrightness, getTextColorClass, getTextOpacityClass } from "./utils/getFrontImageBrightness";
@@ -17,6 +17,7 @@ export default function DebateCard({ debate }: DebateCardProps) {
   const consRatio = 100 - prosRatio;
   const { isAuthenticated, _hasHydrated } = useUserStore();
   const router = useRouter();
+  const pathname = usePathname();
   const [isExpanding, setIsExpanding] = useState(false);
   const [showOverlay, setShowOverlay] = useState(false);
   const [frontBackgroundBrightness, setFrontBackgroundBrightness] = useState<'light' | 'dark'>('dark');
@@ -33,6 +34,8 @@ export default function DebateCard({ debate }: DebateCardProps) {
       detectFrontBrightness();
     }
   }, [debate.img]);
+
+  const [previousPathname, setPreviousPathname] = useState(pathname);
 
   const frontTextColorClass = getTextColorClass(frontBackgroundBrightness);
   const frontMutedTextColorClass = getTextOpacityClass(frontBackgroundBrightness, 0.6);
@@ -55,7 +58,9 @@ export default function DebateCard({ debate }: DebateCardProps) {
         const remainingTime = Math.max(50, minDisplayTime - elapsedTime); // 최소 50ms 더 대기
 
         setTimeout(() => {
-          router.push(`/sparring/${debate.id}`);
+          // 페이지 이동 시작
+          const debateData = btoa(encodeURIComponent(JSON.stringify(debate)));
+          router.push(`/sparring/${debate.id}?data=${debateData}`);
         }, remainingTime);
       }, 100);
     } else {
@@ -63,16 +68,14 @@ export default function DebateCard({ debate }: DebateCardProps) {
     }
   };
 
-  // 확대 애니메이션 완료 후 오버레이 숨기기
+  // 페이지 이동 완료 시 오버레이 숨기기
   useEffect(() => {
-    if (isExpanding) {
-      const timer = setTimeout(() => {
-        setIsExpanding(false);
-        setShowOverlay(false);
-      }, 600);
-      return () => clearTimeout(timer);
+    if (pathname !== previousPathname && showOverlay) {
+      setIsExpanding(false);
+      setShowOverlay(false);
+      setPreviousPathname(pathname);
     }
-  }, [isExpanding]);
+  }, [pathname, previousPathname, showOverlay]);
 
   return (
     <>
@@ -89,6 +92,7 @@ export default function DebateCard({ debate }: DebateCardProps) {
                 src={debate.img}
                 alt="background image"
                 fill
+                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                 className="object-cover"
                 priority
               />
@@ -105,6 +109,7 @@ export default function DebateCard({ debate }: DebateCardProps) {
                 src={debate.img}
                 alt="background image"
                 fill
+                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                 className="object-cover"
                 priority
               />
@@ -149,6 +154,7 @@ export default function DebateCard({ debate }: DebateCardProps) {
                 src={debate.img}
                 alt="background image"
                 fill
+                sizes="100vw"
                 className="object-cover rounded-lg"
                 priority
               />
