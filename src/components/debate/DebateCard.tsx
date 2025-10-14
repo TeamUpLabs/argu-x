@@ -69,7 +69,7 @@ export default function DebateCard({ debate }: DebateCardProps) {
       const timer = setTimeout(() => {
         setIsExpanding(false);
         setShowOverlay(false);
-      }, 500);
+      }, 600);
       return () => clearTimeout(timer);
     }
   }, [isExpanding]);
