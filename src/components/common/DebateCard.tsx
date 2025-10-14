@@ -51,7 +51,7 @@ export default function DebateCard({ debate }: DebateCardProps) {
               priority
             />
             <div className="absolute inset-0 z-10 p-6 flex flex-col items-start justify-start max-w-[80%]">
-              <span className="text-xs text-muted-foreground">{debate.id} 라운드</span>
+              <span className="text-xs text-white/60">{debate.id} 라운드</span>
               <span className="text-2xl font-bold text-white">{debate.title}</span>
             </div>
           </div>
@@ -70,7 +70,7 @@ export default function DebateCard({ debate }: DebateCardProps) {
               {isAuthenticated() ? (
                 <>
                   <span className="text-lg font-bold text-white">토론 결과</span>
-                  <div className="flex flex-col text-xs text-white/80">
+                  <div className="flex flex-col text-xs text-white/60">
                     <span>찬성: {prosRatio}%</span>
                     <span>반대: {consRatio}%</span>
                   </div>
