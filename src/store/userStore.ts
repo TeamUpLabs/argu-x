@@ -2,7 +2,8 @@ import { create } from "zustand";
 import { devtools, persist, createJSONStorage } from "zustand/middleware";
 
 type State = {
-  Token: string;
+  Token: string | undefined;
+  isAuthenticated: () => boolean;
 }
 
 type Action = {
@@ -12,9 +13,10 @@ type Action = {
 export const useUserStore = create<State & Action>()(
   devtools(
     persist(
-      (set) => ({
-        Token: "",
+      (set, get) => ({
+        Token: undefined,
         setToken: (token: string) => set({ Token: token }),
+        isAuthenticated: () => !!get().Token,
       }),
       {
         name: "user-storage",
