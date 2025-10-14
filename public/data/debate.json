@@ -2,142 +2,586 @@
   {
     "id": 1,
     "title": "이재명 정부 국정 운영 잘하고 있나?",
+    "category": "Politics",
     "img": "/data/images/round1.svg",
+    "status": "active",
+    "start_at": "2023-01-01T00:00:00Z",
+    "end_at": "2023-12-31T23:59:59Z",
+    "created_at": "2023-01-01T00:00:00Z",
+    "updated_at": "2023-01-01T00:00:00Z",
     "pros": {
       "title": "제대로 하고 있다",
-      "count": 45,
+      "count": 3,
       "users": [
         {
           "id": 1,
-          "name": "User 1",
-          "voted_at": "2023-01-01"
+          "name": "김철수",
+          "voted_at": "2023-01-01T10:00:00Z"
         },
         {
           "id": 2,
-          "name": "User 2",
-          "voted_at": "2023-01-02"
+          "name": "이영희",
+          "voted_at": "2023-01-02T11:00:00Z"
         },
         {
           "id": 3,
-          "name": "User 3",
-          "voted_at": "2023-01-03"
+          "name": "박민수",
+          "voted_at": "2023-01-03T12:00:00Z"
         }
       ]
     },
     "cons": {
       "title": "잘못하고 있다",
-      "count": 55,
+      "count": 3,
       "users": [
         {
           "id": 4,
-          "name": "User 4",
-          "voted_at": "2023-01-04"
+          "name": "정수진",
+          "voted_at": "2023-01-04T13:00:00Z"
         },
         {
           "id": 5,
-          "name": "User 5",
-          "voted_at": "2023-01-05"
+          "name": "강한빛",
+          "voted_at": "2023-01-05T14:00:00Z"
         },
         {
           "id": 6,
-          "name": "User 6",
-          "voted_at": "2023-01-06"
+          "name": "윤지영",
+          "voted_at": "2023-01-06T15:00:00Z"
         }
       ]
+    },
+    "creator": {
+      "id": 1,
+      "name": "관리자",
+      "email": "admin@example.com",
+      "avatar": "/avatars/admin.png",
+      "created_at": "2023-01-01T00:00:00Z",
+      "updated_at": "2023-01-01T00:00:00Z"
     }
   },
   {
     "id": 2,
     "title": "음주 운전엔 빨간 번호판, 필요할까?",
+    "category": "Traffic Safety",
     "img": "/data/images/round2.png",
+    "status": "active",
+    "start_at": "2023-02-01T00:00:00Z",
+    "end_at": "2023-12-31T23:59:59Z",
+    "created_at": "2023-02-01T00:00:00Z",
+    "updated_at": "2023-02-01T00:00:00Z",
     "pros": {
       "title": "빨간 번호판이 필요하다",
-      "count": 45,
+      "count": 3,
       "users": [
         {
-          "id": 1,
-          "name": "User 1",
-          "voted_at": "2023-01-01"
+          "id": 7,
+          "name": "김철수",
+          "voted_at": "2023-02-01T10:00:00Z"
         },
         {
-          "id": 2,
-          "name": "User 2",
-          "voted_at": "2023-01-02"
+          "id": 8,
+          "name": "이영희",
+          "voted_at": "2023-02-02T11:00:00Z"
         },
         {
-          "id": 3,
-          "name": "User 3",
-          "voted_at": "2023-01-03"
+          "id": 9,
+          "name": "박민수",
+          "voted_at": "2023-02-03T12:00:00Z"
         }
       ]
     },
     "cons": {
       "title": "빨간 번호판이 필요하지 않다",
-      "count": 55,
+      "count": 3,
       "users": [
         {
-          "id": 4,
-          "name": "User 4",
-          "voted_at": "2023-01-04"
+          "id": 10,
+          "name": "정수진",
+          "voted_at": "2023-02-04T13:00:00Z"
         },
         {
-          "id": 5,
-          "name": "User 5",
-          "voted_at": "2023-01-05"
+          "id": 11,
+          "name": "강한빛",
+          "voted_at": "2023-02-05T14:00:00Z"
         },
         {
-          "id": 6,
-          "name": "User 6",
-          "voted_at": "2023-01-06"
+          "id": 12,
+          "name": "윤지영",
+          "voted_at": "2023-02-06T15:00:00Z"
         }
       ]
+    },
+    "creator": {
+      "id": 2,
+      "name": "운전면허관리팀",
+      "email": "license@example.com",
+      "avatar": "/avatars/license.png",
+      "created_at": "2023-02-01T00:00:00Z",
+      "updated_at": "2023-02-01T00:00:00Z"
     }
   },
   {
     "id": 3,
     "title": "임산부 배려석 꼭 비워둬야할까?",
+    "category": "Social Etiquette",
     "img": "/data/images/round3.png",
+    "status": "active",
+    "start_at": "2023-03-01T00:00:00Z",
+    "end_at": "2023-12-31T23:59:59Z",
+    "created_at": "2023-03-01T00:00:00Z",
+    "updated_at": "2023-03-01T00:00:00Z",
     "pros": {
       "title": "꼭 비워둬야한다",
-      "count": 45,
+      "count": 3,
       "users": [
         {
-          "id": 1,
-          "name": "User 1",
-          "voted_at": "2023-01-01"
+          "id": 13,
+          "name": "김철수",
+          "voted_at": "2023-03-01T10:00:00Z"
         },
         {
-          "id": 2,
-          "name": "User 2",
-          "voted_at": "2023-01-02"
+          "id": 14,
+          "name": "이영희",
+          "voted_at": "2023-03-02T11:00:00Z"
         },
         {
-          "id": 3,
-          "name": "User 3",
-          "voted_at": "2023-01-03"
+          "id": 15,
+          "name": "박민수",
+          "voted_at": "2023-03-03T12:00:00Z"
         }
       ]
     },
     "cons": {
       "title": "앉아도 된다",
-      "count": 55,
+      "count": 3,
       "users": [
         {
-          "id": 4,
-          "name": "User 4",
-          "voted_at": "2023-01-04"
+          "id": 16,
+          "name": "정수진",
+          "voted_at": "2023-03-04T13:00:00Z"
         },
         {
-          "id": 5,
-          "name": "User 5",
-          "voted_at": "2023-01-05"
+          "id": 17,
+          "name": "강한빛",
+          "voted_at": "2023-03-05T14:00:00Z"
         },
         {
-          "id": 6,
-          "name": "User 6",
-          "voted_at": "2023-01-06"
+          "id": 18,
+          "name": "윤지영",
+          "voted_at": "2023-03-06T15:00:00Z"
         }
       ]
+    },
+    "creator": {
+      "id": 3,
+      "name": "대중교통팀",
+      "email": "transport@example.com",
+      "avatar": "/avatars/transport.png",
+      "created_at": "2023-03-01T00:00:00Z",
+      "updated_at": "2023-03-01T00:00:00Z"
+    }
+  },
+  {
+    "id": 4,
+    "title": "온라인 강의, 대면 강의보다 효과적일까?",
+    "category": "Education",
+    "img": "/data/images/round4.png",
+    "status": "active",
+    "start_at": "2023-04-01T00:00:00Z",
+    "end_at": "2023-12-31T23:59:59Z",
+    "created_at": "2023-04-01T00:00:00Z",
+    "updated_at": "2023-04-01T00:00:00Z",
+    "pros": {
+      "title": "온라인 강의가 더 효과적이다",
+      "count": 2,
+      "users": [
+        {
+          "id": 19,
+          "name": "서준호",
+          "voted_at": "2023-04-01T10:00:00Z"
+        },
+        {
+          "id": 20,
+          "name": "최유나",
+          "voted_at": "2023-04-02T11:00:00Z"
+        }
+      ]
+    },
+    "cons": {
+      "title": "대면 강의가 더 효과적이다",
+      "count": 3,
+      "users": [
+        {
+          "id": 21,
+          "name": "장민석",
+          "voted_at": "2023-04-03T13:00:00Z"
+        },
+        {
+          "id": 22,
+          "name": "오수진",
+          "voted_at": "2023-04-04T14:00:00Z"
+        },
+        {
+          "id": 23,
+          "name": "신동욱",
+          "voted_at": "2023-04-05T15:00:00Z"
+        }
+      ]
+    },
+    "creator": {
+      "id": 4,
+      "name": "교육연구팀",
+      "email": "education@example.com",
+      "avatar": "/avatars/education.png",
+      "created_at": "2023-04-01T00:00:00Z",
+      "updated_at": "2023-04-01T00:00:00Z"
+    }
+  },
+  {
+    "id": 5,
+    "title": "플라스틱 사용 금지, 환경 보호에 실질적 도움이 될까?",
+    "category": "Environment",
+    "img": "/data/images/round5.png",
+    "status": "completed",
+    "start_at": "2023-01-01T00:00:00Z",
+    "end_at": "2023-06-30T23:59:59Z",
+    "created_at": "2023-01-01T00:00:00Z",
+    "updated_at": "2023-07-01T00:00:00Z",
+    "pros": {
+      "title": "실질적 도움이 된다",
+      "count": 3,
+      "users": [
+        {
+          "id": 24,
+          "name": "환경지킴이",
+          "voted_at": "2023-01-15T10:00:00Z"
+        },
+        {
+          "id": 25,
+          "name": "그린피스",
+          "voted_at": "2023-02-01T11:00:00Z"
+        },
+        {
+          "id": 26,
+          "name": "에코워리어",
+          "voted_at": "2023-03-01T12:00:00Z"
+        }
+      ]
+    },
+    "cons": {
+      "title": "효과가 제한적이다",
+      "count": 2,
+      "users": [
+        {
+          "id": 27,
+          "name": "산업계대표",
+          "voted_at": "2023-04-01T13:00:00Z"
+        },
+        {
+          "id": 28,
+          "name": "비즈니스맨",
+          "voted_at": "2023-05-01T14:00:00Z"
+        }
+      ]
+    },
+    "creator": {
+      "id": 5,
+      "name": "환경운동가",
+      "email": "environment@example.com",
+      "avatar": "/avatars/environment.png",
+      "created_at": "2023-01-01T00:00:00Z",
+      "updated_at": "2023-07-01T00:00:00Z"
+    }
+  },
+  {
+    "id": 6,
+    "title": "인공지능이 인간의 일자리를 위협할까?",
+    "category": "Technology",
+    "img": "/data/images/round6.png",
+    "status": "active",
+    "start_at": "2023-05-01T00:00:00Z",
+    "end_at": "2023-12-31T23:59:59Z",
+    "created_at": "2023-05-01T00:00:00Z",
+    "updated_at": "2023-05-01T00:00:00Z",
+    "pros": {
+      "title": "인공지능이 일자리를 창출할 것이다",
+      "count": 3,
+      "users": [
+        {
+          "id": 29,
+          "name": "테크옵티미스트",
+          "voted_at": "2023-05-01T10:00:00Z"
+        },
+        {
+          "id": 30,
+          "name": "미래학자",
+          "voted_at": "2023-05-02T11:00:00Z"
+        },
+        {
+          "id": 31,
+          "name": "혁신가",
+          "voted_at": "2023-05-03T12:00:00Z"
+        }
+      ]
+    },
+    "cons": {
+      "title": "인공지능이 일자리를 대체할 것이다",
+      "count": 3,
+      "users": [
+        {
+          "id": 32,
+          "name": "노동운동가",
+          "voted_at": "2023-05-04T13:00:00Z"
+        },
+        {
+          "id": 33,
+          "name": "전통근로자",
+          "voted_at": "2023-05-05T14:00:00Z"
+        },
+        {
+          "id": 34,
+          "name": "미래불안자",
+          "voted_at": "2023-05-06T15:00:00Z"
+        }
+      ]
+    },
+    "creator": {
+      "id": 6,
+      "name": "테크전문가",
+      "email": "tech@example.com",
+      "avatar": "/avatars/tech.png",
+      "created_at": "2023-05-01T00:00:00Z",
+      "updated_at": "2023-05-01T00:00:00Z"
+    }
+  },
+  {
+    "id": 7,
+    "title": "육식이 환경에 미치는 영향은?",
+    "category": "Environment",
+    "img": "/data/images/round7.png",
+    "status": "active",
+    "start_at": "2023-06-01T00:00:00Z",
+    "end_at": "2023-12-31T23:59:59Z",
+    "created_at": "2023-06-01T00:00:00Z",
+    "updated_at": "2023-06-01T00:00:00Z",
+    "pros": {
+      "title": "육식이 환경에 심각한 영향을 미친다",
+      "count": 3,
+      "users": [
+        {
+          "id": 35,
+          "name": "환경보호자",
+          "voted_at": "2023-06-01T10:00:00Z"
+        },
+        {
+          "id": 36,
+          "name": "비건활동가",
+          "voted_at": "2023-06-02T11:00:00Z"
+        },
+        {
+          "id": 37,
+          "name": "지속가능성전문가",
+          "voted_at": "2023-06-03T12:00:00Z"
+        }
+      ]
+    },
+    "cons": {
+      "title": "육식이 환경에 미치는 영향이 과장되어 있다",
+      "count": 2,
+      "users": [
+        {
+          "id": 38,
+          "name": "축산업자",
+          "voted_at": "2023-06-04T13:00:00Z"
+        },
+        {
+          "id": 39,
+          "name": "육식문화옹호자",
+          "voted_at": "2023-06-05T14:00:00Z"
+        }
+      ]
+    },
+    "creator": {
+      "id": 7,
+      "name": "환경연구원",
+      "email": "environment@example.com",
+      "avatar": "/avatars/environment.png",
+      "created_at": "2023-06-01T00:00:00Z",
+      "updated_at": "2023-06-01T00:00:00Z"
+    }
+  },
+  {
+    "id": 8,
+    "title": "사회적 거리두기는 여전히 필요할까?",
+    "category": "Health",
+    "img": "/data/images/round8.png",
+    "status": "completed",
+    "start_at": "2023-01-01T00:00:00Z",
+    "end_at": "2023-08-31T23:59:59Z",
+    "created_at": "2023-01-01T00:00:00Z",
+    "updated_at": "2023-09-01T00:00:00Z",
+    "pros": {
+      "title": "사회적 거리두기가 여전히 필요하다",
+      "count": 2,
+      "users": [
+        {
+          "id": 40,
+          "name": "보건전문가",
+          "voted_at": "2023-01-15T10:00:00Z"
+        },
+        {
+          "id": 41,
+          "name": "감염병학자",
+          "voted_at": "2023-02-01T11:00:00Z"
+        }
+      ]
+    },
+    "cons": {
+      "title": "사회적 거리두기가 더 이상 필요하지 않다",
+      "count": 3,
+      "users": [
+        {
+          "id": 42,
+          "name": "경제회복론자",
+          "voted_at": "2023-03-01T12:00:00Z"
+        },
+        {
+          "id": 43,
+          "name": "사회활동가",
+          "voted_at": "2023-04-01T13:00:00Z"
+        },
+        {
+          "id": 44,
+          "name": "정상생활추구자",
+          "voted_at": "2023-05-01T14:00:00Z"
+        }
+      ]
+    },
+    "creator": {
+      "id": 8,
+      "name": "보건당국",
+      "email": "health@example.com",
+      "avatar": "/avatars/health.png",
+      "created_at": "2023-01-01T00:00:00Z",
+      "updated_at": "2023-09-01T00:00:00Z"
+    }
+  },
+  {
+    "id": 9,
+    "title": "암호화폐가 미래의 화폐가 될 수 있을까?",
+    "category": "Finance",
+    "img": "/data/images/round9.png",
+    "status": "active",
+    "start_at": "2023-07-01T00:00:00Z",
+    "end_at": "2023-12-31T23:59:59Z",
+    "created_at": "2023-07-01T00:00:00Z",
+    "updated_at": "2023-07-01T00:00:00Z",
+    "pros": {
+      "title": "암호화폐가 미래의 화폐가 될 것이다",
+      "count": 2,
+      "users": [
+        {
+          "id": 45,
+          "name": "크립토투자자",
+          "voted_at": "2023-07-01T10:00:00Z"
+        },
+        {
+          "id": 46,
+          "name": "블록체인전문가",
+          "voted_at": "2023-07-02T11:00:00Z"
+        }
+      ]
+    },
+    "cons": {
+      "title": "암호화폐는 미래의 화폐가 될 수 없다",
+      "count": 3,
+      "users": [
+        {
+          "id": 47,
+          "name": "전통금융인",
+          "voted_at": "2023-07-03T13:00:00Z"
+        },
+        {
+          "id": 48,
+          "name": "경제학자",
+          "voted_at": "2023-07-04T14:00:00Z"
+        },
+        {
+          "id": 49,
+          "name": "위험회피자",
+          "voted_at": "2023-07-05T15:00:00Z"
+        }
+      ]
+    },
+    "creator": {
+      "id": 9,
+      "name": "금융전문가",
+      "email": "finance@example.com",
+      "avatar": "/avatars/finance.png",
+      "created_at": "2023-07-01T00:00:00Z",
+      "updated_at": "2023-07-01T00:00:00Z"
+    }
+  },
+  {
+    "id": 10,
+    "title": "재택근무가 사무실 출근보다 생산적일까?",
+    "category": "Work",
+    "img": "/data/images/round10.png",
+    "status": "active",
+    "start_at": "2023-08-01T00:00:00Z",
+    "end_at": "2023-12-31T23:59:59Z",
+    "created_at": "2023-08-01T00:00:00Z",
+    "updated_at": "2023-08-01T00:00:00Z",
+    "pros": {
+      "title": "재택근무가 더 생산적이다",
+      "count": 3,
+      "users": [
+        {
+          "id": 50,
+          "name": "프리랜서",
+          "voted_at": "2023-08-01T10:00:00Z"
+        },
+        {
+          "id": 51,
+          "name": "워라밸중시자",
+          "voted_at": "2023-08-02T11:00:00Z"
+        },
+        {
+          "id": 52,
+          "name": "디지털노마드",
+          "voted_at": "2023-08-03T12:00:00Z"
+        }
+      ]
+    },
+    "cons": {
+      "title": "사무실 출근이 더 생산적이다",
+      "count": 3,
+      "users": [
+        {
+          "id": 53,
+          "name": "팀플레이어",
+          "voted_at": "2023-08-04T13:00:00Z"
+        },
+        {
+          "id": 54,
+          "name": "관리자",
+          "voted_at": "2023-08-05T14:00:00Z"
+        },
+        {
+          "id": 55,
+          "name": "대면소통중시자",
+          "voted_at": "2023-08-06T15:00:00Z"
+        }
+      ]
+    },
+    "creator": {
+      "id": 10,
+      "name": "HR전문가",
+      "email": "hr@example.com",
+      "avatar": "/avatars/hr.png",
+      "created_at": "2023-08-01T00:00:00Z",
+      "updated_at": "2023-08-01T00:00:00Z"
     }
   }
 ]
