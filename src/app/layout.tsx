@@ -9,7 +9,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ko" suppressHydrationWarning>
-      <body className="antialiased" suppressHydrationWarning={true}>
+      <body className="antialiased px-3" suppressHydrationWarning={true}>
         <ThemeProvider
           attribute="class"
           defaultTheme="light"
