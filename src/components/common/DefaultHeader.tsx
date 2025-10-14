@@ -88,7 +88,7 @@ const categories: Category[] = [
   },
 ]
 
-export default function DefaultHeader() {
+export default function DefaultHeader({ fixed }: { fixed?: boolean }) {
   const pathname = usePathname();
   const scrollRef = useRef<HTMLDivElement>(null);
   const [showLeftArrow, setShowLeftArrow] = useState(false);
@@ -121,8 +121,8 @@ export default function DefaultHeader() {
   };
 
   return (
-    <header className="w-full">
-      <div className="flex items-center gap-4 px-4 lg:px-6 py-4 pb-1 max-w-7xl mx-auto">
+    <header className={`w-full bg-background pt-4 pb-2 space-y-1 border-b ${fixed ? "sticky top-0 z-10" : ""}`}>
+      <div className="flex items-center gap-4 max-w-7xl mx-auto">
         <Logo />
         <InputGroup>
           <InputGroupInput placeholder="Search..." />
@@ -136,13 +136,13 @@ export default function DefaultHeader() {
         </div>
       </div>
 
-      <nav className="relative max-w-7xl mx-auto px-4">
-        <div className="flex items-center gap-2 overflow-x-auto scrollbar-hide" ref={scrollRef} onScroll={checkScrollArrows}>
+      <nav className="relative max-w-7xl mx-auto">
+        <div className="flex items-center gap-8 justify-between overflow-hidden overflow-x-auto scrollbar-hide" ref={scrollRef} onScroll={checkScrollArrows}>
           {categories.map((item) => {
             const isActive = pathname === item.href || pathname === item.href + '/';
 
             return (
-              <Link href={item.href} key={item.name} className={`flex flex-1 items-center gap-2 px-2.5 py-1 hover:text-foreground text-sm text-center ${isActive ? "text-foreground" : "text-muted-foreground"}`}>
+              <Link href={item.href} key={item.name} className={`flex flex-1 items-center gap-2 py-1 hover:text-foreground text-sm text-center ${isActive ? "text-foreground" : "text-muted-foreground"}`}>
                 {item.icon}
                 {item.name}
               </Link>

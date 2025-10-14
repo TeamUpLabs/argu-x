@@ -7,7 +7,7 @@ export default function SparringLayout({
 }>) {
   return (
     <>
-      <DefaultHeader />
+      <DefaultHeader fixed />
       {children}
     </>
   );

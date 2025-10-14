@@ -5,7 +5,7 @@ import debates from "../../public/data/debate.json";
 export default function Home() {
   return (
     <div className="min-h-screen flex flex-col">
-      <DefaultHeader />
+      <DefaultHeader fixed />
       <main className="flex-1 py-10">
         <div className="max-w-7xl mx-auto grid grid-cols-4 gap-4">
           {debates.map((debate, index) => (
