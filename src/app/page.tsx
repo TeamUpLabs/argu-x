@@ -1,5 +1,5 @@
 import DefaultHeader from "@/components/common/DefaultHeader";
-import DebateCard from "@/components/common/DebateCard";
+import DebateCard from "@/components/debate/DebateCard";
 import debates from "../../public/data/debate.json";
 
 export default function Home() {

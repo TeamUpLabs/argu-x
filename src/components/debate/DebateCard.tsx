@@ -5,30 +5,8 @@ import { useUserStore } from "@/store/userStore";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 import { useState, useRef, useEffect } from "react";
-
-interface Debate {
-  id: number;
-  title: string;
-  img: string;
-  cons: {
-    title: string;
-    count: number;
-    users: {
-      id: number;
-      name: string;
-      voted_at: string;
-    }[]
-  }
-  pros: {
-    title: string;
-    count: number;
-    users: {
-      id: number;
-      name: string;
-      voted_at: string;
-    }[]
-  }
-}
+import { Debate } from "@/types/Debate";
+import { getFrontImageBrightness, getTextColorClass, getTextOpacityClass } from "./utils/getFrontImageBrightness";
 
 interface DebateCardProps {
   debate: Debate;
@@ -37,11 +15,27 @@ interface DebateCardProps {
 export default function DebateCard({ debate }: DebateCardProps) {
   const prosRatio = debate.pros.count / (debate.pros.count + debate.cons.count) * 100;
   const consRatio = 100 - prosRatio;
-  const { isAuthenticated } = useUserStore();
+  const { isAuthenticated, _hasHydrated } = useUserStore();
   const router = useRouter();
   const [isExpanding, setIsExpanding] = useState(false);
   const [showOverlay, setShowOverlay] = useState(false);
+  const [frontBackgroundBrightness, setFrontBackgroundBrightness] = useState<'light' | 'dark'>('dark');
   const cardRef = useRef<HTMLDivElement>(null);
+
+  // 앞면 이미지 밝기 감지
+  useEffect(() => {
+    const detectFrontBrightness = async () => {
+      const brightness = await getFrontImageBrightness(debate.img);
+      setFrontBackgroundBrightness(brightness);
+    };
+
+    if (debate.img) {
+      detectFrontBrightness();
+    }
+  }, [debate.img]);
+
+  const frontTextColorClass = getTextColorClass(frontBackgroundBrightness);
+  const frontMutedTextColorClass = getTextOpacityClass(frontBackgroundBrightness, 0.6);
 
   const handleDebateClick = async () => {
     if (isAuthenticated()) {
@@ -99,8 +93,8 @@ export default function DebateCard({ debate }: DebateCardProps) {
                 priority
               />
               <div className="absolute inset-0 z-10 p-6 flex flex-col items-start justify-start max-w-[80%]">
-                <span className="text-xs text-white/60">{debate.id} 라운드</span>
-                <span className="text-2xl font-bold text-white">{debate.title}</span>
+                <span className={`text-xs ${frontMutedTextColorClass}`}>{debate.id} 라운드</span>
+                <span className={`text-2xl font-bold ${frontTextColorClass}`}>{debate.title}</span>
               </div>
             </div>
           </div>
@@ -115,19 +109,28 @@ export default function DebateCard({ debate }: DebateCardProps) {
                 priority
               />
               <div className="absolute inset-0 z-10 px-4 py-6 flex flex-col gap-3 items-center justify-center text-center">
-                {isAuthenticated() ? (
-                  <>
-                    <span className="text-lg font-bold text-white">토론 결과</span>
-                    <div className="flex flex-col text-xs text-white/60">
-                      <span>찬성: {prosRatio}%</span>
-                      <span>반대: {consRatio}%</span>
-                    </div>
-                  </>
+                {_hasHydrated ? (
+                  isAuthenticated() ? (
+                    <>
+                      <span className="text-lg font-bold text-white">토론 결과</span>
+                      <div className="flex flex-col text-xs text-white/80">
+                        <span>찬성: {prosRatio}%</span>
+                        <span>반대: {consRatio}%</span>
+                      </div>
+                    </>
+                  ) : (
+                    <>
+                      <span className="text-lg font-bold text-white">토론 결과가 궁금하다면?</span>
+                      <div className="flex flex-col text-xs text-white/80">
+                        <span>로그인 후 확인 가능합니다.</span>
+                      </div>
+                    </>
+                  )
                 ) : (
                   <>
                     <span className="text-lg font-bold text-white">토론 결과가 궁금하다면?</span>
                     <div className="flex flex-col text-xs text-white/80">
-                      <span>로그인 후 확인 가능합니다.</span>
+                      <span>로딩 중...</span>
                     </div>
                   </>
                 )}

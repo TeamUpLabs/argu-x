@@ -1,7 +1,7 @@
 export default function SparringPage() {
   return (
-    <div>
-      <h1>Sparring Page</h1>
+    <div className="max-w-7xl mx-auto">
+      
     </div>
   );
 }
