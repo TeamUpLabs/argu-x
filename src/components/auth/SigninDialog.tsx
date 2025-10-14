@@ -7,6 +7,8 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
+import { useCallback, useState } from "react";
+import { useUserStore } from "@/store/userStore";
 
 interface SigninDialogProps {
   isLogin: boolean | undefined;
@@ -14,6 +16,47 @@ interface SigninDialogProps {
 }
 
 export default function SigninDialog({ isLogin, setIsLogin }: SigninDialogProps) {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState("");
+  const setToken = useUserStore((state) => state.setToken);
+  const setUser = useUserStore((state) => state.setUser);
+
+  const handleLogin = useCallback(async () => {
+    if (!email || !password) {
+      setError("Please enter both email and password");
+      return;
+    }
+
+    setIsLoading(true);
+    setError("");
+
+    try {
+      const response = await fetch('/api/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email, password }),
+      });
+
+      const data = await response.json();
+
+      if (response.ok && data.success) {
+        setToken(data.token); // 로그인 성공 시 토큰 저장
+        setUser(data.user); // 로그인 성공 시 사용자 정보 저장
+        setIsLogin(undefined); // 로그인 성공 시 다이얼로그 닫기
+      } else {
+        setError(data.message || "Login failed");
+      }
+    } catch {
+      setError("Network error occurred");
+    } finally {
+      setIsLoading(false);
+    }
+  }, [email, password, setIsLogin, setToken, setUser]);
+
   return (
     <Dialog open={isLogin === true} onOpenChange={() => setIsLogin(undefined)}>
       <DialogContent className="sm:max-w-[425px]">
@@ -28,6 +71,8 @@ export default function SigninDialog({ isLogin, setIsLogin }: SigninDialogProps)
               id="email"
               placeholder="Enter your email"
               className="h-11"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
             />
           </div>
           <div className="space-y-2">
@@ -37,10 +82,20 @@ export default function SigninDialog({ isLogin, setIsLogin }: SigninDialogProps)
               id="password"
               placeholder="Enter your password"
               className="h-11"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
             />
           </div>
-          <Button className="w-full h-11 mt-2" size="lg">
-            Sign In
+          {error && (
+            <div className="text-sm text-red-500 text-center">{error}</div>
+          )}
+          <Button
+            onClick={handleLogin}
+            className="w-full h-11 mt-2"
+            size="lg"
+            disabled={isLoading}
+          >
+            {isLoading ? "Signing In..." : "Sign In"}
           </Button>
 
           {/* 소셜 로그인 섹션 */}

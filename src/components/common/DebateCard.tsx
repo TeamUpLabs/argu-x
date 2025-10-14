@@ -35,7 +35,7 @@ interface DebateCardProps {
 export default function DebateCard({ debate }: DebateCardProps) {
   const prosRatio = debate.pros.count / (debate.pros.count + debate.cons.count) * 100;
   const consRatio = 100 - prosRatio;
-  const isAuthenticated = useUserStore((state) => state.isAuthenticated);
+  const { isAuthenticated } = useUserStore();
 
   return (
     <Link href="#" className="card-flip-container aspect-[9/16]">
