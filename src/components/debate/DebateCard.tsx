@@ -175,12 +175,7 @@ export default function DebateCard({ debate }: DebateCardProps) {
                                     ? `polygon(0 0%, 100% 0, ${100 - (consRatio / prosRatio) * 7}% 100%, 0% 100%)`
                                     : `polygon(0 0%, 100% 0, 93% 100%, 0% 100%)`
                                 }}
-                              >
-                                {/* 반짝임 효과 */}
-                                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent animate-pulse opacity-60" />
-                                {/* 물결 효과 */}
-                                <div className="absolute inset-0 bg-gradient-to-r from-blue-300/40 to-transparent animate-bounce opacity-20" style={{ animationDuration: '3s' }} />
-                              </div>
+                              />
 
                               {/* 반대 바 - 동적 사선 알고리즘 */}
                               <div
@@ -193,12 +188,7 @@ export default function DebateCard({ debate }: DebateCardProps) {
                                     ? `polygon(${prosRatio / consRatio * 7}% 0, 100% 0, 100% 100%, 0% 100%)`
                                     : `polygon(7% 0, 100% 0, 100% 100%, 0% 100%)`
                                 }}
-                              >
-                                {/* 반짝임 효과 */}
-                                <div className="absolute inset-0 bg-gradient-to-l from-transparent via-white/30 to-transparent animate-pulse opacity-60" />
-                                {/* 물결 효과 */}
-                                <div className="absolute inset-0 bg-gradient-to-l from-red-300/40 to-transparent animate-bounce opacity-20" style={{ animationDuration: '2.5s', animationDelay: '0.5s' }} />
-                              </div>
+                              />
                             </div>
                           </div>
 
