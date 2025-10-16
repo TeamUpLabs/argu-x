@@ -27,7 +27,10 @@ export default function Header({ scale, debate, opacity }: HeaderProps) {
                 className="object-cover"
               />
             </div>
-            <span className="text-foreground font-bold text-2xl">{debate.title}</span>
+            <div className="flex flex-col">
+              <span className="text-foreground font-bold text-2xl">{debate.title}</span>
+              <span className="text-muted-foreground text-xs">{debate.cons.count + debate.pros.count}명 투표완료</span>
+            </div>
           </>
         ) : (
           <>
