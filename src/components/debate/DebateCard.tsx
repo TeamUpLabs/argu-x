@@ -15,7 +15,7 @@ interface DebateCardProps {
 }
 
 export default function DebateCard({ debate }: DebateCardProps) {
-  const prosRatio = debate.pros.count / (debate.pros.count + debate.cons.count) * 100;
+  const prosRatio = (debate.pros.users.length / (debate.pros.users.length + debate.cons.users.length)) * 100;
   const consRatio = 100 - prosRatio;
   const { isAuthenticated, _hasHydrated } = useUserStore();
   const router = useRouter();
@@ -200,7 +200,7 @@ export default function DebateCard({ debate }: DebateCardProps) {
                                 <div className="w-2 h-2 bg-blue-400 rounded-full relative" />
                               </div>
                               <span className="bg-blue-500/20 backdrop-blur-sm px-2 py-1 rounded-full">
-                                찬성 {Math.round(prosRatio)}%
+                                찬성 {prosRatio.toFixed(1)}%
                               </span>
                             </div>
 
@@ -210,7 +210,7 @@ export default function DebateCard({ debate }: DebateCardProps) {
                                 <div className="w-2 h-2 bg-red-400 rounded-full relative" />
                               </div>
                               <span className="bg-purple-500/20 backdrop-blur-sm px-2 py-1 rounded-full">
-                                반대 {Math.round(consRatio)}%
+                                반대 {consRatio.toFixed(1)}%
                               </span>
                             </div>
                           </div>
