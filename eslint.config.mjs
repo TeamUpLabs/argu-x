@@ -20,6 +20,7 @@ const eslintConfig = [
       ...unicorn.configs.recommended.rules,
       "unicorn/filename-case": 0,
       "unicorn/prevent-abbreviations": 0,
+      "unicorn/no-null": 0,
     },
   },
   {

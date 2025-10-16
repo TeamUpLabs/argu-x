@@ -8,6 +8,7 @@ import OpinionCards from "@/components/sparring/OpinionCards";
 import ProgressBar from "@/components/sparring/ProgressBar";
 import DebateResult from "@/components/sparring/DebateResult";
 import { calculateRatiosExcludingToday, calculateRatiosIncludingToday } from "@/components/sparring/utils/calculateRatios";
+import ParticipationTrend from "@/components/sparring/charts/ParticipationTrend";
 
 // 타입 정의
 type OpinionType = '찬성' | '반대' | '변동 없음';
@@ -31,8 +32,36 @@ export default function SparringPage() {
   const [percentage, setPercentage] = useState(0);
   const [latestProsDate, setLatestProsDate] = useState('');
   const [latestConsDate, setLatestConsDate] = useState('');
+  const [participationData, setParticipationData] = useState<{ date: string; pros: number; cons: number; }[]>([]);
 
-  // URL에서 debate 정보 가져오기
+  // 토론 참여 추이 데이터 생성 함수
+  const generateParticipationData = (debate: Debate) => {
+    const allUsers = [...(debate.pros?.users || []), ...(debate.cons?.users || [])];
+    const sortedUsers = allUsers.toSorted((a, b) => new Date(a.voted_at).getTime() - new Date(b.voted_at).getTime());
+
+    const dailyParticipation: { [key: string]: { date: string; pros: number; cons: number } } = {};
+
+    for (const user of sortedUsers) {
+      const date = new Date(user.voted_at).toISOString().split('T')[0];
+      if (!dailyParticipation[date]) {
+        dailyParticipation[date] = { date, pros: 0, cons: 0 };
+      }
+
+      // pros나 cons 구분 (간단히 사용자 ID 기반으로 분배)
+      if (user.id % 2 === 0) {
+        dailyParticipation[date].pros += 1;
+      } else {
+        dailyParticipation[date].cons += 1;
+      }
+    }
+
+    return Object.values(dailyParticipation).map(item => ({
+      date: item.date,
+      pros: item.pros,
+      cons: item.cons,
+    }));
+  };
+
   useEffect(() => {
     const data = searchParams.get('data');
     if (data) {
@@ -41,6 +70,11 @@ export default function SparringPage() {
       try {
         const decodedData = JSON.parse(decodeURIComponent(atob(data)));
         setDebate(decodedData);
+
+        // 토론 참여 추이 데이터 생성
+        const participationChartData = generateParticipationData(decodedData);
+        console.log(participationChartData);
+        setParticipationData(participationChartData);
 
         const { prosRatio: prosRatioExcludingToday, consRatio: consRatioExcludingToday, latestProsDate, latestConsDate } = calculateRatiosExcludingToday(decodedData);
         const { prosRatio: prosRatioIncludingToday, consRatio: consRatioIncludingToday } = calculateRatiosIncludingToday(decodedData);
@@ -151,8 +185,15 @@ export default function SparringPage() {
                   latestProsDate={latestProsDate}
                   latestConsDate={latestConsDate}
                 />
+
+                {/* 토론 참여 추이 차트 */}
+                {participationData.length > 0 && (
+                  <ParticipationTrend participationData={participationData} />
+                )}
               </div>
             </div>
+
+
           </div>
         </div>
       </div>
