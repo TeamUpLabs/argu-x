@@ -10,7 +10,7 @@ export default function ProgressBar({ prosRatio, consRatio }: ProgressBarProps) 
     <div className="w-full bg-white/10 rounded-full h-4 overflow-hidden backdrop-blur-sm" role="img" aria-label={`찬성 ${prosRatio.toFixed(1)}% 대 반대 ${consRatio.toFixed(1)}%`}>
       {/* 찬성 바 - 동적 사선 알고리즘 */}
       <div
-        className="h-full bg-gradient-to-r from-blue-300 via-blue-400 to-blue-500 transition-all duration-2000 ease-out relative overflow-hidden shadow-lg"
+        className="h-full bg-gradient-to-r from-blue-300 dark:from-blue-400 via-blue-400 dark:via-blue-500 to-blue-500 dark:to-blue-600 transition-all duration-2000 ease-out relative overflow-hidden shadow-lg"
         style={{
           width: `${prosRatio + 1}%`,  // 프로그래스 바 끼리 가까워지기 위해 1% 추가
           clipPath: prosRatio > consRatio
@@ -22,7 +22,7 @@ export default function ProgressBar({ prosRatio, consRatio }: ProgressBarProps) 
 
       {/* 반대 바 - 동적 사선 알고리즘 */}
       <div
-        className="absolute top-0 h-full bg-gradient-to-l from-red-300 via-red-400 to-red-500 transition-all duration-2000 ease-out shadow-lg"
+        className="absolute top-0 h-full bg-gradient-to-l from-red-300 dark:from-red-400 via-red-400 dark:via-red-500 to-red-500 dark:to-red-600 transition-all duration-2000 ease-out shadow-lg"
         style={{
           width: `${consRatio + 1}%`,  // 프로그래스 바 끼리 가까워지기 위해 1% 추가
           right: 0,
