@@ -147,14 +147,14 @@ export default function ParticipationTrend({ participationData }: ParticipationT
             />
             <Line
               dataKey="cons"
-              type="natural"
+              type="linear"
               fill="url(#fillCons)"
               stroke="var(--color-cons)"
               isAnimationActive={false}
             />
             <Line
               dataKey="pros"
-              type="natural"
+              type="linear"
               fill="url(#fillPros)"
               stroke="var(--color-pros)"
               isAnimationActive={false}

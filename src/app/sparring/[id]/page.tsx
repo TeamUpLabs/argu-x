@@ -42,6 +42,7 @@ export default function SparringPage() {
 
     const dailyParticipation: { [key: string]: { date: string; pros: number; cons: number } } = {};
 
+    // 먼저 모든 날짜의 데이터를 그룹화
     for (const user of sortedUsers) {
       const date = new Date(user.voted_at).toISOString().split('T')[0];
       if (!dailyParticipation[date]) {
@@ -56,10 +57,29 @@ export default function SparringPage() {
       }
     }
 
-    return Object.values(dailyParticipation).map(item => ({
-      date: item.date,
-      pros: item.pros,
-      cons: item.cons,
+    // 가장 오래된 날짜와 오늘 날짜를 구함
+    if (sortedUsers.length === 0) {
+      return [];
+    }
+
+    const oldestDate = new Date(sortedUsers[0].voted_at);
+    const today = new Date();
+    today.setHours(0, 0, 0, 0); // 오늘 날짜의 시작 시간으로 설정
+
+    // 날짜 범위 생성 (오래된 날짜부터 오늘까지)
+    const dateRange: string[] = [];
+    const currentDate = new Date(oldestDate);
+
+    while (currentDate <= today) {
+      dateRange.push(currentDate.toISOString().split('T')[0]);
+      currentDate.setDate(currentDate.getDate() + 1);
+    }
+
+    // 모든 날짜 범위에 대해 데이터 생성 (데이터가 없는 날은 0으로 채움)
+    return dateRange.map(date => ({
+      date,
+      pros: dailyParticipation[date]?.pros || 0,
+      cons: dailyParticipation[date]?.cons || 0,
     }));
   };
 
