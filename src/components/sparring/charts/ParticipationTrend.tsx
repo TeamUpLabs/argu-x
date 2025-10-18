@@ -69,10 +69,7 @@ export default function ParticipationTrend({ participationData }: ParticipationT
         <CardDescription>플랫폼 활성도를 실시간으로 확인하세요</CardDescription>
       </CardHeader>
       <CardContent className="px-2 sm:px-6">
-        <ChartContainer
-          config={chartConfig}
-          className="aspect-auto h-[250px] w-full"
-        >
+        <ChartContainer config={chartConfig}>
           <LineChart data={cumulativeData}>
             <defs>
               <linearGradient id="fillPros" x1="0" y1="0" x2="0" y2="1">
