@@ -107,6 +107,8 @@ export default function ParticipationTrend({ participationData }: ParticipationT
                 fill: 'hsl(var(--muted-foreground))',
                 fontWeight: 500
               }}
+              interval={1}
+              domain={[0, 'dataMax']}
               dx={-5}
               width={35}
             />
@@ -149,129 +151,5 @@ export default function ParticipationTrend({ participationData }: ParticipationT
         </ChartContainer>
       </CardContent>
     </Card>
-    // <div className="relative overflow-hidden rounded-2xl p-4 sm:p-6 lg:p-8 border border-border transition-all duration-500 group">
-    //   <div className="relative">
-    //     <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-4 sm:mb-6 gap-3">
-    //       <div>
-    //         <h3 className="text-xl sm:text-2xl font-bold bg-gradient-to-r from-slate-800 to-slate-600 bg-clip-text text-transparent mb-1 sm:mb-2">
-    //           토론 참여 추이
-    //         </h3>
-    //         <p className="text-xs sm:text-sm text-slate-500 font-medium">
-    //           플랫폼 활성도를 실시간으로 확인하세요
-    //         </p>
-    //       </div>
-    //       <Badge variant="secondary" className="flex items-center gap-2">
-    //         <div className="w-1.5 h-1.5 sm:w-2 sm:h-2 bg-green-400 rounded-full animate-pulse"></div>
-    //         <span className="text-muted-foreground">실시간</span>
-    //       </Badge>
-    //     </div>
-
-    //     <div className="relative">
-    //       <ChartContainer config={chartConfig} className="w-full h-[280px] sm:h-[320px]">
-    //         <LineChart
-    //           data={participationData}
-    //           margin={{ top: 20, right: 10, left: 10, bottom: 20 }}
-    //           accessibilityLayer={true}
-    //         >
-
-    //           <CartesianGrid
-    //             strokeDasharray="2 4"
-    //             stroke="#e2e8f0"
-    //             strokeOpacity={0.4}
-    //             horizontal={true}
-    //             vertical={false}
-    //           />
-
-    //           <XAxis
-    //             dataKey="date"
-    //             axisLine={false}
-    //             tickLine={false}
-    //             tick={{
-    //               fontSize: window.innerWidth < 640 ? 10 : 12,
-    //               fill: '#64748b',
-    //               fontWeight: 500
-    //             }}
-    //             dy={10}
-    //             interval="preserveStartEnd"
-    //           />
-
-    //           <YAxis
-    //             axisLine={false}
-    //             tickLine={false}
-    //             tick={{
-    //               fontSize: window.innerWidth < 640 ? 10 : 12,
-    //               fill: '#64748b',
-    //               fontWeight: 500
-    //             }}
-    //             dx={-5}
-    //             width={30}
-    //           />
-
-    //           <ChartTooltip
-    //             content={({ active, payload, label }) => {
-    //               if (active && payload && payload.length > 0) {
-    //                 return (
-    //                   <div className="bg-background border border-border rounded-lg p-3 shadow-lg">
-    //                     <p className="font-medium">{label}</p>
-    //                     {payload.map((entry, index) => (
-    //                       <p key={index} style={{ color: entry.color }}>
-    //                         {entry.name}: {entry.value}명
-    //                       </p>
-    //                     ))}
-    //                   </div>
-    //                 );
-    //               }
-    //               return null;
-    //             }}
-    //           />
-
-    //           <ChartLegend />
-
-    //           <Line
-    //             type="monotone"
-    //             dataKey="찬성"
-    //             stroke="var(--color-찬성)"
-    //             strokeWidth={window.innerWidth < 640 ? 2 : 3}
-    //             dot={{
-    //               fill: '#22c55e',
-    //               strokeWidth: 2,
-    //               stroke: '#ffffff',
-    //               r: window.innerWidth < 640 ? 3 : 4
-    //             }}
-    //             activeDot={{
-    //               r: window.innerWidth < 640 ? 5 : 6,
-    //               stroke: '#22c55e',
-    //               strokeWidth: 2,
-    //               fill: '#ffffff'
-    //             }}
-    //             name="찬성 의견"
-    //             isAnimationActive={false}
-    //           />
-
-    //           <Line
-    //             type="monotone"
-    //             dataKey="반대"
-    //             stroke="var(--color-반대)"
-    //             strokeWidth={window.innerWidth < 640 ? 2 : 3}
-    //             dot={{
-    //               fill: '#f59e0b',
-    //               strokeWidth: 2,
-    //               stroke: '#ffffff',
-    //               r: window.innerWidth < 640 ? 3 : 4
-    //             }}
-    //             activeDot={{
-    //               r: window.innerWidth < 640 ? 5 : 6,
-    //               stroke: '#f59e0b',
-    //               strokeWidth: 2,
-    //               fill: '#ffffff'
-    //             }}
-    //             name="반대 의견"
-    //             isAnimationActive={false}
-    //           />
-    //         </LineChart>
-    //       </ChartContainer>
-    //     </div>
-    //   </div>
-    // </div>
   );
 }
