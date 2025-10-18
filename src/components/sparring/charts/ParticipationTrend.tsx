@@ -1,3 +1,4 @@
+import { useMemo } from "react";
 import { Badge } from "@/components/ui/badge";
 import { Line, LineChart, CartesianGrid, XAxis, YAxis } from "recharts";
 import {
@@ -39,6 +40,22 @@ const chartConfig: ChartConfig = {
 };
 
 export default function ParticipationTrend({ participationData }: ParticipationTrendProps) {
+  const cumulativeData = useMemo(() => {
+    const sortedData = [...participationData].sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
+    return sortedData.reduce((acc, curr, index) => {
+      if (index === 0) {
+        acc.push({ ...curr });
+      } else {
+        acc.push({
+          date: curr.date,
+          pros: acc[index - 1].pros + curr.pros,
+          cons: acc[index - 1].cons + curr.cons,
+        });
+      }
+      return acc;
+    }, [] as ParticipationData[]);
+  }, [participationData]);
+
   return (
     <Card>
       <CardHeader>
@@ -56,7 +73,7 @@ export default function ParticipationTrend({ participationData }: ParticipationT
           config={chartConfig}
           className="aspect-auto h-[250px] w-full"
         >
-          <LineChart data={participationData}>
+          <LineChart data={cumulativeData}>
             <defs>
               <linearGradient id="fillPros" x1="0" y1="0" x2="0" y2="1">
                 <stop
@@ -108,7 +125,6 @@ export default function ParticipationTrend({ participationData }: ParticipationT
                 fontWeight: 500
               }}
               interval={1}
-              domain={[0, 'dataMax']}
               dx={-5}
               width={35}
             />
