@@ -2,7 +2,7 @@ import { Debate } from "@/types/Debate";
 
 // 오늘을 제외한 가장 최신 날짜까지의 찬성과 반대 비율을 계산하는 함수
 export const calculateRatiosExcludingToday = (debate: Debate) => {
-  const today = new Date().toISOString().split("T")[0]; // e.g., '2025-10-16'
+  const today = new Date().toISOString().split("T")[0];
   const latestProsDate = new Date(
     debate.pros.users
       .filter((user) => user.voted_at.split("T")[0] !== today)
@@ -12,7 +12,7 @@ export const calculateRatiosExcludingToday = (debate: Debate) => {
       )[0].voted_at
   )
     .toISOString()
-    .split("T")[0]; // e.g., '2025-10-16'
+    .split("T")[0];
   const latestConsDate = new Date(
     debate.cons.users
       .filter((user) => user.voted_at.split("T")[0] !== today)
@@ -22,7 +22,7 @@ export const calculateRatiosExcludingToday = (debate: Debate) => {
       )[0].voted_at
   )
     .toISOString()
-    .split("T")[0]; // e.g., '2025-10-16'
+    .split("T")[0];
 
   const prosCount = debate.pros.users.filter(
     (user) => user.voted_at.split("T")[0] !== today

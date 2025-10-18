@@ -6,13 +6,10 @@ import { Debate } from "@/types/Debate";
 import Header from "@/components/sparring/header";
 import OpinionCards from "@/components/sparring/OpinionCards";
 import ProgressBar from "@/components/sparring/ProgressBar";
-import DebateResult from "@/components/sparring/DebateResult";
+import DebateResult, { OpinionType } from "@/components/sparring/DebateResult";
 import { calculateRatiosExcludingToday, calculateRatiosIncludingToday } from "@/components/sparring/utils/calculateRatios";
 import ParticipationTrend from "@/components/sparring/charts/ParticipationTrend";
 import OpinionDistribution from "@/components/sparring/charts/OpinionDistribution";
-
-// 타입 정의
-type OpinionType = '찬성' | '반대' | '변동 없음';
 
 // 상수 정의
 const SCALE_MIN = 0.7;
@@ -37,45 +34,55 @@ export default function SparringPage() {
 
   // 토론 참여 추이 데이터 생성 함수
   const generateParticipationData = (debate: Debate) => {
-    const allUsers = [...(debate.pros?.users || []), ...(debate.cons?.users || [])];
-    const sortedUsers = allUsers.toSorted((a, b) => new Date(a.voted_at).getTime() - new Date(b.voted_at).getTime());
+    if (!debate.pros?.users && !debate.cons?.users) {
+      return [];
+    }
 
     const dailyParticipation: { [key: string]: { date: string; pros: number; cons: number } } = {};
 
-    // 먼저 모든 날짜의 데이터를 그룹화
-    for (const user of sortedUsers) {
-      const date = new Date(user.voted_at).toISOString().split('T')[0];
-      if (!dailyParticipation[date]) {
-        dailyParticipation[date] = { date, pros: 0, cons: 0 };
-      }
-
-      // pros나 cons 구분 (간단히 사용자 ID 기반으로 분배)
-      if (user.id % 2 === 0) {
+    // Pros 데이터 처리
+    if (debate.pros?.users) {
+      for (const user of debate.pros.users) {
+        const date = new Date(user.voted_at).toISOString().split('T')[0];
+        if (!dailyParticipation[date]) {
+          dailyParticipation[date] = { date, pros: 0, cons: 0 };
+        }
         dailyParticipation[date].pros += 1;
-      } else {
+      }
+    }
+
+    // Cons 데이터 처리
+    if (debate.cons?.users) {
+      for (const user of debate.cons.users) {
+        const date = new Date(user.voted_at).toISOString().split('T')[0];
+        if (!dailyParticipation[date]) {
+          dailyParticipation[date] = { date, pros: 0, cons: 0 };
+        }
         dailyParticipation[date].cons += 1;
       }
     }
 
-    // 가장 오래된 날짜와 오늘 날짜를 구함
-    if (sortedUsers.length === 0) {
+    const allUsers = [...(debate.pros?.users || []), ...(debate.cons?.users || [])];
+    if (allUsers.length === 0) {
       return [];
     }
 
+    const sortedUsers = allUsers.toSorted((a, b) => new Date(a.voted_at).getTime() - new Date(b.voted_at).getTime());
     const oldestDate = new Date(sortedUsers[0].voted_at);
-    const today = new Date();
-    today.setHours(0, 0, 0, 0); // 오늘 날짜의 시작 시간으로 설정
+    const currentDateObj = new Date();
+    const currentDateString = currentDateObj.toISOString().split('T')[0];
 
-    // 날짜 범위 생성 (오래된 날짜부터 오늘까지)
     const dateRange: string[] = [];
-    const currentDate = new Date(oldestDate);
+    const startDate = new Date(oldestDate);
 
-    while (currentDate <= today) {
-      dateRange.push(currentDate.toISOString().split('T')[0]);
-      currentDate.setDate(currentDate.getDate() + 1);
+    const endDate = new Date(currentDateString + 'T23:59:59.999Z');
+
+    while (startDate.getTime() <= endDate.getTime()) {
+      const dateStr = startDate.toISOString().split('T')[0];
+      dateRange.push(dateStr);
+      startDate.setDate(startDate.getDate() + 1);
     }
 
-    // 모든 날짜 범위에 대해 데이터 생성 (데이터가 없는 날은 0으로 채움)
     return dateRange.map(date => ({
       date,
       pros: dailyParticipation[date]?.pros || 0,
@@ -92,9 +99,7 @@ export default function SparringPage() {
         const decodedData = JSON.parse(decodeURIComponent(atob(data)));
         setDebate(decodedData);
 
-        // 토론 참여 추이 데이터 생성
         const participationChartData = generateParticipationData(decodedData);
-        console.log(participationChartData);
         setParticipationData(participationChartData);
 
         const { prosRatio: prosRatioExcludingToday, consRatio: consRatioExcludingToday, latestProsDate, latestConsDate } = calculateRatiosExcludingToday(decodedData);

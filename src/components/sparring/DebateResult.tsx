@@ -2,7 +2,7 @@ import React from 'react';
 import { ArrowBigUp } from 'lucide-react';
 import { getRelativeDate } from '@/components/sparring/utils/getRelativeDate';
 
-type OpinionType = '찬성' | '반대' | '변동 없음';
+export type OpinionType = '찬성' | '반대' | '변동 없음';
 
 interface DebateResultProps {
   prosRatio: number;
