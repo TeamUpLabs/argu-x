@@ -9,6 +9,7 @@ import ProgressBar from "@/components/sparring/ProgressBar";
 import DebateResult from "@/components/sparring/DebateResult";
 import { calculateRatiosExcludingToday, calculateRatiosIncludingToday } from "@/components/sparring/utils/calculateRatios";
 import ParticipationTrend from "@/components/sparring/charts/ParticipationTrend";
+import OpinionDistribution from "@/components/sparring/charts/OpinionDistribution";
 
 // 타입 정의
 type OpinionType = '찬성' | '반대' | '변동 없음';
@@ -190,6 +191,9 @@ export default function SparringPage() {
                 {participationData.length > 0 && (
                   <ParticipationTrend participationData={participationData} />
                 )}
+
+                {/* 토론 의견 분포 차트 */}
+                <OpinionDistribution prosCount={debate?.pros?.users?.length || 0} consCount={debate?.cons?.users?.length || 0} />
               </div>
             </div>
 
