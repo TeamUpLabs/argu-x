@@ -22,7 +22,7 @@ export default function DebateResult({
   latestConsDate
 }: DebateResultProps) {
   return (
-    <div className="bg-muted max-w-lg mx-auto flex flex-col gap-2 p-2 rounded-lg border border-border" role="region" aria-label="토론 결과">
+    <div className="bg-muted flex flex-col gap-2 p-2 rounded-lg border border-border" role="region" aria-label="토론 결과">
       <div className="flex items-end justify-between">
         <div className="flex flex-col flex-1 items-center">
           <span className="text-blue-700 font-bold">그렇다</span>

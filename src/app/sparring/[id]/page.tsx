@@ -10,7 +10,9 @@ import DebateResult, { OpinionType } from "@/components/sparring/DebateResult";
 import { calculateRatiosExcludingToday, calculateRatiosIncludingToday } from "@/components/sparring/utils/calculateRatios";
 import ParticipationTrend from "@/components/sparring/charts/ParticipationTrend";
 import OpinionDistribution from "@/components/sparring/charts/OpinionDistribution";
-import Filter from "@/components/sparring/charts/filter";
+import ChartFilter from "@/components/sparring/charts/filter";
+import InsightsFilter from "@/components/sparring/insights/filter";
+import InsightCard from "@/components/sparring/insights/InsightCard";
 
 // 상수 정의
 const SCALE_MIN = 0.7;
@@ -32,6 +34,7 @@ export default function SparringPage() {
   const [latestProsDate, setLatestProsDate] = useState('');
   const [latestConsDate, setLatestConsDate] = useState('');
   const [participationData, setParticipationData] = useState<{ date: string; pros: number; cons: number; }[]>([]);
+  const [opinionType, setOpinionType] = useState<'pros' | 'cons'>('pros');
   const [chartType, setChartType] = useState<'participation' | 'opinion'>('participation');
 
   // 토론 참여 추이 데이터 생성 함수
@@ -198,7 +201,7 @@ export default function SparringPage() {
 
             {/* 내용 */}
             <div className="py-5">
-              <div className="relative space-y-8">
+              <div className="relative space-y-8 px-1">
                 <div className="space-y-2">
                   {debate && <OpinionCards debate={debate} />}
                   <ProgressBar prosRatio={prosRatio} consRatio={consRatio} />
@@ -214,10 +217,26 @@ export default function SparringPage() {
                   latestConsDate={latestConsDate}
                 />
 
-                <div className="flex flex-col gap-2 px-1">
+                <div className="flex flex-col gap-2">
+                  <div className="flex items-center justify-between">
+                    <span className="text-foreground font-bold text-2xl">INSIGHTS</span>
+                    <InsightsFilter opinionType={opinionType} setOpinionType={setOpinionType} />
+                  </div>
+                  {opinionType === 'pros' ? (
+                    debate?.pros?.insights?.map((insight) => (
+                      <InsightCard key={insight.id} insight={insight} opinion={opinionType} />
+                    ))
+                  ) : (
+                    debate?.cons?.insights?.map((insight) => (
+                      <InsightCard key={insight.id} insight={insight} opinion={opinionType} />
+                    ))
+                  )}
+                </div>
+
+                <div className="flex flex-col gap-2">
                   <div className="flex items-center justify-between">
                     <span className="text-foreground font-bold text-2xl">CHARTS</span>
-                    <Filter chartType={chartType} setChartType={setChartType} />
+                    <ChartFilter chartType={chartType} setChartType={setChartType} />
                   </div>
                   {/* 토론 참여 추이 차트 */}
                   {chartType === 'participation' && (
@@ -230,8 +249,6 @@ export default function SparringPage() {
                   )}
                 </div>
               </div>
-
-
             </div>
           </div>
         </div>

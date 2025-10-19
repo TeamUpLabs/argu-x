@@ -8,58 +8,12 @@ export interface Debate {
   cons: {
     title: string;
     count: number;
-    insights: {
-      id: number;
-      content: string;
-      created_at: string;
-      updated_at: string;
-      creator: {
-        id: number;
-        name: string;
-        email: string;
-        avatar: string;
-        created_at: string;
-        updated_at: string;
-      };
-      voted_count: number;
-      voted_users: {
-        id: number;
-        name: string;
-        email: string;
-        avatar: string;
-        created_at: string;
-        updated_at: string;
-        voted_at: string;
-      }[];
-    }[];
+    insights: Insight[];
   };
   pros: {
     title: string;
     count: number;
-    insights: {
-      id: number;
-      content: string;
-      created_at: string;
-      updated_at: string;
-      creator: {
-        id: number;
-        name: string;
-        email: string;
-        avatar: string;
-        created_at: string;
-        updated_at: string;
-      };
-      voted_count: number;
-      voted_users: {
-        id: number;
-        name: string;
-        email: string;
-        avatar: string;
-        created_at: string;
-        updated_at: string;
-        voted_at: string;
-      }[];
-    }[];
+    insights: Insight[];
   };
 
   start_at: string;
@@ -89,5 +43,30 @@ export interface Debate {
       created_at: string;
       updated_at: string;
     };
+  }[];
+}
+
+export interface Insight {
+  id: number;
+  content: string;
+  created_at: string;
+  updated_at: string;
+  creator: {
+    id: number;
+    name: string;
+    email: string;
+    avatar: string;
+    created_at: string;
+    updated_at: string;
+  };
+  voted_count: number;
+  voted_users: {
+    id: number;
+    name: string;
+    email: string;
+    avatar: string;
+    created_at: string;
+    updated_at: string;
+    voted_at: string;
   }[];
 }
