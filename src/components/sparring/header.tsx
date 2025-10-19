@@ -14,7 +14,7 @@ interface HeaderProps {
 
 export default function Header({ scale, debate, opacity }: HeaderProps) {
   return (
-    <div className="flex items-center justify-between sticky bg-background top-25 z-10 pt-4 pb-1">
+    <div className="flex items-center justify-between sticky top-[101px] bg-background z-10 pt-4 pb-1">
       <div className={`flex items-center gap-4 origin-center origin-left`} style={{ transform: `scale(${scale})` }}>
         {debate ? (
           <>

@@ -190,12 +190,12 @@ export default function SparringPage() {
     <div className="max-w-7xl mx-auto">
       <div className="flex items-center gap-2 justify-between">
         <div className="w-2/3 h-full relative">
-          <div className="flex flex-col gap-10 w-full h-full">
+          <div className="flex flex-col w-full h-full">
             {/* 헤더 */}
             <Header debate={debate} scale={headerScale} opacity={headerOpacity} />
 
             {/* 내용 */}
-            <div className="min-h-[10000px]">
+            <div className="py-5">
               <div className="relative space-y-8">
                 <div className="space-y-2">
                   {debate && <OpinionCards debate={debate} />}
