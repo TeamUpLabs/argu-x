@@ -15,7 +15,7 @@ interface DebateCardProps {
 }
 
 export default function DebateCard({ debate }: DebateCardProps) {
-  const prosRatio = (debate.pros.users.length / (debate.pros.users.length + debate.cons.users.length)) * 100;
+  const prosRatio = (debate.pros.count / (debate.pros.count + debate.cons.count)) * 100;
   const consRatio = 100 - prosRatio;
   const { isAuthenticated, _hasHydrated } = useUserStore();
   const router = useRouter();

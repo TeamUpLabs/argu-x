@@ -41,19 +41,23 @@ const chartConfig: ChartConfig = {
 
 export default function ParticipationTrend({ participationData }: ParticipationTrendProps) {
   const cumulativeData = useMemo(() => {
-    const sortedData = [...participationData].sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
-    return sortedData.reduce((acc, curr, index) => {
+    const sortedData = participationData.toSorted((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
+    const result: ParticipationData[] = [];
+
+    for (const [index, current] of sortedData.entries()) {
       if (index === 0) {
-        acc.push({ ...curr });
+        result.push({ ...current });
       } else {
-        acc.push({
-          date: curr.date,
-          pros: acc[index - 1].pros + curr.pros,
-          cons: acc[index - 1].cons + curr.cons,
+        const previous = result[index - 1];
+        result.push({
+          date: current.date,
+          pros: previous.pros + current.pros,
+          cons: previous.cons + current.cons,
         });
       }
-      return acc;
-    }, [] as ParticipationData[]);
+    }
+
+    return result;
   }, [participationData]);
 
   return (

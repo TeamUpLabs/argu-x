@@ -4,31 +4,31 @@ import { Debate } from "@/types/Debate";
 export const calculateRatiosExcludingToday = (debate: Debate) => {
   const today = new Date().toISOString().split("T")[0];
   const latestProsDate = new Date(
-    debate.pros.users
-      .filter((user) => user.voted_at.split("T")[0] !== today)
+    debate.pros.insights
+      .filter((insight) => insight.created_at.split("T")[0] !== today)
       .toSorted(
         (a, b) =>
-          new Date(b.voted_at).getTime() - new Date(a.voted_at).getTime()
-      )[0].voted_at
+          new Date(b.created_at).getTime() - new Date(a.created_at).getTime()
+      )[0].created_at
   )
     .toISOString()
     .split("T")[0];
   const latestConsDate = new Date(
-    debate.cons.users
-      .filter((user) => user.voted_at.split("T")[0] !== today)
+    debate.cons.insights
+      .filter((insight) => insight.created_at.split("T")[0] !== today)
       .toSorted(
         (a, b) =>
-          new Date(b.voted_at).getTime() - new Date(a.voted_at).getTime()
-      )[0].voted_at
+          new Date(b.created_at).getTime() - new Date(a.created_at).getTime()
+      )[0].created_at
   )
     .toISOString()
     .split("T")[0];
 
-  const prosCount = debate.pros.users.filter(
-    (user) => user.voted_at.split("T")[0] !== today
+  const prosCount = debate.pros.insights.filter(
+    (insight) => insight.created_at.split("T")[0] !== today
   ).length;
-  const consCount = debate.cons.users.filter(
-    (user) => user.voted_at.split("T")[0] !== today
+  const consCount = debate.cons.insights.filter(
+    (insight) => insight.created_at.split("T")[0] !== today
   ).length;
 
   const total = prosCount + consCount;
@@ -40,8 +40,8 @@ export const calculateRatiosExcludingToday = (debate: Debate) => {
 
 // 오늘을 포함한 찬성과 반대 비율을 계산하는 함수
 export const calculateRatiosIncludingToday = (debate: Debate) => {
-  const prosCount = debate.pros.users.length; // 오늘을 포함한 모든 pros 투표
-  const consCount = debate.cons.users.length; // 오늘을 포함한 모든 cons 투표
+  const prosCount = debate.pros.insights.length; // 오늘을 포함한 모든 pros 투표
+  const consCount = debate.cons.insights.length; // 오늘을 포함한 모든 cons 투표
 
   const total = prosCount + consCount;
   const prosRatio = total > 0 ? (prosCount / total) * 100 : 0;

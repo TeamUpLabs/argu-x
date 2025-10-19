@@ -2,9 +2,10 @@
   {
     "id": 1,
     "title": "이재명 정부 국정 운영 잘하고 있나?",
+    "description": "현 정부의 국정 운영 성과에 대한 찬반 토론",
     "category": "Politics",
+    "status": "ROUND_1",
     "img": "/data/images/round1.png",
-    "status": "active",
     "start_at": "2023-01-01T00:00:00Z",
     "end_at": "2023-12-31T23:59:59Z",
     "created_at": "2023-01-01T00:00:00Z",
@@ -12,72 +13,324 @@
     "pros": {
       "title": "제대로 하고 있다",
       "count": 6,
-      "users": [
+      "insights": [
         {
           "id": 1,
-          "name": "김철수",
-          "voted_at": "2025-10-15T10:00:00Z"
+          "content": "현 정부의 경제 정책이 효과를 보고 있습니다.",
+          "created_at": "2025-10-15T10:00:00Z",
+          "updated_at": "2025-10-15T10:00:00Z",
+          "creator": {
+            "id": 1,
+            "name": "김철수",
+            "email": "kim@example.com",
+            "avatar": "/avatars/user1.png",
+            "created_at": "2023-01-01T00:00:00Z",
+            "updated_at": "2023-01-01T00:00:00Z"
+          },
+          "voted_count": 1,
+          "voted_users": [
+            {
+              "id": 1,
+              "name": "김철수",
+              "email": "kim@example.com",
+              "avatar": "/avatars/user1.png",
+              "created_at": "2023-01-01T00:00:00Z",
+              "updated_at": "2023-01-01T00:00:00Z",
+              "voted_at": "2025-10-15T10:00:00Z"
+            }
+          ]
         },
         {
           "id": 2,
-          "name": "이영희",
-          "voted_at": "2025-10-15T11:00:00Z"
+          "content": "사회 복지 정책이 잘 시행되고 있습니다.",
+          "created_at": "2025-10-15T11:00:00Z",
+          "updated_at": "2025-10-15T11:00:00Z",
+          "creator": {
+            "id": 2,
+            "name": "이영희",
+            "email": "lee@example.com",
+            "avatar": "/avatars/user2.png",
+            "created_at": "2023-01-01T00:00:00Z",
+            "updated_at": "2023-01-01T00:00:00Z"
+          },
+          "voted_count": 1,
+          "voted_users": [
+            {
+              "id": 2,
+              "name": "이영희",
+              "email": "lee@example.com",
+              "avatar": "/avatars/user2.png",
+              "created_at": "2023-01-01T00:00:00Z",
+              "updated_at": "2023-01-01T00:00:00Z",
+              "voted_at": "2025-10-15T11:00:00Z"
+            }
+          ]
         },
         {
           "id": 3,
-          "name": "박민수",
-          "voted_at": "2025-10-16T12:00:00Z"
+          "content": "외교 정책이 안정적으로 추진되고 있습니다.",
+          "created_at": "2025-10-16T12:00:00Z",
+          "updated_at": "2025-10-16T12:00:00Z",
+          "creator": {
+            "id": 3,
+            "name": "박민수",
+            "email": "park@example.com",
+            "avatar": "/avatars/user3.png",
+            "created_at": "2023-01-01T00:00:00Z",
+            "updated_at": "2023-01-01T00:00:00Z"
+          },
+          "voted_count": 1,
+          "voted_users": [
+            {
+              "id": 3,
+              "name": "박민수",
+              "email": "park@example.com",
+              "avatar": "/avatars/user3.png",
+              "created_at": "2023-01-01T00:00:00Z",
+              "updated_at": "2023-01-01T00:00:00Z",
+              "voted_at": "2025-10-16T12:00:00Z"
+            }
+          ]
         },
         {
           "id": 101,
-          "name": "새로운찬성자1",
-          "voted_at": "2025-10-16T13:00:00Z"
+          "content": "교육 정책이 개선되고 있습니다.",
+          "created_at": "2025-10-16T13:00:00Z",
+          "updated_at": "2025-10-16T13:00:00Z",
+          "creator": {
+            "id": 101,
+            "name": "새로운찬성자1",
+            "email": "newpro1@example.com",
+            "avatar": "/avatars/user101.png",
+            "created_at": "2023-01-01T00:00:00Z",
+            "updated_at": "2023-01-01T00:00:00Z"
+          },
+          "voted_count": 1,
+          "voted_users": [
+            {
+              "id": 101,
+              "name": "새로운찬성자1",
+              "email": "newpro1@example.com",
+              "avatar": "/avatars/user101.png",
+              "created_at": "2023-01-01T00:00:00Z",
+              "updated_at": "2023-01-01T00:00:00Z",
+              "voted_at": "2025-10-16T13:00:00Z"
+            }
+          ]
         },
         {
           "id": 102,
-          "name": "새로운찬성자2",
-          "voted_at": "2025-10-15T14:00:00Z"
+          "content": "환경 정책이 적극적으로 추진되고 있습니다.",
+          "created_at": "2025-10-15T14:00:00Z",
+          "updated_at": "2025-10-15T14:00:00Z",
+          "creator": {
+            "id": 102,
+            "name": "새로운찬성자2",
+            "email": "newpro2@example.com",
+            "avatar": "/avatars/user102.png",
+            "created_at": "2023-01-01T00:00:00Z",
+            "updated_at": "2023-01-01T00:00:00Z"
+          },
+          "voted_count": 1,
+          "voted_users": [
+            {
+              "id": 102,
+              "name": "새로운찬성자2",
+              "email": "newpro2@example.com",
+              "avatar": "/avatars/user102.png",
+              "created_at": "2023-01-01T00:00:00Z",
+              "updated_at": "2023-01-01T00:00:00Z",
+              "voted_at": "2025-10-15T14:00:00Z"
+            }
+          ]
         },
         {
           "id": 103,
-          "name": "새로운찬성자3",
-          "voted_at": "2025-10-17T15:00:00Z"
+          "content": "국민 안전 정책이 강화되고 있습니다.",
+          "created_at": "2025-10-17T15:00:00Z",
+          "updated_at": "2025-10-17T15:00:00Z",
+          "creator": {
+            "id": 103,
+            "name": "새로운찬성자3",
+            "email": "newpro3@example.com",
+            "avatar": "/avatars/user103.png",
+            "created_at": "2023-01-01T00:00:00Z",
+            "updated_at": "2023-01-01T00:00:00Z"
+          },
+          "voted_count": 1,
+          "voted_users": [
+            {
+              "id": 103,
+              "name": "새로운찬성자3",
+              "email": "newpro3@example.com",
+              "avatar": "/avatars/user103.png",
+              "created_at": "2023-01-01T00:00:00Z",
+              "updated_at": "2023-01-01T00:00:00Z",
+              "voted_at": "2025-10-17T15:00:00Z"
+            }
+          ]
         }
       ]
     },
     "cons": {
       "title": "잘못하고 있다",
       "count": 6,
-      "users": [
+      "insights": [
         {
           "id": 4,
-          "name": "정수진",
-          "voted_at": "2025-10-15T13:00:00Z"
+          "content": "경제 정책이 실패하고 있습니다.",
+          "created_at": "2025-10-15T13:00:00Z",
+          "updated_at": "2025-10-15T13:00:00Z",
+          "creator": {
+            "id": 4,
+            "name": "정수진",
+            "email": "jung@example.com",
+            "avatar": "/avatars/user4.png",
+            "created_at": "2023-01-01T00:00:00Z",
+            "updated_at": "2023-01-01T00:00:00Z"
+          },
+          "voted_count": 1,
+          "voted_users": [
+            {
+              "id": 4,
+              "name": "정수진",
+              "email": "jung@example.com",
+              "avatar": "/avatars/user4.png",
+              "created_at": "2023-01-01T00:00:00Z",
+              "updated_at": "2023-01-01T00:00:00Z",
+              "voted_at": "2025-10-15T13:00:00Z"
+            }
+          ]
         },
         {
           "id": 5,
-          "name": "강한빛",
-          "voted_at": "2025-10-16T14:00:00Z"
+          "content": "사회 정책이 제대로 시행되지 않고 있습니다.",
+          "created_at": "2025-10-16T14:00:00Z",
+          "updated_at": "2025-10-16T14:00:00Z",
+          "creator": {
+            "id": 5,
+            "name": "강한빛",
+            "email": "kang@example.com",
+            "avatar": "/avatars/user5.png",
+            "created_at": "2023-01-01T00:00:00Z",
+            "updated_at": "2023-01-01T00:00:00Z"
+          },
+          "voted_count": 1,
+          "voted_users": [
+            {
+              "id": 5,
+              "name": "강한빛",
+              "email": "kang@example.com",
+              "avatar": "/avatars/user5.png",
+              "created_at": "2023-01-01T00:00:00Z",
+              "updated_at": "2023-01-01T00:00:00Z",
+              "voted_at": "2025-10-16T14:00:00Z"
+            }
+          ]
         },
         {
           "id": 6,
-          "name": "윤지영",
-          "voted_at": "2025-10-16T15:00:00Z"
-        },
-        {
-          "id": 103,
-          "name": "새로운반대자1",
-          "voted_at": "2025-10-15T16:00:00Z"
+          "content": "외교 정책에 문제가 많습니다.",
+          "created_at": "2025-10-16T15:00:00Z",
+          "updated_at": "2025-10-16T15:00:00Z",
+          "creator": {
+            "id": 6,
+            "name": "윤지영",
+            "email": "yoon@example.com",
+            "avatar": "/avatars/user6.png",
+            "created_at": "2023-01-01T00:00:00Z",
+            "updated_at": "2023-01-01T00:00:00Z"
+          },
+          "voted_count": 1,
+          "voted_users": [
+            {
+              "id": 6,
+              "name": "윤지영",
+              "email": "yoon@example.com",
+              "avatar": "/avatars/user6.png",
+              "created_at": "2023-01-01T00:00:00Z",
+              "updated_at": "2023-01-01T00:00:00Z",
+              "voted_at": "2025-10-16T15:00:00Z"
+            }
+          ]
         },
         {
           "id": 104,
-          "name": "새로운반대자2",
-          "voted_at": "2025-10-16T17:00:00Z"
+          "content": "교육 정책이 후퇴하고 있습니다.",
+          "created_at": "2025-10-15T16:00:00Z",
+          "updated_at": "2025-10-15T16:00:00Z",
+          "creator": {
+            "id": 104,
+            "name": "새로운반대자1",
+            "email": "newcon1@example.com",
+            "avatar": "/avatars/user104.png",
+            "created_at": "2023-01-01T00:00:00Z",
+            "updated_at": "2023-01-01T00:00:00Z"
+          },
+          "voted_count": 1,
+          "voted_users": [
+            {
+              "id": 104,
+              "name": "새로운반대자1",
+              "email": "newcon1@example.com",
+              "avatar": "/avatars/user104.png",
+              "created_at": "2023-01-01T00:00:00Z",
+              "updated_at": "2023-01-01T00:00:00Z",
+              "voted_at": "2025-10-15T16:00:00Z"
+            }
+          ]
         },
         {
           "id": 105,
-          "name": "새로운반대자3",
-          "voted_at": "2025-10-18T18:00:00Z"
+          "content": "환경 정책이 부족합니다.",
+          "created_at": "2025-10-16T17:00:00Z",
+          "updated_at": "2025-10-16T17:00:00Z",
+          "creator": {
+            "id": 105,
+            "name": "새로운반대자2",
+            "email": "newcon2@example.com",
+            "avatar": "/avatars/user105.png",
+            "created_at": "2023-01-01T00:00:00Z",
+            "updated_at": "2023-01-01T00:00:00Z"
+          },
+          "voted_count": 1,
+          "voted_users": [
+            {
+              "id": 105,
+              "name": "새로운반대자2",
+              "email": "newcon2@example.com",
+              "avatar": "/avatars/user105.png",
+              "created_at": "2023-01-01T00:00:00Z",
+              "updated_at": "2023-01-01T00:00:00Z",
+              "voted_at": "2025-10-16T17:00:00Z"
+            }
+          ]
+        },
+        {
+          "id": 106,
+          "content": "국민 안전이 위협받고 있습니다.",
+          "created_at": "2025-10-18T18:00:00Z",
+          "updated_at": "2025-10-18T18:00:00Z",
+          "creator": {
+            "id": 106,
+            "name": "새로운반대자3",
+            "email": "newcon3@example.com",
+            "avatar": "/avatars/user106.png",
+            "created_at": "2023-01-01T00:00:00Z",
+            "updated_at": "2023-01-01T00:00:00Z"
+          },
+          "voted_count": 1,
+          "voted_users": [
+            {
+              "id": 106,
+              "name": "새로운반대자3",
+              "email": "newcon3@example.com",
+              "avatar": "/avatars/user106.png",
+              "created_at": "2023-01-01T00:00:00Z",
+              "updated_at": "2023-01-01T00:00:00Z",
+              "voted_at": "2025-10-18T18:00:00Z"
+            }
+          ]
         }
       ]
     },
@@ -88,14 +341,16 @@
       "avatar": "/avatars/admin.png",
       "created_at": "2023-01-01T00:00:00Z",
       "updated_at": "2023-01-01T00:00:00Z"
-    }
+    },
+    "comments": []
   },
   {
     "id": 2,
     "title": "음주 운전엔 빨간 번호판, 필요할까?",
+    "description": "음주 운전 차량에 대한 특별 번호판 제도의 필요성 토론",
     "category": "Traffic Safety",
+    "status": "ROUND_1",
     "img": "/data/images/round2.png",
-    "status": "active",
     "start_at": "2023-02-01T00:00:00Z",
     "end_at": "2023-12-31T23:59:59Z",
     "created_at": "2023-02-01T00:00:00Z",
@@ -103,62 +358,272 @@
     "pros": {
       "title": "빨간 번호판이 필요하다",
       "count": 5,
-      "users": [
+      "insights": [
         {
           "id": 7,
-          "name": "김철수",
-          "voted_at": "2025-10-15T10:00:00Z"
+          "content": "음주 운전 근절을 위해 빨간 번호판이 필요합니다.",
+          "created_at": "2025-10-15T10:00:00Z",
+          "updated_at": "2025-10-15T10:00:00Z",
+          "creator": {
+            "id": 7,
+            "name": "김철수",
+            "email": "kim@example.com",
+            "avatar": "/avatars/user7.png",
+            "created_at": "2023-02-01T00:00:00Z",
+            "updated_at": "2023-02-01T00:00:00Z"
+          },
+          "voted_count": 1,
+          "voted_users": [
+            {
+              "id": 7,
+              "name": "김철수",
+              "email": "kim@example.com",
+              "avatar": "/avatars/user7.png",
+              "created_at": "2023-02-01T00:00:00Z",
+              "updated_at": "2023-02-01T00:00:00Z",
+              "voted_at": "2025-10-15T10:00:00Z"
+            }
+          ]
         },
         {
           "id": 8,
-          "name": "이영희",
-          "voted_at": "2025-10-16T11:00:00Z"
+          "content": "사회적 낙인을 통해 예방 효과를 높일 수 있습니다.",
+          "created_at": "2025-10-16T11:00:00Z",
+          "updated_at": "2025-10-16T11:00:00Z",
+          "creator": {
+            "id": 8,
+            "name": "이영희",
+            "email": "lee@example.com",
+            "avatar": "/avatars/user8.png",
+            "created_at": "2023-02-01T00:00:00Z",
+            "updated_at": "2023-02-01T00:00:00Z"
+          },
+          "voted_count": 1,
+          "voted_users": [
+            {
+              "id": 8,
+              "name": "이영희",
+              "email": "lee@example.com",
+              "avatar": "/avatars/user8.png",
+              "created_at": "2023-02-01T00:00:00Z",
+              "updated_at": "2023-02-01T00:00:00Z",
+              "voted_at": "2025-10-16T11:00:00Z"
+            }
+          ]
         },
         {
           "id": 9,
-          "name": "박민수",
-          "voted_at": "2025-10-16T12:00:00Z"
+          "content": "다른 운전자들의 경각심을 높일 수 있습니다.",
+          "created_at": "2025-10-16T12:00:00Z",
+          "updated_at": "2025-10-16T12:00:00Z",
+          "creator": {
+            "id": 9,
+            "name": "박민수",
+            "email": "park@example.com",
+            "avatar": "/avatars/user9.png",
+            "created_at": "2023-02-01T00:00:00Z",
+            "updated_at": "2023-02-01T00:00:00Z"
+          },
+          "voted_count": 1,
+          "voted_users": [
+            {
+              "id": 9,
+              "name": "박민수",
+              "email": "park@example.com",
+              "avatar": "/avatars/user9.png",
+              "created_at": "2023-02-01T00:00:00Z",
+              "updated_at": "2023-02-01T00:00:00Z",
+              "voted_at": "2025-10-16T12:00:00Z"
+            }
+          ]
         },
         {
           "id": 105,
-          "name": "새로운찬성자3",
-          "voted_at": "2025-10-15T13:00:00Z"
+          "content": "재발 방지에 효과적입니다.",
+          "created_at": "2025-10-15T13:00:00Z",
+          "updated_at": "2025-10-15T13:00:00Z",
+          "creator": {
+            "id": 105,
+            "name": "새로운찬성자3",
+            "email": "newpro3@example.com",
+            "avatar": "/avatars/user105.png",
+            "created_at": "2023-02-01T00:00:00Z",
+            "updated_at": "2023-02-01T00:00:00Z"
+          },
+          "voted_count": 1,
+          "voted_users": [
+            {
+              "id": 105,
+              "name": "새로운찬성자3",
+              "email": "newpro3@example.com",
+              "avatar": "/avatars/user105.png",
+              "created_at": "2023-02-01T00:00:00Z",
+              "updated_at": "2023-02-01T00:00:00Z",
+              "voted_at": "2025-10-15T13:00:00Z"
+            }
+          ]
         },
         {
           "id": 106,
-          "name": "새로운찬성자4",
-          "voted_at": "2025-10-16T14:00:00Z"
+          "content": "음주 운전의 심각성을 알릴 수 있습니다.",
+          "created_at": "2025-10-16T14:00:00Z",
+          "updated_at": "2025-10-16T14:00:00Z",
+          "creator": {
+            "id": 106,
+            "name": "새로운찬성자4",
+            "email": "newpro4@example.com",
+            "avatar": "/avatars/user106.png",
+            "created_at": "2023-02-01T00:00:00Z",
+            "updated_at": "2023-02-01T00:00:00Z"
+          },
+          "voted_count": 1,
+          "voted_users": [
+            {
+              "id": 106,
+              "name": "새로운찬성자4",
+              "email": "newpro4@example.com",
+              "avatar": "/avatars/user106.png",
+              "created_at": "2023-02-01T00:00:00Z",
+              "updated_at": "2023-02-01T00:00:00Z",
+              "voted_at": "2025-10-16T14:00:00Z"
+            }
+          ]
         }
       ]
     },
     "cons": {
       "title": "빨간 번호판이 필요하지 않다",
       "count": 5,
-      "users": [
+      "insights": [
         {
           "id": 10,
-          "name": "정수진",
-          "voted_at": "2025-10-15T13:00:00Z"
+          "content": "개인정보 보호 문제가 있습니다.",
+          "created_at": "2025-10-15T13:00:00Z",
+          "updated_at": "2025-10-15T13:00:00Z",
+          "creator": {
+            "id": 10,
+            "name": "정수진",
+            "email": "jung@example.com",
+            "avatar": "/avatars/user10.png",
+            "created_at": "2023-02-01T00:00:00Z",
+            "updated_at": "2023-02-01T00:00:00Z"
+          },
+          "voted_count": 1,
+          "voted_users": [
+            {
+              "id": 10,
+              "name": "정수진",
+              "email": "jung@example.com",
+              "avatar": "/avatars/user10.png",
+              "created_at": "2023-02-01T00:00:00Z",
+              "updated_at": "2023-02-01T00:00:00Z",
+              "voted_at": "2025-10-15T13:00:00Z"
+            }
+          ]
         },
         {
           "id": 11,
-          "name": "강한빛",
-          "voted_at": "2025-10-16T14:00:00Z"
+          "content": "처벌 강화로 충분합니다.",
+          "created_at": "2025-10-16T14:00:00Z",
+          "updated_at": "2025-10-16T14:00:00Z",
+          "creator": {
+            "id": 11,
+            "name": "강한빛",
+            "email": "kang@example.com",
+            "avatar": "/avatars/user11.png",
+            "created_at": "2023-02-01T00:00:00Z",
+            "updated_at": "2023-02-01T00:00:00Z"
+          },
+          "voted_count": 1,
+          "voted_users": [
+            {
+              "id": 11,
+              "name": "강한빛",
+              "email": "kang@example.com",
+              "avatar": "/avatars/user11.png",
+              "created_at": "2023-02-01T00:00:00Z",
+              "updated_at": "2023-02-01T00:00:00Z",
+              "voted_at": "2025-10-16T14:00:00Z"
+            }
+          ]
         },
         {
           "id": 12,
-          "name": "윤지영",
-          "voted_at": "2025-10-16T15:00:00Z"
+          "content": "비용 대비 효과가 의문입니다.",
+          "created_at": "2025-10-16T15:00:00Z",
+          "updated_at": "2025-10-16T15:00:00Z",
+          "creator": {
+            "id": 12,
+            "name": "윤지영",
+            "email": "yoon@example.com",
+            "avatar": "/avatars/user12.png",
+            "created_at": "2023-02-01T00:00:00Z",
+            "updated_at": "2023-02-01T00:00:00Z"
+          },
+          "voted_count": 1,
+          "voted_users": [
+            {
+              "id": 12,
+              "name": "윤지영",
+              "email": "yoon@example.com",
+              "avatar": "/avatars/user12.png",
+              "created_at": "2023-02-01T00:00:00Z",
+              "updated_at": "2023-02-01T00:00:00Z",
+              "voted_at": "2025-10-16T15:00:00Z"
+            }
+          ]
         },
         {
           "id": 107,
-          "name": "새로운반대자3",
-          "voted_at": "2025-10-15T16:00:00Z"
+          "content": "다른 방법이 더 효과적일 수 있습니다.",
+          "created_at": "2025-10-15T16:00:00Z",
+          "updated_at": "2025-10-15T16:00:00Z",
+          "creator": {
+            "id": 107,
+            "name": "새로운반대자3",
+            "email": "newcon3@example.com",
+            "avatar": "/avatars/user107.png",
+            "created_at": "2023-02-01T00:00:00Z",
+            "updated_at": "2023-02-01T00:00:00Z"
+          },
+          "voted_count": 1,
+          "voted_users": [
+            {
+              "id": 107,
+              "name": "새로운반대자3",
+              "email": "newcon3@example.com",
+              "avatar": "/avatars/user107.png",
+              "created_at": "2023-02-01T00:00:00Z",
+              "updated_at": "2023-02-01T00:00:00Z",
+              "voted_at": "2025-10-15T16:00:00Z"
+            }
+          ]
         },
         {
           "id": 108,
-          "name": "새로운반대자4",
-          "voted_at": "2025-10-16T17:00:00Z"
+          "content": "시행의 실효성이 의문입니다.",
+          "created_at": "2025-10-16T17:00:00Z",
+          "updated_at": "2025-10-16T17:00:00Z",
+          "creator": {
+            "id": 108,
+            "name": "새로운반대자4",
+            "email": "newcon4@example.com",
+            "avatar": "/avatars/user108.png",
+            "created_at": "2023-02-01T00:00:00Z",
+            "updated_at": "2023-02-01T00:00:00Z"
+          },
+          "voted_count": 1,
+          "voted_users": [
+            {
+              "id": 108,
+              "name": "새로운반대자4",
+              "email": "newcon4@example.com",
+              "avatar": "/avatars/user108.png",
+              "created_at": "2023-02-01T00:00:00Z",
+              "updated_at": "2023-02-01T00:00:00Z",
+              "voted_at": "2025-10-16T17:00:00Z"
+            }
+          ]
         }
       ]
     },
@@ -169,14 +634,16 @@
       "avatar": "/avatars/license.png",
       "created_at": "2023-02-01T00:00:00Z",
       "updated_at": "2023-02-01T00:00:00Z"
-    }
+    },
+    "comments": []
   },
   {
     "id": 3,
     "title": "임산부 배려석 꼭 비워둬야할까?",
+    "description": "대중교통 임산부 배려석의 올바른 사용 방법에 대한 토론",
     "category": "Social Etiquette",
+    "status": "ROUND_2",
     "img": "/data/images/round3.png",
-    "status": "active",
     "start_at": "2023-03-01T00:00:00Z",
     "end_at": "2023-12-31T23:59:59Z",
     "created_at": "2023-03-01T00:00:00Z",
@@ -184,62 +651,272 @@
     "pros": {
       "title": "꼭 비워둬야한다",
       "count": 5,
-      "users": [
+      "insights": [
         {
           "id": 13,
-          "name": "김철수",
-          "voted_at": "2025-10-15T10:00:00Z"
+          "content": "임산부의 안전과 편의를 위해 필요합니다.",
+          "created_at": "2025-10-15T10:00:00Z",
+          "updated_at": "2025-10-15T10:00:00Z",
+          "creator": {
+            "id": 13,
+            "name": "김철수",
+            "email": "kim@example.com",
+            "avatar": "/avatars/user13.png",
+            "created_at": "2023-03-01T00:00:00Z",
+            "updated_at": "2023-03-01T00:00:00Z"
+          },
+          "voted_count": 1,
+          "voted_users": [
+            {
+              "id": 13,
+              "name": "김철수",
+              "email": "kim@example.com",
+              "avatar": "/avatars/user13.png",
+              "created_at": "2023-03-01T00:00:00Z",
+              "updated_at": "2023-03-01T00:00:00Z",
+              "voted_at": "2025-10-15T10:00:00Z"
+            }
+          ]
         },
         {
           "id": 14,
-          "name": "이영희",
-          "voted_at": "2025-10-16T11:00:00Z"
+          "content": "사회적 배려 문화를 만들어갑니다.",
+          "created_at": "2025-10-16T11:00:00Z",
+          "updated_at": "2025-10-16T11:00:00Z",
+          "creator": {
+            "id": 14,
+            "name": "이영희",
+            "email": "lee@example.com",
+            "avatar": "/avatars/user14.png",
+            "created_at": "2023-03-01T00:00:00Z",
+            "updated_at": "2023-03-01T00:00:00Z"
+          },
+          "voted_count": 1,
+          "voted_users": [
+            {
+              "id": 14,
+              "name": "이영희",
+              "email": "lee@example.com",
+              "avatar": "/avatars/user14.png",
+              "created_at": "2023-03-01T00:00:00Z",
+              "updated_at": "2023-03-01T00:00:00Z",
+              "voted_at": "2025-10-16T11:00:00Z"
+            }
+          ]
         },
         {
           "id": 15,
-          "name": "박민수",
-          "voted_at": "2025-10-16T12:00:00Z"
+          "content": "법적으로 지정된 자리입니다.",
+          "created_at": "2025-10-16T12:00:00Z",
+          "updated_at": "2025-10-16T12:00:00Z",
+          "creator": {
+            "id": 15,
+            "name": "박민수",
+            "email": "park@example.com",
+            "avatar": "/avatars/user15.png",
+            "created_at": "2023-03-01T00:00:00Z",
+            "updated_at": "2023-03-01T00:00:00Z"
+          },
+          "voted_count": 1,
+          "voted_users": [
+            {
+              "id": 15,
+              "name": "박민수",
+              "email": "park@example.com",
+              "avatar": "/avatars/user15.png",
+              "created_at": "2023-03-01T00:00:00Z",
+              "updated_at": "2023-03-01T00:00:00Z",
+              "voted_at": "2025-10-16T12:00:00Z"
+            }
+          ]
         },
         {
           "id": 109,
-          "name": "새로운찬성자5",
-          "voted_at": "2025-10-15T13:00:00Z"
+          "content": "임산부의 건강을 지키기 위해 필수적입니다.",
+          "created_at": "2025-10-15T13:00:00Z",
+          "updated_at": "2025-10-15T13:00:00Z",
+          "creator": {
+            "id": 109,
+            "name": "새로운찬성자5",
+            "email": "newpro5@example.com",
+            "avatar": "/avatars/user109.png",
+            "created_at": "2023-03-01T00:00:00Z",
+            "updated_at": "2023-03-01T00:00:00Z"
+          },
+          "voted_count": 1,
+          "voted_users": [
+            {
+              "id": 109,
+              "name": "새로운찬성자5",
+              "email": "newpro5@example.com",
+              "avatar": "/avatars/user109.png",
+              "created_at": "2023-03-01T00:00:00Z",
+              "updated_at": "2023-03-01T00:00:00Z",
+              "voted_at": "2025-10-15T13:00:00Z"
+            }
+          ]
         },
         {
           "id": 110,
-          "name": "새로운찬성자6",
-          "voted_at": "2025-10-16T14:00:00Z"
+          "content": "사회적 약자 보호의 상징입니다.",
+          "created_at": "2025-10-16T14:00:00Z",
+          "updated_at": "2025-10-16T14:00:00Z",
+          "creator": {
+            "id": 110,
+            "name": "새로운찬성자6",
+            "email": "newpro6@example.com",
+            "avatar": "/avatars/user110.png",
+            "created_at": "2023-03-01T00:00:00Z",
+            "updated_at": "2023-03-01T00:00:00Z"
+          },
+          "voted_count": 1,
+          "voted_users": [
+            {
+              "id": 110,
+              "name": "새로운찬성자6",
+              "email": "newpro6@example.com",
+              "avatar": "/avatars/user110.png",
+              "created_at": "2023-03-01T00:00:00Z",
+              "updated_at": "2023-03-01T00:00:00Z",
+              "voted_at": "2025-10-16T14:00:00Z"
+            }
+          ]
         }
       ]
     },
     "cons": {
       "title": "앉아도 된다",
       "count": 5,
-      "users": [
+      "insights": [
         {
           "id": 16,
-          "name": "정수진",
-          "voted_at": "2025-10-15T13:00:00Z"
+          "content": "자리가 비어있을 때 활용하면 됩니다.",
+          "created_at": "2025-10-15T13:00:00Z",
+          "updated_at": "2025-10-15T13:00:00Z",
+          "creator": {
+            "id": 16,
+            "name": "정수진",
+            "email": "jung@example.com",
+            "avatar": "/avatars/user16.png",
+            "created_at": "2023-03-01T00:00:00Z",
+            "updated_at": "2023-03-01T00:00:00Z"
+          },
+          "voted_count": 1,
+          "voted_users": [
+            {
+              "id": 16,
+              "name": "정수진",
+              "email": "jung@example.com",
+              "avatar": "/avatars/user16.png",
+              "created_at": "2023-03-01T00:00:00Z",
+              "updated_at": "2023-03-01T00:00:00Z",
+              "voted_at": "2025-10-15T13:00:00Z"
+            }
+          ]
         },
         {
           "id": 17,
-          "name": "강한빛",
-          "voted_at": "2025-10-16T14:00:00Z"
+          "content": "상황에 따라 유연하게 사용해야 합니다.",
+          "created_at": "2025-10-16T14:00:00Z",
+          "updated_at": "2025-10-16T14:00:00Z",
+          "creator": {
+            "id": 17,
+            "name": "강한빛",
+            "email": "kang@example.com",
+            "avatar": "/avatars/user17.png",
+            "created_at": "2023-03-01T00:00:00Z",
+            "updated_at": "2023-03-01T00:00:00Z"
+          },
+          "voted_count": 1,
+          "voted_users": [
+            {
+              "id": 17,
+              "name": "강한빛",
+              "email": "kang@example.com",
+              "avatar": "/avatars/user17.png",
+              "created_at": "2023-03-01T00:00:00Z",
+              "updated_at": "2023-03-01T00:00:00Z",
+              "voted_at": "2025-10-16T14:00:00Z"
+            }
+          ]
         },
         {
           "id": 18,
-          "name": "윤지영",
-          "voted_at": "2025-10-16T15:00:00Z"
+          "content": "강제성보다는 자발적 배려가 중요합니다.",
+          "created_at": "2025-10-16T15:00:00Z",
+          "updated_at": "2025-10-16T15:00:00Z",
+          "creator": {
+            "id": 18,
+            "name": "윤지영",
+            "email": "yoon@example.com",
+            "avatar": "/avatars/user18.png",
+            "created_at": "2023-03-01T00:00:00Z",
+            "updated_at": "2023-03-01T00:00:00Z"
+          },
+          "voted_count": 1,
+          "voted_users": [
+            {
+              "id": 18,
+              "name": "윤지영",
+              "email": "yoon@example.com",
+              "avatar": "/avatars/user18.png",
+              "created_at": "2023-03-01T00:00:00Z",
+              "updated_at": "2023-03-01T00:00:00Z",
+              "voted_at": "2025-10-16T15:00:00Z"
+            }
+          ]
         },
         {
           "id": 111,
-          "name": "새로운반대자5",
-          "voted_at": "2025-10-15T16:00:00Z"
+          "content": "효율적 사용을 위해 필요시 활용해야 합니다.",
+          "created_at": "2025-10-15T16:00:00Z",
+          "updated_at": "2025-10-15T16:00:00Z",
+          "creator": {
+            "id": 111,
+            "name": "새로운반대자5",
+            "email": "newcon5@example.com",
+            "avatar": "/avatars/user111.png",
+            "created_at": "2023-03-01T00:00:00Z",
+            "updated_at": "2023-03-01T00:00:00Z"
+          },
+          "voted_count": 1,
+          "voted_users": [
+            {
+              "id": 111,
+              "name": "새로운반대자5",
+              "email": "newcon5@example.com",
+              "avatar": "/avatars/user111.png",
+              "created_at": "2023-03-01T00:00:00Z",
+              "updated_at": "2023-03-01T00:00:00Z",
+              "voted_at": "2025-10-15T16:00:00Z"
+            }
+          ]
         },
         {
           "id": 112,
-          "name": "새로운반대자6",
-          "voted_at": "2025-10-16T17:00:00Z"
+          "content": "상황에 따른 융통성이 필요합니다.",
+          "created_at": "2025-10-16T17:00:00Z",
+          "updated_at": "2025-10-16T17:00:00Z",
+          "creator": {
+            "id": 112,
+            "name": "새로운반대자6",
+            "email": "newcon6@example.com",
+            "avatar": "/avatars/user112.png",
+            "created_at": "2023-03-01T00:00:00Z",
+            "updated_at": "2023-03-01T00:00:00Z"
+          },
+          "voted_count": 1,
+          "voted_users": [
+            {
+              "id": 112,
+              "name": "새로운반대자6",
+              "email": "newcon6@example.com",
+              "avatar": "/avatars/user112.png",
+              "created_at": "2023-03-01T00:00:00Z",
+              "updated_at": "2023-03-01T00:00:00Z",
+              "voted_at": "2025-10-16T17:00:00Z"
+            }
+          ]
         }
       ]
     },
@@ -250,14 +927,16 @@
       "avatar": "/avatars/transport.png",
       "created_at": "2023-03-01T00:00:00Z",
       "updated_at": "2023-03-01T00:00:00Z"
-    }
+    },
+    "comments": []
   },
   {
     "id": 4,
     "title": "온라인 강의, 대면 강의보다 효과적일까?",
+    "description": "교육 방식 비교: 온라인 강의 vs 대면 강의의 효과성 토론",
     "category": "Education",
+    "status": "ROUND_2",
     "img": "/data/images/round4.png",
-    "status": "active",
     "start_at": "2023-04-01T00:00:00Z",
     "end_at": "2023-12-31T23:59:59Z",
     "created_at": "2023-04-01T00:00:00Z",
@@ -265,57 +944,246 @@
     "pros": {
       "title": "온라인 강의가 더 효과적이다",
       "count": 4,
-      "users": [
+      "insights": [
         {
           "id": 19,
-          "name": "서준호",
-          "voted_at": "2025-10-15T10:00:00Z"
+          "content": "시간과 장소의 제약이 없습니다.",
+          "created_at": "2025-10-15T10:00:00Z",
+          "updated_at": "2025-10-15T10:00:00Z",
+          "creator": {
+            "id": 19,
+            "name": "서준호",
+            "email": "seo@example.com",
+            "avatar": "/avatars/user19.png",
+            "created_at": "2023-04-01T00:00:00Z",
+            "updated_at": "2023-04-01T00:00:00Z"
+          },
+          "voted_count": 1,
+          "voted_users": [
+            {
+              "id": 19,
+              "name": "서준호",
+              "email": "seo@example.com",
+              "avatar": "/avatars/user19.png",
+              "created_at": "2023-04-01T00:00:00Z",
+              "updated_at": "2023-04-01T00:00:00Z",
+              "voted_at": "2025-10-15T10:00:00Z"
+            }
+          ]
         },
         {
           "id": 20,
-          "name": "최유나",
-          "voted_at": "2025-10-16T11:00:00Z"
+          "content": "개인 맞춤 학습이 가능합니다.",
+          "created_at": "2025-10-16T11:00:00Z",
+          "updated_at": "2025-10-16T11:00:00Z",
+          "creator": {
+            "id": 20,
+            "name": "최유나",
+            "email": "choi@example.com",
+            "avatar": "/avatars/user20.png",
+            "created_at": "2023-04-01T00:00:00Z",
+            "updated_at": "2023-04-01T00:00:00Z"
+          },
+          "voted_count": 1,
+          "voted_users": [
+            {
+              "id": 20,
+              "name": "최유나",
+              "email": "choi@example.com",
+              "avatar": "/avatars/user20.png",
+              "created_at": "2023-04-01T00:00:00Z",
+              "updated_at": "2023-04-01T00:00:00Z",
+              "voted_at": "2025-10-16T11:00:00Z"
+            }
+          ]
         },
         {
           "id": 113,
-          "name": "새로운찬성자7",
-          "voted_at": "2025-10-16T12:00:00Z"
+          "content": "다양한 학습 자료 활용이 용이합니다.",
+          "created_at": "2025-10-16T12:00:00Z",
+          "updated_at": "2025-10-16T12:00:00Z",
+          "creator": {
+            "id": 113,
+            "name": "새로운찬성자7",
+            "email": "newpro7@example.com",
+            "avatar": "/avatars/user113.png",
+            "created_at": "2023-04-01T00:00:00Z",
+            "updated_at": "2023-04-01T00:00:00Z"
+          },
+          "voted_count": 1,
+          "voted_users": [
+            {
+              "id": 113,
+              "name": "새로운찬성자7",
+              "email": "newpro7@example.com",
+              "avatar": "/avatars/user113.png",
+              "created_at": "2023-04-01T00:00:00Z",
+              "updated_at": "2023-04-01T00:00:00Z",
+              "voted_at": "2025-10-16T12:00:00Z"
+            }
+          ]
         },
         {
           "id": 114,
-          "name": "새로운찬성자8",
-          "voted_at": "2025-10-15T13:00:00Z"
+          "content": "비용 효율적입니다.",
+          "created_at": "2025-10-15T13:00:00Z",
+          "updated_at": "2025-10-15T13:00:00Z",
+          "creator": {
+            "id": 114,
+            "name": "새로운찬성자8",
+            "email": "newpro8@example.com",
+            "avatar": "/avatars/user114.png",
+            "created_at": "2023-04-01T00:00:00Z",
+            "updated_at": "2023-04-01T00:00:00Z"
+          },
+          "voted_count": 1,
+          "voted_users": [
+            {
+              "id": 114,
+              "name": "새로운찬성자8",
+              "email": "newpro8@example.com",
+              "avatar": "/avatars/user114.png",
+              "created_at": "2023-04-01T00:00:00Z",
+              "updated_at": "2023-04-01T00:00:00Z",
+              "voted_at": "2025-10-15T13:00:00Z"
+            }
+          ]
         }
       ]
     },
     "cons": {
       "title": "대면 강의가 더 효과적이다",
       "count": 5,
-      "users": [
+      "insights": [
         {
           "id": 21,
-          "name": "장민석",
-          "voted_at": "2025-10-15T13:00:00Z"
+          "content": "실시간 상호작용이 중요합니다.",
+          "created_at": "2025-10-15T13:00:00Z",
+          "updated_at": "2025-10-15T13:00:00Z",
+          "creator": {
+            "id": 21,
+            "name": "장민석",
+            "email": "jang@example.com",
+            "avatar": "/avatars/user21.png",
+            "created_at": "2023-04-01T00:00:00Z",
+            "updated_at": "2023-04-01T00:00:00Z"
+          },
+          "voted_count": 1,
+          "voted_users": [
+            {
+              "id": 21,
+              "name": "장민석",
+              "email": "jang@example.com",
+              "avatar": "/avatars/user21.png",
+              "created_at": "2023-04-01T00:00:00Z",
+              "updated_at": "2023-04-01T00:00:00Z",
+              "voted_at": "2025-10-15T13:00:00Z"
+            }
+          ]
         },
         {
           "id": 22,
-          "name": "오수진",
-          "voted_at": "2025-10-16T14:00:00Z"
+          "content": "집중력 유지에 도움이 됩니다.",
+          "created_at": "2025-10-16T14:00:00Z",
+          "updated_at": "2025-10-16T14:00:00Z",
+          "creator": {
+            "id": 22,
+            "name": "오수진",
+            "email": "oh@example.com",
+            "avatar": "/avatars/user22.png",
+            "created_at": "2023-04-01T00:00:00Z",
+            "updated_at": "2023-04-01T00:00:00Z"
+          },
+          "voted_count": 1,
+          "voted_users": [
+            {
+              "id": 22,
+              "name": "오수진",
+              "email": "oh@example.com",
+              "avatar": "/avatars/user22.png",
+              "created_at": "2023-04-01T00:00:00Z",
+              "updated_at": "2023-04-01T00:00:00Z",
+              "voted_at": "2025-10-16T14:00:00Z"
+            }
+          ]
         },
         {
           "id": 23,
-          "name": "신동욱",
-          "voted_at": "2025-10-16T15:00:00Z"
+          "content": "비언어적 소통이 가능합니다.",
+          "created_at": "2025-10-16T15:00:00Z",
+          "updated_at": "2025-10-16T15:00:00Z",
+          "creator": {
+            "id": 23,
+            "name": "신동욱",
+            "email": "shin@example.com",
+            "avatar": "/avatars/user23.png",
+            "created_at": "2023-04-01T00:00:00Z",
+            "updated_at": "2023-04-01T00:00:00Z"
+          },
+          "voted_count": 1,
+          "voted_users": [
+            {
+              "id": 23,
+              "name": "신동욱",
+              "email": "shin@example.com",
+              "avatar": "/avatars/user23.png",
+              "created_at": "2023-04-01T00:00:00Z",
+              "updated_at": "2023-04-01T00:00:00Z",
+              "voted_at": "2025-10-16T15:00:00Z"
+            }
+          ]
         },
         {
           "id": 115,
-          "name": "새로운반대자7",
-          "voted_at": "2025-10-15T16:00:00Z"
+          "content": "사회적 관계 형성에 도움이 됩니다.",
+          "created_at": "2025-10-15T16:00:00Z",
+          "updated_at": "2025-10-15T16:00:00Z",
+          "creator": {
+            "id": 115,
+            "name": "새로운반대자7",
+            "email": "newcon7@example.com",
+            "avatar": "/avatars/user115.png",
+            "created_at": "2023-04-01T00:00:00Z",
+            "updated_at": "2023-04-01T00:00:00Z"
+          },
+          "voted_count": 1,
+          "voted_users": [
+            {
+              "id": 115,
+              "name": "새로운반대자7",
+              "email": "newcon7@example.com",
+              "avatar": "/avatars/user115.png",
+              "created_at": "2023-04-01T00:00:00Z",
+              "updated_at": "2023-04-01T00:00:00Z",
+              "voted_at": "2025-10-15T16:00:00Z"
+            }
+          ]
         },
         {
           "id": 116,
-          "name": "새로운반대자8",
-          "voted_at": "2025-10-16T17:00:00Z"
+          "content": "실시간 피드백이 가능합니다.",
+          "created_at": "2025-10-16T17:00:00Z",
+          "updated_at": "2025-10-16T17:00:00Z",
+          "creator": {
+            "id": 116,
+            "name": "새로운반대자8",
+            "email": "newcon8@example.com",
+            "avatar": "/avatars/user116.png",
+            "created_at": "2023-04-01T00:00:00Z",
+            "updated_at": "2023-04-01T00:00:00Z"
+          },
+          "voted_count": 1,
+          "voted_users": [
+            {
+              "id": 116,
+              "name": "새로운반대자8",
+              "email": "newcon8@example.com",
+              "avatar": "/avatars/user116.png",
+              "created_at": "2023-04-01T00:00:00Z",
+              "updated_at": "2023-04-01T00:00:00Z",
+              "voted_at": "2025-10-16T17:00:00Z"
+            }
+          ]
         }
       ]
     },
@@ -326,14 +1194,16 @@
       "avatar": "/avatars/education.png",
       "created_at": "2023-04-01T00:00:00Z",
       "updated_at": "2023-04-01T00:00:00Z"
-    }
+    },
+    "comments": []
   },
   {
     "id": 5,
     "title": "플라스틱 사용 금지, 환경 보호에 실질적 도움이 될까?",
+    "description": "플라스틱 규제 정책의 환경 보호 효과에 대한 토론",
     "category": "Environment",
+    "status": "FINISHED",
     "img": "/data/images/round5.png",
-    "status": "completed",
     "start_at": "2023-01-01T00:00:00Z",
     "end_at": "2023-06-30T23:59:59Z",
     "created_at": "2023-01-01T00:00:00Z",
@@ -341,57 +1211,246 @@
     "pros": {
       "title": "실질적 도움이 된다",
       "count": 5,
-      "users": [
+      "insights": [
         {
           "id": 24,
-          "name": "환경지킴이",
-          "voted_at": "2025-10-15T10:00:00Z"
+          "content": "플라스틱 오염을 줄일 수 있습니다.",
+          "created_at": "2025-10-15T10:00:00Z",
+          "updated_at": "2025-10-15T10:00:00Z",
+          "creator": {
+            "id": 24,
+            "name": "환경지킴이",
+            "email": "env@example.com",
+            "avatar": "/avatars/user24.png",
+            "created_at": "2023-01-01T00:00:00Z",
+            "updated_at": "2023-01-01T00:00:00Z"
+          },
+          "voted_count": 1,
+          "voted_users": [
+            {
+              "id": 24,
+              "name": "환경지킴이",
+              "email": "env@example.com",
+              "avatar": "/avatars/user24.png",
+              "created_at": "2023-01-01T00:00:00Z",
+              "updated_at": "2023-01-01T00:00:00Z",
+              "voted_at": "2025-10-15T10:00:00Z"
+            }
+          ]
         },
         {
           "id": 25,
-          "name": "그린피스",
-          "voted_at": "2025-10-16T11:00:00Z"
+          "content": "해양 생태계를 보호할 수 있습니다.",
+          "created_at": "2025-10-16T11:00:00Z",
+          "updated_at": "2025-10-16T11:00:00Z",
+          "creator": {
+            "id": 25,
+            "name": "그린피스",
+            "email": "greenpeace@example.com",
+            "avatar": "/avatars/user25.png",
+            "created_at": "2023-01-01T00:00:00Z",
+            "updated_at": "2023-01-01T00:00:00Z"
+          },
+          "voted_count": 1,
+          "voted_users": [
+            {
+              "id": 25,
+              "name": "그린피스",
+              "email": "greenpeace@example.com",
+              "avatar": "/avatars/user25.png",
+              "created_at": "2023-01-01T00:00:00Z",
+              "updated_at": "2023-01-01T00:00:00Z",
+              "voted_at": "2025-10-16T11:00:00Z"
+            }
+          ]
         },
         {
           "id": 26,
-          "name": "에코워리어",
-          "voted_at": "2025-10-16T12:00:00Z"
+          "content": "지속 가능한 소비 문화를 만듭니다.",
+          "created_at": "2025-10-16T12:00:00Z",
+          "updated_at": "2025-10-16T12:00:00Z",
+          "creator": {
+            "id": 26,
+            "name": "에코워리어",
+            "email": "eco@example.com",
+            "avatar": "/avatars/user26.png",
+            "created_at": "2023-01-01T00:00:00Z",
+            "updated_at": "2023-01-01T00:00:00Z"
+          },
+          "voted_count": 1,
+          "voted_users": [
+            {
+              "id": 26,
+              "name": "에코워리어",
+              "email": "eco@example.com",
+              "avatar": "/avatars/user26.png",
+              "created_at": "2023-01-01T00:00:00Z",
+              "updated_at": "2023-01-01T00:00:00Z",
+              "voted_at": "2025-10-16T12:00:00Z"
+            }
+          ]
         },
         {
           "id": 117,
-          "name": "새로운찬성자9",
-          "voted_at": "2025-10-15T13:00:00Z"
+          "content": "미세플라스틱 문제를 해결할 수 있습니다.",
+          "created_at": "2025-10-15T13:00:00Z",
+          "updated_at": "2025-10-15T13:00:00Z",
+          "creator": {
+            "id": 117,
+            "name": "새로운찬성자9",
+            "email": "newpro9@example.com",
+            "avatar": "/avatars/user117.png",
+            "created_at": "2023-01-01T00:00:00Z",
+            "updated_at": "2023-01-01T00:00:00Z"
+          },
+          "voted_count": 1,
+          "voted_users": [
+            {
+              "id": 117,
+              "name": "새로운찬성자9",
+              "email": "newpro9@example.com",
+              "avatar": "/avatars/user117.png",
+              "created_at": "2023-01-01T00:00:00Z",
+              "updated_at": "2023-01-01T00:00:00Z",
+              "voted_at": "2025-10-15T13:00:00Z"
+            }
+          ]
         },
         {
           "id": 118,
-          "name": "새로운찬성자10",
-          "voted_at": "2025-10-16T14:00:00Z"
+          "content": "환경 의식 개선에 기여합니다.",
+          "created_at": "2025-10-16T14:00:00Z",
+          "updated_at": "2025-10-16T14:00:00Z",
+          "creator": {
+            "id": 118,
+            "name": "새로운찬성자10",
+            "email": "newpro10@example.com",
+            "avatar": "/avatars/user118.png",
+            "created_at": "2023-01-01T00:00:00Z",
+            "updated_at": "2023-01-01T00:00:00Z"
+          },
+          "voted_count": 1,
+          "voted_users": [
+            {
+              "id": 118,
+              "name": "새로운찬성자10",
+              "email": "newpro10@example.com",
+              "avatar": "/avatars/user118.png",
+              "created_at": "2023-01-01T00:00:00Z",
+              "updated_at": "2023-01-01T00:00:00Z",
+              "voted_at": "2025-10-16T14:00:00Z"
+            }
+          ]
         }
       ]
     },
     "cons": {
       "title": "효과가 제한적이다",
       "count": 4,
-      "users": [
+      "insights": [
         {
           "id": 27,
-          "name": "산업계대표",
-          "voted_at": "2025-10-15T13:00:00Z"
+          "content": "대체재의 환경 영향도 고려해야 합니다.",
+          "created_at": "2025-10-15T13:00:00Z",
+          "updated_at": "2025-10-15T13:00:00Z",
+          "creator": {
+            "id": 27,
+            "name": "산업계대표",
+            "email": "industry@example.com",
+            "avatar": "/avatars/user27.png",
+            "created_at": "2023-01-01T00:00:00Z",
+            "updated_at": "2023-01-01T00:00:00Z"
+          },
+          "voted_count": 1,
+          "voted_users": [
+            {
+              "id": 27,
+              "name": "산업계대표",
+              "email": "industry@example.com",
+              "avatar": "/avatars/user27.png",
+              "created_at": "2023-01-01T00:00:00Z",
+              "updated_at": "2023-01-01T00:00:00Z",
+              "voted_at": "2025-10-15T13:00:00Z"
+            }
+          ]
         },
         {
           "id": 28,
-          "name": "비즈니스맨",
-          "voted_at": "2025-10-16T14:00:00Z"
+          "content": "경제적 부담이 큽니다.",
+          "created_at": "2025-10-16T14:00:00Z",
+          "updated_at": "2025-10-16T14:00:00Z",
+          "creator": {
+            "id": 28,
+            "name": "비즈니스맨",
+            "email": "business@example.com",
+            "avatar": "/avatars/user28.png",
+            "created_at": "2023-01-01T00:00:00Z",
+            "updated_at": "2023-01-01T00:00:00Z"
+          },
+          "voted_count": 1,
+          "voted_users": [
+            {
+              "id": 28,
+              "name": "비즈니스맨",
+              "email": "business@example.com",
+              "avatar": "/avatars/user28.png",
+              "created_at": "2023-01-01T00:00:00Z",
+              "updated_at": "2023-01-01T00:00:00Z",
+              "voted_at": "2025-10-16T14:00:00Z"
+            }
+          ]
         },
         {
           "id": 119,
-          "name": "새로운반대자9",
-          "voted_at": "2025-10-16T15:00:00Z"
+          "content": "실효성에 의문이 있습니다.",
+          "created_at": "2025-10-16T15:00:00Z",
+          "updated_at": "2025-10-16T15:00:00Z",
+          "creator": {
+            "id": 119,
+            "name": "새로운반대자9",
+            "email": "newcon9@example.com",
+            "avatar": "/avatars/user119.png",
+            "created_at": "2023-01-01T00:00:00Z",
+            "updated_at": "2023-01-01T00:00:00Z"
+          },
+          "voted_count": 1,
+          "voted_users": [
+            {
+              "id": 119,
+              "name": "새로운반대자9",
+              "email": "newcon9@example.com",
+              "avatar": "/avatars/user119.png",
+              "created_at": "2023-01-01T00:00:00Z",
+              "updated_at": "2023-01-01T00:00:00Z",
+              "voted_at": "2025-10-16T15:00:00Z"
+            }
+          ]
         },
         {
           "id": 120,
-          "name": "새로운반대자10",
-          "voted_at": "2025-10-15T16:00:00Z"
+          "content": "다른 환경 문제에 우선순위가 있습니다.",
+          "created_at": "2025-10-15T16:00:00Z",
+          "updated_at": "2025-10-15T16:00:00Z",
+          "creator": {
+            "id": 120,
+            "name": "새로운반대자10",
+            "email": "newcon10@example.com",
+            "avatar": "/avatars/user120.png",
+            "created_at": "2023-01-01T00:00:00Z",
+            "updated_at": "2023-01-01T00:00:00Z"
+          },
+          "voted_count": 1,
+          "voted_users": [
+            {
+              "id": 120,
+              "name": "새로운반대자10",
+              "email": "newcon10@example.com",
+              "avatar": "/avatars/user120.png",
+              "created_at": "2023-01-01T00:00:00Z",
+              "updated_at": "2023-01-01T00:00:00Z",
+              "voted_at": "2025-10-15T16:00:00Z"
+            }
+          ]
         }
       ]
     },
@@ -402,396 +1461,7 @@
       "avatar": "/avatars/environment.png",
       "created_at": "2023-01-01T00:00:00Z",
       "updated_at": "2023-07-01T00:00:00Z"
-    }
-  },
-  {
-    "id": 6,
-    "title": "인공지능이 인간의 일자리를 위협할까?",
-    "category": "Technology",
-    "img": "/data/images/round6.png",
-    "status": "active",
-    "start_at": "2023-05-01T00:00:00Z",
-    "end_at": "2023-12-31T23:59:59Z",
-    "created_at": "2023-05-01T00:00:00Z",
-    "updated_at": "2023-05-01T00:00:00Z",
-    "pros": {
-      "title": "인공지능이 일자리를 창출할 것이다",
-      "count": 5,
-      "users": [
-        {
-          "id": 29,
-          "name": "테크옵티미스트",
-          "voted_at": "2025-10-15T10:00:00Z"
-        },
-        {
-          "id": 30,
-          "name": "미래학자",
-          "voted_at": "2025-10-16T11:00:00Z"
-        },
-        {
-          "id": 31,
-          "name": "혁신가",
-          "voted_at": "2025-10-16T12:00:00Z"
-        },
-        {
-          "id": 121,
-          "name": "새로운찬성자11",
-          "voted_at": "2025-10-15T13:00:00Z"
-        },
-        {
-          "id": 122,
-          "name": "새로운찬성자12",
-          "voted_at": "2025-10-16T14:00:00Z"
-        }
-      ]
     },
-    "cons": {
-      "title": "인공지능이 일자리를 대체할 것이다",
-      "count": 5,
-      "users": [
-        {
-          "id": 32,
-          "name": "노동운동가",
-          "voted_at": "2025-10-15T13:00:00Z"
-        },
-        {
-          "id": 33,
-          "name": "전통근로자",
-          "voted_at": "2025-10-16T14:00:00Z"
-        },
-        {
-          "id": 34,
-          "name": "미래불안자",
-          "voted_at": "2025-10-16T15:00:00Z"
-        },
-        {
-          "id": 123,
-          "name": "새로운반대자11",
-          "voted_at": "2025-10-15T16:00:00Z"
-        },
-        {
-          "id": 124,
-          "name": "새로운반대자12",
-          "voted_at": "2025-10-16T17:00:00Z"
-        }
-      ]
-    },
-    "creator": {
-      "id": 6,
-      "name": "테크전문가",
-      "email": "tech@example.com",
-      "avatar": "/avatars/tech.png",
-      "created_at": "2023-05-01T00:00:00Z",
-      "updated_at": "2023-05-01T00:00:00Z"
-    }
-  },
-  {
-    "id": 7,
-    "title": "육식이 환경에 미치는 영향은?",
-    "category": "Environment",
-    "img": "/data/images/round7.png",
-    "status": "active",
-    "start_at": "2023-06-01T00:00:00Z",
-    "end_at": "2023-12-31T23:59:59Z",
-    "created_at": "2023-06-01T00:00:00Z",
-    "updated_at": "2023-06-01T00:00:00Z",
-    "pros": {
-      "title": "육식이 환경에 심각한 영향을 미친다",
-      "count": 5,
-      "users": [
-        {
-          "id": 35,
-          "name": "환경보호자",
-          "voted_at": "2025-10-15T10:00:00Z"
-        },
-        {
-          "id": 36,
-          "name": "비건활동가",
-          "voted_at": "2025-10-16T11:00:00Z"
-        },
-        {
-          "id": 37,
-          "name": "지속가능성전문가",
-          "voted_at": "2025-10-16T12:00:00Z"
-        },
-        {
-          "id": 125,
-          "name": "새로운찬성자13",
-          "voted_at": "2025-10-15T13:00:00Z"
-        },
-        {
-          "id": 126,
-          "name": "새로운찬성자14",
-          "voted_at": "2025-10-16T14:00:00Z"
-        }
-      ]
-    },
-    "cons": {
-      "title": "육식이 환경에 미치는 영향이 과장되어 있다",
-      "count": 4,
-      "users": [
-        {
-          "id": 38,
-          "name": "축산업자",
-          "voted_at": "2025-10-15T13:00:00Z"
-        },
-        {
-          "id": 39,
-          "name": "육식문화옹호자",
-          "voted_at": "2025-10-16T14:00:00Z"
-        },
-        {
-          "id": 127,
-          "name": "새로운반대자13",
-          "voted_at": "2025-10-16T15:00:00Z"
-        },
-        {
-          "id": 128,
-          "name": "새로운반대자14",
-          "voted_at": "2025-10-15T16:00:00Z"
-        }
-      ]
-    },
-    "creator": {
-      "id": 7,
-      "name": "환경연구원",
-      "email": "environment@example.com",
-      "avatar": "/avatars/environment.png",
-      "created_at": "2023-06-01T00:00:00Z",
-      "updated_at": "2023-06-01T00:00:00Z"
-    }
-  },
-  {
-    "id": 8,
-    "title": "사회적 거리두기는 여전히 필요할까?",
-    "category": "Health",
-    "img": "/data/images/round8.png",
-    "status": "completed",
-    "start_at": "2023-01-01T00:00:00Z",
-    "end_at": "2023-08-31T23:59:59Z",
-    "created_at": "2023-01-01T00:00:00Z",
-    "updated_at": "2023-09-01T00:00:00Z",
-    "pros": {
-      "title": "사회적 거리두기가 여전히 필요하다",
-      "count": 4,
-      "users": [
-        {
-          "id": 40,
-          "name": "보건전문가",
-          "voted_at": "2025-10-15T10:00:00Z"
-        },
-        {
-          "id": 41,
-          "name": "감염병학자",
-          "voted_at": "2025-10-16T11:00:00Z"
-        },
-        {
-          "id": 129,
-          "name": "새로운찬성자15",
-          "voted_at": "2025-10-16T12:00:00Z"
-        },
-        {
-          "id": 130,
-          "name": "새로운찬성자16",
-          "voted_at": "2025-10-15T13:00:00Z"
-        }
-      ]
-    },
-    "cons": {
-      "title": "사회적 거리두기가 더 이상 필요하지 않다",
-      "count": 5,
-      "users": [
-        {
-          "id": 42,
-          "name": "경제회복론자",
-          "voted_at": "2025-10-15T12:00:00Z"
-        },
-        {
-          "id": 43,
-          "name": "사회활동가",
-          "voted_at": "2025-10-16T13:00:00Z"
-        },
-        {
-          "id": 44,
-          "name": "정상생활추구자",
-          "voted_at": "2025-10-16T14:00:00Z"
-        },
-        {
-          "id": 131,
-          "name": "새로운반대자15",
-          "voted_at": "2025-10-15T15:00:00Z"
-        },
-        {
-          "id": 132,
-          "name": "새로운반대자16",
-          "voted_at": "2025-10-16T16:00:00Z"
-        }
-      ]
-    },
-    "creator": {
-      "id": 8,
-      "name": "보건당국",
-      "email": "health@example.com",
-      "avatar": "/avatars/health.png",
-      "created_at": "2023-01-01T00:00:00Z",
-      "updated_at": "2023-09-01T00:00:00Z"
-    }
-  },
-  {
-    "id": 9,
-    "title": "암호화폐가 미래의 화폐가 될 수 있을까?",
-    "category": "Finance",
-    "img": "/data/images/round9.png",
-    "status": "active",
-    "start_at": "2023-07-01T00:00:00Z",
-    "end_at": "2023-12-31T23:59:59Z",
-    "created_at": "2023-07-01T00:00:00Z",
-    "updated_at": "2023-07-01T00:00:00Z",
-    "pros": {
-      "title": "암호화폐가 미래의 화폐가 될 것이다",
-      "count": 4,
-      "users": [
-        {
-          "id": 45,
-          "name": "크립토투자자",
-          "voted_at": "2025-10-15T10:00:00Z"
-        },
-        {
-          "id": 46,
-          "name": "블록체인전문가",
-          "voted_at": "2025-10-16T11:00:00Z"
-        },
-        {
-          "id": 133,
-          "name": "새로운찬성자17",
-          "voted_at": "2025-10-16T12:00:00Z"
-        },
-        {
-          "id": 134,
-          "name": "새로운찬성자18",
-          "voted_at": "2025-10-15T13:00:00Z"
-        }
-      ]
-    },
-    "cons": {
-      "title": "암호화폐는 미래의 화폐가 될 수 없다",
-      "count": 5,
-      "users": [
-        {
-          "id": 47,
-          "name": "전통금융인",
-          "voted_at": "2025-10-15T13:00:00Z"
-        },
-        {
-          "id": 48,
-          "name": "경제학자",
-          "voted_at": "2025-10-16T14:00:00Z"
-        },
-        {
-          "id": 49,
-          "name": "위험회피자",
-          "voted_at": "2025-10-16T15:00:00Z"
-        },
-        {
-          "id": 135,
-          "name": "새로운반대자17",
-          "voted_at": "2025-10-15T16:00:00Z"
-        },
-        {
-          "id": 136,
-          "name": "새로운반대자18",
-          "voted_at": "2025-10-16T17:00:00Z"
-        }
-      ]
-    },
-    "creator": {
-      "id": 9,
-      "name": "금융전문가",
-      "email": "finance@example.com",
-      "avatar": "/avatars/finance.png",
-      "created_at": "2023-07-01T00:00:00Z",
-      "updated_at": "2023-07-01T00:00:00Z"
-    }
-  },
-  {
-    "id": 10,
-    "title": "재택근무가 사무실 출근보다 생산적일까?",
-    "category": "Work",
-    "img": "/data/images/round10.png",
-    "status": "active",
-    "start_at": "2023-08-01T00:00:00Z",
-    "end_at": "2023-12-31T23:59:59Z",
-    "created_at": "2023-08-01T00:00:00Z",
-    "updated_at": "2023-08-01T00:00:00Z",
-    "pros": {
-      "title": "재택근무가 더 생산적이다",
-      "count": 5,
-      "users": [
-        {
-          "id": 50,
-          "name": "프리랜서",
-          "voted_at": "2025-10-15T10:00:00Z"
-        },
-        {
-          "id": 51,
-          "name": "워라밸중시자",
-          "voted_at": "2025-10-16T11:00:00Z"
-        },
-        {
-          "id": 52,
-          "name": "디지털노마드",
-          "voted_at": "2025-10-16T12:00:00Z"
-        },
-        {
-          "id": 137,
-          "name": "새로운찬성자19",
-          "voted_at": "2025-10-15T13:00:00Z"
-        },
-        {
-          "id": 138,
-          "name": "새로운찬성자20",
-          "voted_at": "2025-10-16T14:00:00Z"
-        }
-      ]
-    },
-    "cons": {
-      "title": "사무실 출근이 더 생산적이다",
-      "count": 5,
-      "users": [
-        {
-          "id": 53,
-          "name": "팀플레이어",
-          "voted_at": "2025-10-15T13:00:00Z"
-        },
-        {
-          "id": 54,
-          "name": "관리자",
-          "voted_at": "2025-10-16T14:00:00Z"
-        },
-        {
-          "id": 55,
-          "name": "대면소통중시자",
-          "voted_at": "2025-10-16T15:00:00Z"
-        },
-        {
-          "id": 139,
-          "name": "새로운반대자19",
-          "voted_at": "2025-10-15T16:00:00Z"
-        },
-        {
-          "id": 140,
-          "name": "새로운반대자20",
-          "voted_at": "2025-10-16T17:00:00Z"
-        }
-      ]
-    },
-    "creator": {
-      "id": 10,
-      "name": "HR전문가",
-      "email": "hr@example.com",
-      "avatar": "/avatars/hr.png",
-      "created_at": "2023-08-01T00:00:00Z",
-      "updated_at": "2023-08-01T00:00:00Z"
-    }
+    "comments": []
   }
 ]

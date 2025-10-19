@@ -34,16 +34,16 @@ export default function SparringPage() {
 
   // 토론 참여 추이 데이터 생성 함수
   const generateParticipationData = (debate: Debate) => {
-    if (!debate.pros?.users && !debate.cons?.users) {
+    if (!debate.pros?.insights || !debate.cons?.insights) {
       return [];
     }
 
     const dailyParticipation: { [key: string]: { date: string; pros: number; cons: number } } = {};
 
     // Pros 데이터 처리
-    if (debate.pros?.users) {
-      for (const user of debate.pros.users) {
-        const date = new Date(user.voted_at).toISOString().split('T')[0];
+    if (debate.pros?.insights) {
+      for (const insight of debate.pros.insights) {
+        const date = new Date(insight.created_at).toISOString().split('T')[0];
         if (!dailyParticipation[date]) {
           dailyParticipation[date] = { date, pros: 0, cons: 0 };
         }
@@ -52,9 +52,9 @@ export default function SparringPage() {
     }
 
     // Cons 데이터 처리
-    if (debate.cons?.users) {
-      for (const user of debate.cons.users) {
-        const date = new Date(user.voted_at).toISOString().split('T')[0];
+    if (debate.cons?.insights) {
+      for (const insight of debate.cons.insights) {
+        const date = new Date(insight.created_at).toISOString().split('T')[0];
         if (!dailyParticipation[date]) {
           dailyParticipation[date] = { date, pros: 0, cons: 0 };
         }
@@ -62,13 +62,13 @@ export default function SparringPage() {
       }
     }
 
-    const allUsers = [...(debate.pros?.users || []), ...(debate.cons?.users || [])];
+    const allUsers = [...(debate.pros?.insights || []), ...(debate.cons?.insights || [])];
     if (allUsers.length === 0) {
       return [];
     }
 
-    const sortedUsers = allUsers.toSorted((a, b) => new Date(a.voted_at).getTime() - new Date(b.voted_at).getTime());
-    const oldestDate = new Date(sortedUsers[0].voted_at);
+    const sortedUsers = allUsers.toSorted((a, b) => new Date(a.created_at).getTime() - new Date(b.created_at).getTime());
+    const oldestDate = new Date(sortedUsers[0].created_at);
     const currentDateObj = new Date();
     const currentDateString = currentDateObj.toISOString().split('T')[0];
 
@@ -218,7 +218,7 @@ export default function SparringPage() {
                 )}
 
                 {/* 토론 의견 분포 차트 */}
-                <OpinionDistribution prosCount={debate?.pros?.users?.length || 0} consCount={debate?.cons?.users?.length || 0} />
+                <OpinionDistribution prosCount={debate?.pros?.insights?.length || 0} consCount={debate?.cons?.insights?.length || 0} />
               </div>
             </div>
 
