@@ -16,7 +16,7 @@ const SCALE_MIN = 0.7;
 const SCALE_MAX = 1;
 const SCALE_DIVISOR = 300;
 const OPACITY_DIVISOR = 100;
-const SCALE_OFFSET = 25;
+const SCALE_OFFSET = 0;
 
 export default function SparringPage() {
   const [scrollY, setScrollY] = useState(0);
@@ -156,8 +156,8 @@ export default function SparringPage() {
 
   // 스크롤에 따른 헤더 스케일 및 투명도 계산 (최소 0.7, 최대 1.0)
   // 헤더의 높이가 24px이므로, 24px를 뺀 값으로 계산
-  const headerScale = Math.max(SCALE_MIN, SCALE_MAX - (scrollY - SCALE_OFFSET) / SCALE_DIVISOR);
-  const headerOpacity = Math.max(0, SCALE_MAX - (scrollY - SCALE_OFFSET) / OPACITY_DIVISOR);
+  const headerScale = Math.max(SCALE_MIN, Math.round((SCALE_MAX - (scrollY - SCALE_OFFSET) / SCALE_DIVISOR) * 1000) / 1000);
+  const headerOpacity = Math.max(0, Math.round((SCALE_MAX - (scrollY - SCALE_OFFSET) / OPACITY_DIVISOR) * 1000) / 1000);
 
   if (isLoading) {
     return (

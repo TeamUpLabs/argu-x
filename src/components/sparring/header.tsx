@@ -1,10 +1,6 @@
-
+import { Badge } from "@/components/ui/badge";
+import { Users, MessageSquare, Clock } from "lucide-react";
 import { Debate } from "@/types/Debate";
-import Image from "next/image";
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
-import { Button } from "@/components/ui/button";
-import { Link } from "lucide-react";
-import { Bookmark } from "lucide-react";
 
 interface HeaderProps {
   debate?: Debate;
@@ -14,47 +10,41 @@ interface HeaderProps {
 
 export default function Header({ scale, debate, opacity }: HeaderProps) {
   return (
-    <div className="flex items-center justify-between sticky top-[101px] bg-background z-10 pt-4 pb-1">
-      <div className={`flex items-center gap-4 origin-center origin-left`} style={{ transform: `scale(${scale})` }}>
-        {debate ? (
-          <>
-            <div className="bg-muted aspect-square rounded-md w-16 h-16 relative overflow-hidden">
-              <Image
-                src={debate.img}
-                alt={debate.title}
-                fill
-                sizes="80px"
-                className="object-cover"
-              />
+    <div className="sticky top-[101px] bg-background z-10 pt-4 pb-1" style={{ height: `${Math.max(80, 150 * scale)}px` }}>
+      <div className="flex flex-col gap-2">
+        <div className="flex flex-col gap-2 origin-center origin-top-left" style={{ transform: `scale(${scale})` }}>
+          <div className="flex items-center gap-2">
+            <Badge
+              variant="default"
+            >
+              {debate?.category}
+            </Badge>
+            <Badge
+              variant="outline"
+            >
+              <div className="w-1.5 h-1.5 sm:w-2 sm:h-2 bg-green-400 rounded-full animate-pulse"></div>
+              {debate?.status}
+            </Badge>
+          </div>
+          <div className="flex flex-col">
+            <span className="text-foreground font-bold text-2xl">{debate?.title}</span>
+            <span className="text-muted-foreground text-sm">{debate?.description}</span>
+          </div>
+          <div className="flex items-center gap-2">
+            <div className="flex items-center gap-2">
+              <Users size={12} className="text-muted-foreground" />
+              <span className="text-muted-foreground text-xs">{(debate?.cons?.insights.reduce((acc, insight) => acc + insight.voted_count, 0) || 0) + (debate?.pros?.insights.reduce((acc, insight) => acc + insight.voted_count, 0) || 0)} participants</span>
             </div>
-            <div className="flex flex-col">
-              <span className="text-foreground font-bold text-2xl">{debate.title}</span>
-              <span className="text-muted-foreground text-xs">{debate.cons.count + debate.pros.count}명 투표완료</span>
+            <div className="flex items-center gap-2">
+              <MessageSquare size={12} className="text-muted-foreground" />
+              <span className="text-muted-foreground text-xs">{(debate?.pros?.count || 0) + (debate?.cons?.count || 0)} insights</span>
             </div>
-          </>
-        ) : (
-          <>
-            <div className="bg-muted aspect-square rounded-md w-16 h-16">
-              {/* TODO: 이미지 */}
+            <div className="flex items-center gap-2">
+              <Clock size={12} className="text-muted-foreground" />
+              <span className="text-muted-foreground text-xs">2h 34m remaining</span>
             </div>
-            <span className="text-foreground font-bold text-2xl">토론 이름</span>
-          </>
-        )}
-      </div>
-      <div className="flex items-center gap-2">
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <Button variant="outline" size="icon">
-              <Link />
-            </Button>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent>
-            <DropdownMenuItem>링크 복사</DropdownMenuItem>
-          </DropdownMenuContent>
-        </DropdownMenu>
-        <Button variant="outline" size="icon">
-          <Bookmark />
-        </Button>
+          </div>
+        </div>
       </div>
       <div className="w-full h-px absolute bottom-0 left-0 bg-border" style={{ opacity: 1 - opacity }}></div>
     </div>
