@@ -13,6 +13,7 @@ import OpinionDistribution from "@/components/sparring/charts/OpinionDistributio
 import ChartFilter from "@/components/sparring/charts/filter";
 import InsightsFilter from "@/components/sparring/insights/filter";
 import InsightCard from "@/components/sparring/insights/InsightCard";
+import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 // 상수 정의
 const SCALE_MIN = 0.7;
@@ -35,6 +36,7 @@ export default function SparringPage() {
   const [latestConsDate, setLatestConsDate] = useState('');
   const [participationData, setParticipationData] = useState<{ date: string; pros: number; cons: number; }[]>([]);
   const [opinionType, setOpinionType] = useState<'pros' | 'cons'>('pros');
+  const [sortType, setSortType] = useState<'latest' | 'popular'>('latest');
   const [chartType, setChartType] = useState<'participation' | 'opinion'>('participation');
 
   // 토론 참여 추이 데이터 생성 함수
@@ -219,17 +221,37 @@ export default function SparringPage() {
 
                 <div className="flex flex-col gap-2">
                   <div className="flex items-center justify-between">
-                    <span className="text-foreground font-bold text-2xl">INSIGHTS</span>
-                    <InsightsFilter opinionType={opinionType} setOpinionType={setOpinionType} />
+                    <div className="flex items-center gap-2">
+                      <span className="text-foreground font-bold text-2xl">INSIGHTS</span>
+                      <Tabs defaultValue="pros" className="gap-0">
+                        <TabsList>
+                          <TabsTrigger value="pros" onClick={() => setOpinionType('pros')}>찬성</TabsTrigger>
+                          <TabsTrigger value="cons" onClick={() => setOpinionType('cons')}>반대</TabsTrigger>
+                        </TabsList>
+                      </Tabs>
+                    </div>
+                    <InsightsFilter sortType={sortType} setSortType={setSortType} />
                   </div>
                   {opinionType === 'pros' ? (
-                    debate?.pros?.insights?.map((insight) => (
-                      <InsightCard key={insight.id} insight={insight} opinion={opinionType} />
-                    ))
+                    debate?.pros?.insights
+                      ?.toSorted((a, b) => {
+                        return sortType === 'latest'
+                          ? new Date(b.created_at).getTime() - new Date(a.created_at).getTime()
+                          : (b.voted_count || 0) - (a.voted_count || 0);
+                      })
+                      ?.map((insight) => (
+                        <InsightCard key={insight.id} insight={insight} opinion={opinionType} />
+                      ))
                   ) : (
-                    debate?.cons?.insights?.map((insight) => (
-                      <InsightCard key={insight.id} insight={insight} opinion={opinionType} />
-                    ))
+                    debate?.cons?.insights
+                      ?.toSorted((a, b) => {
+                        return sortType === 'latest'
+                          ? new Date(b.created_at).getTime() - new Date(a.created_at).getTime()
+                          : (b.voted_count || 0) - (a.voted_count || 0);
+                      })
+                      ?.map((insight) => (
+                        <InsightCard key={insight.id} insight={insight} opinion={opinionType} />
+                      ))
                   )}
                 </div>
 

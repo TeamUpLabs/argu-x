@@ -15,18 +15,18 @@ import { cn } from "@/lib/utils";
 import { useState } from "react";
 
 interface FilterProps {
-  opinionType: 'pros' | 'cons';
-  setOpinionType: (type: 'pros' | 'cons') => void;
+  sortType: 'latest' | 'popular';
+  setSortType: (type: 'latest' | 'popular') => void;
 }
 
-export default function Filter({ opinionType, setOpinionType }: FilterProps) {
+export default function Filter({ sortType, setSortType }: FilterProps) {
   const [open, setOpen] = useState(false);
 
   return (
     <Popover open={open} onOpenChange={setOpen}>
       <PopoverTrigger asChild>
         <Button variant="outline">
-          {opinionType === 'pros' ? '찬성 의견' : '반대 의견'}
+          {sortType === 'latest' ? '최신순' : '인기순'}
           <ChevronUp className={cn("opacity-50 transition-all duration-200 ease-in-out", open ? "rotate-0" : "rotate-180")} />
         </Button>
       </PopoverTrigger>
@@ -36,21 +36,21 @@ export default function Filter({ opinionType, setOpinionType }: FilterProps) {
             <CommandGroup>
               <CommandItem
                 onSelect={() => {
-                  setOpinionType('pros');
+                  setSortType('latest');
                   setOpen(false);
                 }}
               >
-                찬성 의견
-                <Check className={opinionType === 'pros' ? 'mr-2 h-4 w-4' : 'mr-2 h-4 w-4 opacity-0'} />
+                최신순
+                <Check className={sortType === 'latest' ? 'mr-2 h-4 w-4' : 'mr-2 h-4 w-4 opacity-0'} />
               </CommandItem>
               <CommandItem
                 onSelect={() => {
-                  setOpinionType('cons');
+                  setSortType('popular');
                   setOpen(false);
                 }}
               >
-                반대 의견 
-                <Check className={opinionType === 'cons' ? 'mr-2 h-4 w-4' : 'mr-2 h-4 w-4 opacity-0'} />
+                인기순
+                <Check className={sortType === 'popular' ? 'mr-2 h-4 w-4' : 'mr-2 h-4 w-4 opacity-0'} />
               </CommandItem>
             </CommandGroup>
           </CommandList>
