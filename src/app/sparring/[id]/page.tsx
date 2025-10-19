@@ -214,7 +214,7 @@ export default function SparringPage() {
                   latestConsDate={latestConsDate}
                 />
 
-                <div className="flex flex-col gap-2">
+                <div className="flex flex-col gap-2 px-1">
                   <div className="flex items-center justify-between">
                     <span className="text-foreground font-bold text-2xl">CHARTS</span>
                     <Filter chartType={chartType} setChartType={setChartType} />
