@@ -333,6 +333,9 @@ export default function ParticipationOrder({ selectedInsight }: ParticipationOrd
             <DialogTitle className="sr-only">
               {mode === 'vote' ? '투표 완료' : '인사이트 작성 완료'}
             </DialogTitle>
+            <DialogDescription className="sr-only">
+              {mode === 'vote' ? '투표 완료' : '인사이트 작성 완료'}
+            </DialogDescription>
             <div className="w-16 h-16 bg-muted rounded-full flex items-center justify-center mx-auto mb-4">
               <CheckCircle className="h-8 w-8 text-muted-foreground" />
             </div>
