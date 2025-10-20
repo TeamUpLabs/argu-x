@@ -82,7 +82,7 @@ export default function ParticipationOrder({ selectedInsight }: ParticipationOrd
                   }`}
               >
                 <div className="flex items-center space-x-3">
-                  <div className={`w-8 h-8 rounded-full flex items-center justify-center ${mode === 'vote' ? 'bg-muted' : 'bg-background group-hover:bg-muted'
+                  <div className={`w-8 h-8 rounded-full flex items-center justify-center transition-all duration-200 ${mode === 'vote' ? 'bg-muted' : 'bg-background group-hover:bg-muted'
                     }`}>
                     <TrendingUp className={`h-4 w-4 ${mode === 'vote' ? 'text-foreground' : 'text-muted-foreground'}`} />
                   </div>
@@ -102,7 +102,7 @@ export default function ParticipationOrder({ selectedInsight }: ParticipationOrd
                   }`}
               >
                 <div className="flex items-center space-x-3">
-                  <div className={`w-8 h-8 rounded-full flex items-center justify-center ${mode === 'create' ? 'bg-muted' : 'bg-background group-hover:bg-muted'
+                  <div className={`w-8 h-8 rounded-full flex items-center justify-center transition-all duration-200 ${mode === 'create' ? 'bg-muted' : 'bg-background group-hover:bg-muted'
                     }`}>
                     <PenTool className={`h-4 w-4 ${mode === 'create' ? 'text-foreground' : 'text-muted-foreground'}`} />
                   </div>
