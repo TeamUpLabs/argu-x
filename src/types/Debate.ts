@@ -30,20 +30,7 @@ export interface Debate {
     updated_at: string;
   };
 
-  comments: {
-    id: number;
-    content: string;
-    created_at: string;
-    updated_at: string;
-    creator: {
-      id: number;
-      name: string;
-      email: string;
-      avatar: string;
-      created_at: string;
-      updated_at: string;
-    };
-  }[];
+  comments: Comment[];
 }
 
 export interface Insight {
@@ -69,4 +56,19 @@ export interface Insight {
     updated_at: string;
     voted_at: string;
   }[];
+}
+
+export interface Comment {
+    id: number;
+    content: string;
+    created_at: string;
+    updated_at: string;
+    creator: {
+        id: number;
+        name: string;
+        email: string;
+        avatar: string;
+        created_at: string;
+        updated_at: string;
+    };
 }

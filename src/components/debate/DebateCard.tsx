@@ -9,6 +9,7 @@ import { Debate } from "@/types/Debate";
 import { getFrontImageBrightness, getTextColorClass, getTextOpacityClass } from "./utils/getFrontImageBrightness";
 import RotatingText from "@/components/RotatingText";
 import { MessageCircleMore, CircleCheckBig } from "lucide-react";
+import { compressData } from "@/lib/compression";
 
 interface DebateCardProps {
   debate: Debate;
@@ -61,7 +62,7 @@ export default function DebateCard({ debate }: DebateCardProps) {
 
         setTimeout(() => {
           // 페이지 이동 시작
-          const debateData = btoa(encodeURIComponent(JSON.stringify(debate)));
+          const debateData = compressData(debate);
           router.push(`/sparring/${debate.id}?data=${debateData}`);
         }, remainingTime);
       }, 100);

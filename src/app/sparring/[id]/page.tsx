@@ -13,7 +13,9 @@ import OpinionDistribution from "@/components/sparring/charts/OpinionDistributio
 import ChartFilter from "@/components/sparring/charts/filter";
 import InsightsFilter from "@/components/sparring/insights/filter";
 import InsightCard from "@/components/sparring/insights/InsightCard";
-import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import Comments from "@/components/sparring/Comments";
+import { decompressData } from "@/lib/compression";
 
 // 상수 정의
 const SCALE_MIN = 0.7;
@@ -103,7 +105,7 @@ export default function SparringPage() {
       setIsLoading(true);
       setError(undefined);
       try {
-        const decodedData = JSON.parse(decodeURIComponent(atob(data)));
+        const decodedData = decompressData(data) as Debate;
         setDebate(decodedData);
 
         const participationChartData = generateParticipationData(decodedData);
@@ -270,6 +272,19 @@ export default function SparringPage() {
                     <OpinionDistribution prosCount={debate?.pros?.insights?.length || 0} consCount={debate?.cons?.insights?.length || 0} />
                   )}
                 </div>
+
+                <Tabs defaultValue="comments">
+                  <TabsList>
+                    <TabsTrigger value="comments">Comments ({debate?.comments?.length})</TabsTrigger>
+                    <TabsTrigger value="top_holders">Top Holders</TabsTrigger>
+                  </TabsList>
+                  <TabsContent value="comments">
+                    <Comments comments={debate?.comments || []} />
+                  </TabsContent>
+                  <TabsContent value="top_holders">
+                    
+                  </TabsContent>
+                </Tabs>
               </div>
             </div>
           </div>
