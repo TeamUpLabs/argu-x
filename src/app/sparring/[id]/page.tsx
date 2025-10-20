@@ -231,7 +231,7 @@ export default function SparringPage() {
             <Header debate={debate} scale={headerScale} opacity={headerOpacity} />
 
             {/* 내용 */}
-            <div className="py-5">
+            <div className="py-5 z-1">
               <div className="relative space-y-8 px-1">
                 <div className="space-y-2">
                   {debate && <OpinionCards debate={debate} />}

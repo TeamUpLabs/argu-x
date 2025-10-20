@@ -123,7 +123,7 @@ export default function ParticipationOrder({ selectedInsight }: ParticipationOrd
               <div className="p-6 bg-background rounded-lg border border-border">
                 <div className="space-y-4">
                   <div>
-                    <h3 className="text-lg font-medium text-foreground mb-2">{insight.title}</h3>
+                    <h3 className="text-lg font-semibold text-foreground">{insight.title}</h3>
                     <span className="text-sm text-muted-foreground">작성자: {insight.author}</span>
                   </div>
 
