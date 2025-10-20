@@ -228,8 +228,8 @@ export default function ParticipationOrder({ selectedInsight }: ParticipationOrd
                   key={amount}
                   onClick={() => handleTokenSelect(amount)}
                   className={`p-3 rounded-lg border-2 text-sm font-medium transition-all duration-200 ${tokenAmount === amount
-                    ? 'border-foreground bg-muted text-foreground'
-                    : 'border-border text-muted-foreground hover:border-border'
+                    ? 'border-foreground bg-foreground text-background'
+                    : 'border-border text-muted-foreground hover:border-foreground'
                     }`}
                 >
                   {amount}
