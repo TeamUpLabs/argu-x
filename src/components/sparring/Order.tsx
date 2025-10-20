@@ -63,8 +63,8 @@ export default function ParticipationOrder({ selectedInsight }: ParticipationOrd
     <div className="space-y-8 pt-6">
       {/* Main Content Card */}
       <Card className="border border-border shadow-sm">
-        <CardHeader className="pb-6">
-          <CardTitle className="text-xl font-normal text-foreground">참여 방법 선택</CardTitle>
+        <CardHeader>
+          <CardTitle className="text-xl font-semibold text-foreground">참여 방법 선택</CardTitle>
           <CardDescription className="text-muted-foreground">
             원하는 참여 방식을 선택하고 토큰을 스테이킹하세요
           </CardDescription>
