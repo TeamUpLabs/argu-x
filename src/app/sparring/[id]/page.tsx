@@ -16,6 +16,7 @@ import InsightCard from "@/components/sparring/insights/InsightCard";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import Comments from "@/components/sparring/Comments";
 import { decompressData } from "@/lib/compression";
+import Order from "@/components/sparring/Order";
 
 // 상수 정의
 const SCALE_MIN = 0.7;
@@ -40,6 +41,32 @@ export default function SparringPage() {
   const [opinionType, setOpinionType] = useState<'pros' | 'cons'>('pros');
   const [sortType, setSortType] = useState<'latest' | 'popular'>('latest');
   const [chartType, setChartType] = useState<'participation' | 'opinion'>('participation');
+  const [selectedInsight, setSelectedInsight] = useState<Debate['pros']['insights'][0] | Debate['cons']['insights'][0] | null>(null);
+  const [selectedInsightOpinionType, setSelectedInsightOpinionType] = useState<'pros' | 'cons'>('pros');
+
+  // 선택된 인사이트를 처리하는 핸들러
+  const handleInsightVoteClick = (insight: Debate['pros']['insights'][0] | Debate['cons']['insights'][0]) => {
+    setSelectedInsight(insight);
+    setSelectedInsightOpinionType(opinionType);
+  };
+
+  // Debate 인사이트 데이터를 Order 컴포넌트 형식으로 변환
+  const convertInsightToOrderData = (insight: Debate['pros']['insights'][0] | Debate['cons']['insights'][0], opinionType: 'pros' | 'cons') => {
+    // 결정론적 토큰 스테이킹 계산 (랜덤 요소 제거)
+    const baseStake = insight.voted_count || 0;
+    const totalStaked = Math.max(100, baseStake * 50 + 100); // voted_count당 50토큰 + 기본 100토큰
+
+    return {
+      id: insight.id,
+      author: insight.creator.name,
+      title: insight.content,
+      opinion: opinionType,
+      currentVotes: insight.voted_count || 0,
+      totalStaked: totalStaked,
+      supportRatio: 50, // 임시 데이터 - 실제로는 계산 필요
+      challengeRatio: 50 // 임시 데이터 - 실제로는 계산 필요
+    };
+  };
 
   // 토론 참여 추이 데이터 생성 함수
   const generateParticipationData = (debate: Debate) => {
@@ -197,7 +224,7 @@ export default function SparringPage() {
 
   return (
     <div className="max-w-7xl mx-auto">
-      <div className="flex items-center gap-2 justify-between">
+      <div className="flex gap-2 justify-between">
         <div className="w-2/3 h-full relative">
           <div className="flex flex-col w-full h-full">
             {/* 헤더 */}
@@ -242,7 +269,12 @@ export default function SparringPage() {
                           : (b.voted_count || 0) - (a.voted_count || 0);
                       })
                       ?.map((insight) => (
-                        <InsightCard key={insight.id} insight={insight} opinion={opinionType} />
+                        <InsightCard
+                          key={insight.id}
+                          insight={insight}
+                          opinion={opinionType}
+                          onVoteClick={handleInsightVoteClick}
+                        />
                       ))
                   ) : (
                     debate?.cons?.insights
@@ -252,7 +284,12 @@ export default function SparringPage() {
                           : (b.voted_count || 0) - (a.voted_count || 0);
                       })
                       ?.map((insight) => (
-                        <InsightCard key={insight.id} insight={insight} opinion={opinionType} />
+                        <InsightCard
+                          key={insight.id}
+                          insight={insight}
+                          opinion={opinionType}
+                          onVoteClick={handleInsightVoteClick}
+                        />
                       ))
                   )}
                 </div>
@@ -287,6 +324,11 @@ export default function SparringPage() {
                 </Tabs>
               </div>
             </div>
+          </div>
+        </div>
+        <div className="w-1/3 h-full pt-4 sticky top-[101px]">
+          <div className="h-full max-h-[calc(100vh-120px)] overflow-y-auto pr-2">
+            <Order selectedInsight={selectedInsight ? convertInsightToOrderData(selectedInsight, selectedInsightOpinionType) : undefined} />
           </div>
         </div>
       </div>

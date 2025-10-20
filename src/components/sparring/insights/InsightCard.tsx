@@ -6,11 +6,26 @@ import { Button } from "@/components/ui/button";
 interface InsightCardProps {
   insight: Insight;
   opinion: 'pros' | 'cons';
+  onVoteClick?: (insight: Insight) => void;
 }
 
-export default function InsightCard({ insight, opinion }: InsightCardProps) {
+export default function InsightCard({ insight, opinion, onVoteClick }: InsightCardProps) {
+  const handleCardClick = () => {
+    if (onVoteClick) {
+      onVoteClick(insight);
+    }
+  };
+
+  const handleVoteButtonClick = (e: React.MouseEvent) => {
+    e.stopPropagation(); // Prevent card click when button is clicked
+    handleCardClick();
+  };
+
   return (
-    <div className="flex flex-col gap-4 bg-transparent border border-border rounded-lg p-4">
+    <div
+      className="flex flex-col gap-4 bg-transparent border border-border rounded-lg p-4 cursor-pointer hover:border-indigo-300 hover:bg-indigo-50/30 transition-all duration-200"
+      onClick={handleCardClick}
+    >
       <div className="flex items-start justify-between">
         <div className="flex items-center gap-3">
           <div className="w-10 h-10 rounded-full bg-muted overflow-hidden"></div>
@@ -33,6 +48,7 @@ export default function InsightCard({ insight, opinion }: InsightCardProps) {
         <Button
           variant="outline"
           className="text-xs"
+          onClick={handleVoteButtonClick}
         >
           투표하기
         </Button>
