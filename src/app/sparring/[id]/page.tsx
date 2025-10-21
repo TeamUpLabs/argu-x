@@ -249,54 +249,123 @@ export default function SparringPage() {
                 />
 
                 <div className="flex flex-col gap-2">
-                  <div className="flex items-center justify-between">
+                  <div className="flex items-center justify-between mb-6">
+                    <div className="flex items-center gap-3">
+                      <div className="flex items-center gap-2">
+                        <div className="w-1 h-6 bg-foreground rounded-full"></div>
+                        <span className="text-foreground font-bold text-xl">
+                          INSIGHTS
+                        </span>
+                      </div>
+                      <div className="flex px-3 py-0.5 justify-center items-center bg-muted rounded-full border border-border">
+                        <span className="text-xs font-medium text-foreground">
+                          {opinionType === 'pros' ? debate?.pros?.insights?.length || 0 : debate?.cons?.insights?.length || 0}개
+                        </span>
+                      </div>
+                    </div>
                     <div className="flex items-center gap-2">
-                      <span className="text-foreground font-bold text-2xl">INSIGHTS</span>
                       <Tabs defaultValue="pros" className="gap-0">
                         <TabsList>
-                          <TabsTrigger value="pros" onClick={() => setOpinionType('pros')}>찬성</TabsTrigger>
-                          <TabsTrigger value="cons" onClick={() => setOpinionType('cons')}>반대</TabsTrigger>
+                          <TabsTrigger
+                            value="pros"
+                            onClick={() => setOpinionType('pros')}
+                            className="transition-all duration-200 data-[state=active]:bg-white data-[state=active]:shadow-sm"
+                          >
+                            찬성
+                          </TabsTrigger>
+                          <TabsTrigger
+                            value="cons"
+                            onClick={() => setOpinionType('cons')}
+                            className="transition-all duration-200 data-[state=active]:bg-white data-[state=active]:shadow-sm"
+                          >
+                            반대
+                          </TabsTrigger>
                         </TabsList>
                       </Tabs>
+                      <InsightsFilter sortType={sortType} setSortType={setSortType} />
                     </div>
-                    <InsightsFilter sortType={sortType} setSortType={setSortType} />
                   </div>
-                  {opinionType === 'pros' ? (
-                    debate?.pros?.insights
-                      ?.toSorted((a, b) => {
-                        return sortType === 'latest'
-                          ? new Date(b.created_at).getTime() - new Date(a.created_at).getTime()
-                          : (b.voted_count || 0) - (a.voted_count || 0);
-                      })
-                      ?.map((insight) => (
-                        <InsightCard
-                          key={insight.id}
-                          insight={insight}
-                          opinion={opinionType}
-                          onVoteClick={handleInsightVoteClick}
-                        />
-                      ))
-                  ) : (
-                    debate?.cons?.insights
-                      ?.toSorted((a, b) => {
-                        return sortType === 'latest'
-                          ? new Date(b.created_at).getTime() - new Date(a.created_at).getTime()
-                          : (b.voted_count || 0) - (a.voted_count || 0);
-                      })
-                      ?.map((insight) => (
-                        <InsightCard
-                          key={insight.id}
-                          insight={insight}
-                          opinion={opinionType}
-                          onVoteClick={handleInsightVoteClick}
-                        />
-                      ))
-                  )}
+
+                  {/* 인사이트 카드 그리드 */}
+                  <div className="space-y-3">
+                    {opinionType === 'pros' ? (
+                      debate?.pros?.insights && debate.pros.insights.length > 0 ? (
+                        debate.pros.insights
+                          ?.toSorted((a, b) => {
+                            return sortType === 'latest'
+                              ? new Date(b.created_at).getTime() - new Date(a.created_at).getTime()
+                              : (b.voted_count || 0) - (a.voted_count || 0);
+                          })
+                          ?.map((insight, index) => (
+                            <div
+                              key={insight.id}
+                              className="animate-in fade-in-0 slide-in-from-bottom-1 duration-200"
+                              style={{ animationDelay: `${index * 30}ms` }}
+                            >
+                              <InsightCard
+                                insight={insight}
+                                opinion={opinionType}
+                                onVoteClick={handleInsightVoteClick}
+                                isSelected={selectedInsight?.id === insight.id}
+                              />
+                            </div>
+                          ))
+                      ) : (
+                        <div className="flex flex-col items-center justify-center py-16 px-4 text-center">
+                          <div className="w-16 h-16 bg-slate-100 rounded-full flex items-center justify-center mb-4">
+                            <span className="text-2xl text-slate-400">💭</span>
+                          </div>
+                          <h3 className="text-lg font-medium text-slate-900 mb-2">아직 찬성 인사이트가 없습니다</h3>
+                          <p className="text-sm text-slate-500 max-w-sm leading-relaxed">
+                            이 토론에 대한 첫 번째 찬성 의견을 남겨보세요.
+                          </p>
+                        </div>
+                      )
+                    ) : (
+                      debate?.cons?.insights && debate.cons.insights.length > 0 ? (
+                        debate.cons.insights
+                          ?.toSorted((a, b) => {
+                            return sortType === 'latest'
+                              ? new Date(b.created_at).getTime() - new Date(a.created_at).getTime()
+                              : (b.voted_count || 0) - (a.voted_count || 0);
+                          })
+                          ?.map((insight, index) => (
+                            <div
+                              key={insight.id}
+                              className="animate-in fade-in-0 slide-in-from-bottom-1 duration-200"
+                              style={{ animationDelay: `${index * 30}ms` }}
+                            >
+                              <InsightCard
+                                insight={insight}
+                                opinion={opinionType}
+                                onVoteClick={handleInsightVoteClick}
+                                isSelected={selectedInsight?.id === insight.id}
+                              />
+                            </div>
+                          ))
+                      ) : (
+                        <div className="flex flex-col items-center justify-center py-16 px-4 text-center">
+                          <div className="w-16 h-16 bg-slate-100 rounded-full flex items-center justify-center mb-4">
+                            <span className="text-2xl text-slate-400">💬</span>
+                          </div>
+                          <h3 className="text-lg font-medium text-slate-900 mb-2">아직 반대 인사이트가 없습니다</h3>
+                          <p className="text-sm text-slate-500 max-w-sm leading-relaxed">
+                            이 토론에 대한 첫 번째 반대 의견을 남겨보세요.
+                          </p>
+                        </div>
+                      )
+                    )}
+                  </div>
                 </div>
 
                 <div className="flex flex-col gap-2">
                   <div className="flex items-center justify-between">
-                    <span className="text-foreground font-bold text-2xl">CHARTS</span>
+                    <div className="flex items-center gap-2">
+                        <div className="w-1 h-6 bg-foreground rounded-full"></div>
+                        <span className="text-foreground font-bold text-xl">
+                          CHARTS
+                        </span>
+                      </div>
                     <ChartFilter chartType={chartType} setChartType={setChartType} />
                   </div>
                   {/* 토론 참여 추이 차트 */}
