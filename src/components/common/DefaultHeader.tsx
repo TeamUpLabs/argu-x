@@ -3,7 +3,7 @@
 import Logo from "@/components/common/Logo";
 import { InputGroup, InputGroupAddon, InputGroupInput } from "@/components/ui/input-group";
 import AuthButtons from "@/components/auth/AuthButtons";
-import { Search, TrendingUp, ChevronLeft, ChevronRight } from "lucide-react";
+import { Search, TrendingUp, CirclePlus, Flame, ChevronLeft, ChevronRight } from "lucide-react";
 import ThemeToggle from "@/components/common/ThemeToggle";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -21,15 +21,17 @@ const categories: Category[] = [
   {
     name: "Trending",
     href: "/",
-    icon: <TrendingUp />
+    icon: <TrendingUp className="w-4 h-4" />
   },
   {
     name: "New",
     href: "/new",
+    icon: <CirclePlus className="w-4 h-4" />
   },
   {
     name: "Hot",
     href: "/hot",
+    icon: <Flame className="w-4 h-4" />
   },
   {
     name: "Politics",
