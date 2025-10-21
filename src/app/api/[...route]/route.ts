@@ -20,6 +20,7 @@ app.post('/login', async (c) => {
         user: {
           email: email,
           name: "테스트 사용자",
+          argx: 1,
           avatar: "https://randomuser.me/api/portraits/men/1.jpg"
         }
       });

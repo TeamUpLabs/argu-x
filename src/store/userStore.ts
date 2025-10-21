@@ -8,6 +8,7 @@ type State = {
     email: string;
     name?: string;
     avatar?: string;
+    argx?: number;
   } | undefined;
   isAuthenticated: () => boolean;
   debug: () => { token: string | undefined; isAuth: boolean };
@@ -16,7 +17,7 @@ type State = {
 
 type Action = {
   setToken: (token: string) => void;
-  setUser: (user: { email: string; name?: string; avatar?: string }) => void;
+  setUser: (user: { email: string; name?: string; avatar?: string; argx?: number }) => void;
   logout: () => void;
   setHasHydrated: (state: boolean) => void;
 }

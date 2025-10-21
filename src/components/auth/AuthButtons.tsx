@@ -4,7 +4,7 @@ import { useState } from "react";
 import SigninDialog from "./SigninDialog";
 import SignupDialog from "./SignupDialog";
 import Image from "next/image";
-import { DropdownMenu, DropdownMenuTrigger, DropdownMenuContent, DropdownMenuLabel, DropdownMenuSeparator } from "@/components/ui/dropdown-menu";
+import { DropdownMenu, DropdownMenuTrigger, DropdownMenuContent, DropdownMenuLabel } from "@/components/ui/dropdown-menu";
 import { useHydration } from "@/store/userStore";
 
 export default function AuthButtons() {
@@ -40,7 +40,9 @@ export default function AuthButtons() {
               <DropdownMenuLabel>
                 {user?.name || user?.email}
               </DropdownMenuLabel>
-              <DropdownMenuSeparator />
+              <DropdownMenuLabel className="float-right">
+                {user?.argx || 0} ARGX
+              </DropdownMenuLabel>
               <DropdownMenuLabel>
                 <Button variant="ghost" onClick={logout} className="w-full">
                   로그아웃
