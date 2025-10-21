@@ -10,7 +10,7 @@ interface HeaderProps {
 
 export default function Header({ scale, debate, opacity }: HeaderProps) {
   return (
-    <div className="sticky top-[101px] bg-background z-2 pt-4 pb-1" style={{ height: `${Math.max(80, 150 * scale)}px` }}>
+    <div className="sticky top-[97px] bg-background z-2 pt-4 pb-1" style={{ height: `${Math.max(80, 150 * scale)}px` }}>
       <div className="flex flex-col gap-2">
         <div className="flex flex-col gap-2 origin-center origin-top-left" style={{ transform: `scale(${scale})` }}>
           <div className="flex items-center gap-2">
