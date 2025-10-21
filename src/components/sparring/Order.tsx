@@ -164,27 +164,23 @@ export default function ParticipationOrder({ selectedInsight }: ParticipationOrd
                 <div className="flex">
                   {insight.opinion === 'pros' ? (
                     <button
-                      className={`flex-1 p-4 rounded-lg border-2 text-center transition-all duration-200 ${insight.opinion === 'pros'
-                        ? 'border-foreground bg-muted'
-                        : 'border-border hover:border-border'
-                        }`}
+                      className="flex-1 p-4 rounded-lg border-2 text-center transition-all duration-200 bg-blue-200/20 text-blue-500 border-blue-500 dark:bg-blue-800/20 dark:text-blue-500 dark:border-blue-800"
                     >
-                      <TrendingUp className={`h-5 w-5 mx-auto mb-2 ${insight.opinion === 'pros' ? 'text-foreground' : 'text-muted-foreground'
-                        }`} />
-                      <div className={`font-medium ${insight.opinion === 'pros' ? 'text-foreground' : 'text-muted-foreground'}`}>
+                      <div className="flex items-center justify-self-center w-fit p-2 rounded-full bg-blue-500 mb-2">
+                        <TrendingUp className="h-5 w-5 mx-auto text-white" />
+                      </div>
+                      <div className="font-medium text-foreground">
                         찬성
                       </div>
                     </button>
                   ) : (
                     <button
-                      className={`flex-1 p-4 rounded-lg border-2 text-center transition-all duration-200 ${insight.opinion === 'cons'
-                        ? 'border-foreground bg-muted'
-                        : 'border-border hover:border-border'
-                        }`}
+                      className="flex-1 p-4 rounded-lg border-2 text-center transition-all duration-200 bg-red-200/20 text-red-500 border-red-500 dark:bg-red-800/20 dark:text-red-500 dark:border-red-800"
                     >
-                      <TrendingDown className={`h-5 w-5 mx-auto mb-2 ${insight.opinion === 'cons' ? 'text-foreground' : 'text-muted-foreground'
-                        }`} />
-                      <div className={`font-medium ${insight.opinion === 'cons' ? 'text-foreground' : 'text-muted-foreground'}`}>
+                      <div className="flex items-center justify-self-center w-fit p-2 rounded-full bg-red-500 mb-2">
+                        <TrendingDown className="h-5 w-5 mx-auto text-white" />
+                      </div>
+                      <div className="font-medium text-foreground">
                         반대
                       </div>
                     </button>
