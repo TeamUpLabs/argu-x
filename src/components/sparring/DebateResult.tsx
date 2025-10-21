@@ -1,6 +1,6 @@
 import React from 'react';
 import { ArrowBigUp } from 'lucide-react';
-import { getRelativeDate } from '@/components/sparring/utils/getRelativeDate';
+import { getRelativeDate } from '@/lib/getRelativeDate';
 
 export type OpinionType = '찬성' | '반대' | '변동 없음';
 
