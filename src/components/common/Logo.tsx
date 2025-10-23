@@ -33,6 +33,7 @@ export default function Logo({ size = "md" }: LogoProps) {
           height={609}
           className="w-full h-full object-contain"
           style={{ width: "auto", height: "auto" }}
+          priority
         />
       </Link>
     );
