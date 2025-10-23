@@ -6,13 +6,17 @@ export interface Debate {
   status: "ROUND_1" | "ROUND_2" | "ROUND_3" | "FINISHED";
   img: string;
   cons: {
+    id: number;
     title: string;
     count: number;
+    argx_amount: number;
     insights: Insight[];
   };
   pros: {
+    id: number;
     title: string;
     count: number;
+    argx_amount: number;
     insights: Insight[];
   };
 
@@ -38,6 +42,7 @@ export interface Insight {
   content: string;
   created_at: string;
   updated_at: string;
+  argx_amount: number;
   creator: {
     id: number;
     name: string;
@@ -55,20 +60,21 @@ export interface Insight {
     created_at: string;
     updated_at: string;
     voted_at: string;
+    argx: number;
   }[];
 }
 
 export interface Comment {
+  id: number;
+  content: string;
+  created_at: string;
+  updated_at: string;
+  creator: {
     id: number;
-    content: string;
+    name: string;
+    email: string;
+    avatar: string;
     created_at: string;
     updated_at: string;
-    creator: {
-        id: number;
-        name: string;
-        email: string;
-        avatar: string;
-        created_at: string;
-        updated_at: string;
-    };
+  };
 }

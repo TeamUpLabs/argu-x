@@ -7,6 +7,7 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { TrendingUp, TrendingDown, Info, Coins, Users, Activity, CheckCircle, PenTool, ArrowRight, AlertTriangle } from "lucide-react";
 import { useUserStore } from "@/store/userStore";
+import { Debate } from "@/types/Debate";
 
 interface InsightData {
   id: number;
@@ -21,12 +22,14 @@ interface InsightData {
 
 interface ParticipationOrderProps {
   selectedInsight?: InsightData;
+  debate: Debate | undefined;
 }
 
-export default function ParticipationOrder({ selectedInsight }: ParticipationOrderProps) {
+export default function ParticipationOrder({ selectedInsight, debate }: ParticipationOrderProps) {
   const [mode, setMode] = useState<'vote' | 'create'>('vote');
   const [tokenAmount, setTokenAmount] = useState<number>(10);
   const [newInsightText, setNewInsightText] = useState('');
+  const [newInsightOpinion, setNewInsightOpinion] = useState<'pros' | 'cons'>('pros');
   const [showConfirm, setShowConfirm] = useState(false);
   const [orderPlaced, setOrderPlaced] = useState(false);
   const [showInsufficientBalance, setShowInsufficientBalance] = useState(false);
@@ -49,11 +52,26 @@ export default function ParticipationOrder({ selectedInsight }: ParticipationOrd
     setShowConfirm(true);
   };
 
-  const confirmAction = () => {
+  const confirmAction = async () => {
     if (mode === 'vote') {
       console.log(`${insight?.opinion} 투표를 위해 ${tokenAmount} ARGX 토큰을 스테이킹합니다. 인사이트: ${insight?.title}`);
     } else {
-      console.log(`새 인사이트 작성: ${newInsightText} (토큰: ${tokenAmount} ARGX)`);
+      if (!debate) return;
+
+      const response = await fetch(`/api/debates/${debate.id}/insights`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          content: newInsightText,
+          debate_side_id: debate[newInsightOpinion].id,
+          argx: tokenAmount,
+        }),
+      });
+
+      const data = await response.json();
+      console.log(data);
     }
     setShowConfirm(false);
     setOrderPlaced(true);
@@ -63,12 +81,13 @@ export default function ParticipationOrder({ selectedInsight }: ParticipationOrd
       setTokenAmount(10);
       if (mode === 'create') {
         setNewInsightText('');
+        setNewInsightOpinion('pros');
       }
     }, 3000);
   };
 
   return (
-    <div className="space-y-8 pt-6">
+    <div className="space-y-8 py-6">
       {/* Main Content Card */}
       <Card className="border border-border shadow-sm">
         <CardHeader>
@@ -213,6 +232,48 @@ export default function ParticipationOrder({ selectedInsight }: ParticipationOrd
                   {newInsightText.length}/500자
                 </div>
               </div>
+
+              {/* Opinion Selection - Create Mode */}
+              <div className="space-y-3">
+                <Label className="text-sm font-medium text-foreground">입장</Label>
+                <div className="flex gap-3">
+                  <button
+                    onClick={() => setNewInsightOpinion('pros')}
+                    className={`flex-1 p-4 rounded-lg border-2 text-center transition-all duration-200 ${
+                      newInsightOpinion === 'pros'
+                        ? 'bg-blue-200/20 text-blue-500 border-blue-500 dark:bg-blue-800/20 dark:text-blue-500 dark:border-blue-800'
+                        : 'bg-background text-muted-foreground border-border hover:border-blue-500 hover:dark:border-blue-800'
+                    }`}
+                  >
+                    <div className={`flex items-center justify-self-center w-fit p-2 rounded-full mb-2 mx-auto ${
+                      newInsightOpinion === 'pros' ? 'bg-blue-500' : 'bg-muted'
+                    }`}>
+                      <TrendingUp className={`h-5 w-5 mx-auto ${newInsightOpinion === 'pros' ? 'text-white' : 'text-muted-foreground'}`} />
+                    </div>
+                    <div className={`font-medium ${newInsightOpinion === 'pros' ? 'text-foreground' : 'text-muted-foreground'}`}>
+                      찬성
+                    </div>
+                  </button>
+
+                  <button
+                    onClick={() => setNewInsightOpinion('cons')}
+                    className={`flex-1 p-4 rounded-lg border-2 text-center transition-all duration-200 ${
+                      newInsightOpinion === 'cons'
+                        ? 'bg-red-200/20 text-red-500 border-red-500 dark:bg-red-800/20 dark:text-red-500 dark:border-red-800'
+                        : 'bg-background text-muted-foreground border-border hover:border-red-500 hover:dark:border-red-800'
+                    }`}
+                  >
+                    <div className={`flex items-center justify-self-center w-fit p-2 rounded-full mb-2 mx-auto ${
+                      newInsightOpinion === 'cons' ? 'bg-red-500' : 'bg-muted'
+                    }`}>
+                      <TrendingDown className={`h-5 w-5 mx-auto ${newInsightOpinion === 'cons' ? 'text-white' : 'text-muted-foreground'}`} />
+                    </div>
+                    <div className={`font-medium ${newInsightOpinion === 'cons' ? 'text-foreground' : 'text-muted-foreground'}`}>
+                      반대
+                    </div>
+                  </button>
+                </div>
+              </div>
             </div>
           )}
 
@@ -250,14 +311,14 @@ export default function ParticipationOrder({ selectedInsight }: ParticipationOrd
           {/* Action Button - Clean and Prominent */}
           <button
             onClick={handleSubmit}
-            disabled={(mode === 'create' && !newInsightText.trim()) || (mode === 'vote' && !insight)}
+            disabled={(mode === 'create' && (!newInsightText.trim() || !debate)) || (mode === 'vote' && !insight)}
             className="w-full h-14 bg-foreground hover:bg-foreground/80 text-background font-medium rounded-lg transition-colors duration-200 disabled:bg-gray-300 disabled:cursor-not-allowed flex items-center justify-center space-x-2"
           >
             <span>
               {mode === 'vote' ? (
                 `${tokenAmount} ARGX로 ${insight?.opinion === 'pros' ? '찬성하기' : '반대하기'}`
               ) : (
-                `${tokenAmount} ARGX로 인사이트 작성하기`
+                `${tokenAmount} ARGX로 ${newInsightOpinion === 'pros' ? '찬성' : '반대'} 인사이트 작성하기`
               )}
             </span>
             <ArrowRight className="h-4 w-4" />
@@ -342,12 +403,20 @@ export default function ParticipationOrder({ selectedInsight }: ParticipationOrd
                   </div>
                 </>
               ) : (
-                <div className="flex justify-between items-start">
-                  <span className="text-sm font-medium text-muted-foreground">내용:</span>
-                  <span className="text-sm text-foreground break-words text-right">
-                    {newInsightText}
-                  </span>
-                </div>
+                <>
+                  <div className="flex justify-between items-start">
+                    <span className="text-sm font-medium text-muted-foreground">내용:</span>
+                    <span className="text-sm text-foreground break-words text-right">
+                      {newInsightText}
+                    </span>
+                  </div>
+                  <div className="flex justify-between items-center">
+                    <span className="text-sm font-medium text-muted-foreground">입장:</span>
+                    <Badge variant={newInsightOpinion === 'pros' ? 'default' : 'destructive'}>
+                      {newInsightOpinion === 'pros' ? '찬성' : '반대'}
+                    </Badge>
+                  </div>
+                </>
               )}
               <div className="flex justify-between items-center pt-2 border-t border-border">
                 <span className="text-sm font-medium text-muted-foreground">스테이킹 토큰:</span>
@@ -397,7 +466,7 @@ export default function ParticipationOrder({ selectedInsight }: ParticipationOrd
               <p className="text-muted-foreground text-sm leading-relaxed">
                 {mode === 'vote'
                   ? `성공적으로 ${tokenAmount} ARGX 토큰을 스테이킹하여 이 인사이트를 ${insight?.opinion === 'pros' ? '찬성' : '반대'}했습니다.`
-                  : `새 인사이트가 성공적으로 작성되었으며 ${tokenAmount} ARGX 토큰이 스테이킹되었습니다.`
+                  : `새 인사이트가 성공적으로 작성되었으며 ${tokenAmount} ARGX 토큰이 ${newInsightOpinion === 'pros' ? '찬성' : '반대'} 의견으로 스테이킹되었습니다.`
                 }
               </p>
             </div>

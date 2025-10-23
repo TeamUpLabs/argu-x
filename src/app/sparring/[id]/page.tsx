@@ -388,7 +388,7 @@ export default function SparringPage() {
         </div>
         <div className="w-1/3 h-full pt-4 sticky top-[101px]">
           <div className="h-full max-h-[calc(100vh-120px)] overflow-y-auto pr-2">
-            <Order selectedInsight={selectedInsight ? convertInsightToOrderData(selectedInsight, selectedInsightOpinionType) : undefined} />
+            <Order selectedInsight={selectedInsight ? convertInsightToOrderData(selectedInsight, selectedInsightOpinionType) : undefined} debate={debate} />
           </div>
         </div>
       </div>
