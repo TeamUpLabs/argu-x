@@ -17,6 +17,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import Comments from "@/components/sparring/Comments";
 import { decompressData } from "@/lib/compression";
 import Order from "@/components/sparring/Order";
+import { Loading } from "@/components/common/Loading";
 
 // 상수 정의
 const SCALE_MIN = 0.7;
@@ -197,14 +198,7 @@ export default function SparringPage() {
 
   if (isLoading) {
     return (
-      <div className="max-w-7xl mx-auto">
-        <div className="flex items-center justify-center min-h-[50vh]">
-          <div className="text-center">
-            <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary mx-auto mb-4"></div>
-            <p className="text-muted-foreground">데이터를 불러오는 중...</p>
-          </div>
-        </div>
-      </div>
+      <Loading className="flex items-center justify-center min-h-[50vh]" />
     );
   }
 
