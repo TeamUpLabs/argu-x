@@ -150,7 +150,6 @@ export default function SparringPage() {
         const prosRatioDifference = prosRatioExcludingToday - prosRatioIncludingToday;
         const consRatioDifference = consRatioExcludingToday - consRatioIncludingToday;
 
-
         if (prosRatioDifference > consRatioDifference) {
           setOpinion('찬성');
           setPercentage(prosRatioDifference);
@@ -204,13 +203,11 @@ export default function SparringPage() {
 
   if (error) {
     return (
-      <div className="max-w-7xl mx-auto">
-        <div className="flex items-center justify-center min-h-[50vh]">
-          <div className="text-center">
-            <div className="text-destructive text-6xl mb-4">⚠️</div>
-            <h2 className="text-xl font-semibold mb-2">오류가 발생했습니다</h2>
-            <p className="text-muted-foreground">{error}</p>
-          </div>
+      <div className="flex items-center justify-center min-h-[50vh]">
+        <div className="text-center">
+          <div className="text-destructive text-6xl mb-4">⚠️</div>
+          <h2 className="text-xl font-semibold mb-2">오류가 발생했습니다</h2>
+          <p className="text-muted-foreground">{error}</p>
         </div>
       </div>
     );
@@ -355,11 +352,11 @@ export default function SparringPage() {
                 <div className="flex flex-col gap-2">
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-2">
-                        <div className="w-1 h-6 bg-foreground rounded-full"></div>
-                        <span className="text-foreground font-bold text-xl">
-                          CHARTS
-                        </span>
-                      </div>
+                      <div className="w-1 h-6 bg-foreground rounded-full"></div>
+                      <span className="text-foreground font-bold text-xl">
+                        CHARTS
+                      </span>
+                    </div>
                     <ChartFilter chartType={chartType} setChartType={setChartType} />
                   </div>
                   {/* 토론 참여 추이 차트 */}
@@ -382,7 +379,7 @@ export default function SparringPage() {
                     <Comments comments={debate?.comments || []} />
                   </TabsContent>
                   <TabsContent value="top_holders">
-                    
+
                   </TabsContent>
                 </Tabs>
               </div>
