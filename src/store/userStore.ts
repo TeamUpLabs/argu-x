@@ -20,6 +20,7 @@ type State = {
 type Action = {
   setToken: (token: string) => void;
   setUser: (user: { email: string; name?: string; avatar?: string; argx?: number }) => void;
+  updateUserArgx: (argx: number) => void;
   logout: () => Promise<void>;
   setHasHydrated: (state: boolean) => void;
 }
@@ -32,7 +33,10 @@ export const useUserStore = create<State & Action>()(
         user: undefined,
         _hasHydrated: false,
         setToken: (token: string) => set({ Token: token }),
-        setUser: (user: { email: string; name?: string; avatar?: string }) => set({ user }),
+        setUser: (user: { email: string; name?: string; avatar?: string; argx?: number }) => set({ user }),
+        updateUserArgx: (argx: number) => set((state) => ({
+          user: state.user ? { ...state.user, argx } : undefined
+        })),
         logout: async () => {
           try {
             await fetch("/api/login", { method: "DELETE" });

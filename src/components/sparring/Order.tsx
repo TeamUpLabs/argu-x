@@ -35,7 +35,7 @@ export default function ParticipationOrder({ selectedInsight, debate }: Particip
   const [showInsufficientBalance, setShowInsufficientBalance] = useState(false);
 
   const insight: InsightData | null = selectedInsight || null;
-  const { user } = useUserStore();
+  const { user, updateUserArgx } = useUserStore();
   const userBalance = user?.argx || 0;
 
   const tokenOptions = [5, 10, 25, 50, 100];
@@ -55,6 +55,7 @@ export default function ParticipationOrder({ selectedInsight, debate }: Particip
   const confirmAction = async () => {
     if (mode === 'vote') {
       console.log(`${insight?.opinion} 투표를 위해 ${tokenAmount} ARGX 토큰을 스테이킹합니다. 인사이트: ${insight?.title}`);
+      updateUserArgx((user?.argx || 0) - tokenAmount);
     } else {
       if (!debate) return;
 
@@ -70,8 +71,9 @@ export default function ParticipationOrder({ selectedInsight, debate }: Particip
         }),
       });
 
-      const data = await response.json();
-      console.log(data);
+      if (response.ok) {
+        updateUserArgx((user?.argx || 0) - tokenAmount);
+      }
     }
     setShowConfirm(false);
     setOrderPlaced(true);
