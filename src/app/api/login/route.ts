@@ -2,7 +2,7 @@ export async function POST(request: Request) {
   try {
     const { email, password } = await request.json();
 
-    const response = await fetch("http://localhost:8000/api/v1/login", {
+    const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/login`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ email, password }),
@@ -35,6 +35,25 @@ export async function POST(request: Request) {
     return Response.json({
       success: false,
       message: "Network error occurred"
+    }, { status: 500 });
+  }
+}
+
+// Add logout endpoint
+export async function DELETE() {
+  try {
+    const responseHeaders = new Headers();
+    responseHeaders.set(
+      "Set-Cookie",
+      "token=; HttpOnly; Path=/; Max-Age=0; SameSite=Strict"
+    );
+
+    return Response.json({ success: true }, { headers: responseHeaders });
+  } catch (error) {
+    console.error(error);
+    return Response.json({
+      success: false,
+      message: "Logout failed"
     }, { status: 500 });
   }
 }

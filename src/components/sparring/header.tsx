@@ -33,7 +33,7 @@ export default function Header({ scale, debate, opacity }: HeaderProps) {
           <div className="flex items-center gap-2">
             <div className="flex items-center gap-2">
               <Users size={12} className="text-muted-foreground" />
-              <span className="text-muted-foreground text-xs">{(debate?.cons?.insights.reduce((acc, insight) => acc + insight.voted_count, 0) || 0) + (debate?.pros?.insights.reduce((acc, insight) => acc + insight.voted_count, 0) || 0)} participants</span>
+              <span className="text-muted-foreground text-xs">{((debate?.cons?.insights && debate.cons.insights.reduce((acc, insight) => acc + insight.voted_count, 0)) || 0) + ((debate?.pros?.insights && debate.pros.insights.reduce((acc, insight) => acc + insight.voted_count, 0)) || 0)} participants</span>
             </div>
             <div className="flex items-center gap-2">
               <MessageSquare size={12} className="text-muted-foreground" />
