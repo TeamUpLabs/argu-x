@@ -5,7 +5,8 @@ import { Badge } from "@/components/ui/badge";
 import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
-import { TrendingUp, TrendingDown, Info, Coins, Users, Activity, CheckCircle, PenTool, ArrowRight } from "lucide-react";
+import { TrendingUp, TrendingDown, Info, Coins, Users, Activity, CheckCircle, PenTool, ArrowRight, AlertTriangle } from "lucide-react";
+import { useUserStore } from "@/store/userStore";
 
 interface InsightData {
   id: number;
@@ -28,8 +29,11 @@ export default function ParticipationOrder({ selectedInsight }: ParticipationOrd
   const [newInsightText, setNewInsightText] = useState('');
   const [showConfirm, setShowConfirm] = useState(false);
   const [orderPlaced, setOrderPlaced] = useState(false);
+  const [showInsufficientBalance, setShowInsufficientBalance] = useState(false);
 
   const insight: InsightData | null = selectedInsight || null;
+  const { user } = useUserStore();
+  const userBalance = user?.argx || 0;
 
   const tokenOptions = [5, 10, 25, 50, 100];
 
@@ -38,6 +42,10 @@ export default function ParticipationOrder({ selectedInsight }: ParticipationOrd
   };
 
   const handleSubmit = () => {
+    if (userBalance < tokenAmount) {
+      setShowInsufficientBalance(true);
+      return;
+    }
     setShowConfirm(true);
   };
 
@@ -257,6 +265,50 @@ export default function ParticipationOrder({ selectedInsight }: ParticipationOrd
         </CardContent>
       </Card>
 
+      {/* Insufficient Balance Warning Modal */}
+      <Dialog open={showInsufficientBalance} onOpenChange={setShowInsufficientBalance}>
+        <DialogContent className="sm:max-w-md">
+          <DialogHeader className="text-center pb-4">
+            <div className="w-12 h-12 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-3">
+              <AlertTriangle className="h-6 w-6 text-red-500" />
+            </div>
+            <DialogTitle className="text-xl font-semibold text-foreground">
+              ARGX 토큰 부족
+            </DialogTitle>
+            <DialogDescription className="text-muted-foreground">
+              스테이킹하려는 토큰 양이 보유하고 계신 ARGX 토큰보다 많습니다
+            </DialogDescription>
+          </DialogHeader>
+
+          <div className="space-y-4">
+            <div className="p-4 bg-muted rounded-lg space-y-3">
+              <div className="flex justify-between items-center">
+                <span className="text-sm font-medium text-muted-foreground">보유 ARGX:</span>
+                <span className="text-base font-semibold text-foreground">{userBalance} ARGX</span>
+              </div>
+              <div className="flex justify-between items-center">
+                <span className="text-sm font-medium text-muted-foreground">필요 ARGX:</span>
+                <span className="text-base font-semibold text-red-500">{tokenAmount} ARGX</span>
+              </div>
+              <div className="flex justify-between items-center pt-2 border-t border-border">
+                <span className="text-sm font-medium text-muted-foreground">부족한 양:</span>
+                <span className="text-base font-semibold text-red-500">-{tokenAmount - userBalance} ARGX</span>
+              </div>
+            </div>
+          </div>
+
+          <DialogFooter className="flex space-x-3 pt-4">
+            <Button
+              variant="outline"
+              onClick={() => setShowInsufficientBalance(false)}
+              className="flex-1"
+            >
+              확인
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
+
       {/* Confirmation Modal - Minimal Design */}
       <Dialog open={showConfirm} onOpenChange={setShowConfirm}>
         <DialogContent className="sm:max-w-md">
@@ -264,7 +316,7 @@ export default function ParticipationOrder({ selectedInsight }: ParticipationOrd
             <div className="w-12 h-12 bg-muted rounded-full flex items-center justify-center mx-auto mb-3">
               <CheckCircle className="h-6 w-6 text-muted-foreground" />
             </div>
-            <DialogTitle className="text-xl font-normal text-foreground">
+            <DialogTitle className="text-xl font-semibold text-foreground">
               참여 확인
             </DialogTitle>
             <DialogDescription className="text-muted-foreground">
