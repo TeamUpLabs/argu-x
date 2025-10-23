@@ -53,39 +53,59 @@ export default function ParticipationOrder({ selectedInsight, debate }: Particip
   };
 
   const confirmAction = async () => {
-    if (mode === 'vote') {
-      console.log(`${insight?.opinion} 투표를 위해 ${tokenAmount} ARGX 토큰을 스테이킹합니다. 인사이트: ${insight?.title}`);
-      updateUserArgx((user?.argx || 0) - tokenAmount);
-    } else {
-      if (!debate) return;
-
-      const response = await fetch(`/api/debates/${debate.id}/insights`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          content: newInsightText,
-          debate_side_id: debate[newInsightOpinion].id,
-          argx: tokenAmount,
-        }),
-      });
-
-      if (response.ok) {
-        updateUserArgx((user?.argx || 0) - tokenAmount);
+    try {
+      if (mode === 'vote') {
+        if (!debate || !insight) return;
+  
+        const response = await fetch(`/api/debates/${debate.id}/insights/${insight?.id}/vote`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            insight_id: insight.id,
+            argx: tokenAmount,
+          }),
+        });
+  
+        if (response.ok) {
+          updateUserArgx((user?.argx || 0) - tokenAmount);
+        }
+      } else {
+        if (!debate) return;
+  
+        const response = await fetch(`/api/debates/${debate.id}/insights`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            content: newInsightText,
+            debate_side_id: debate[newInsightOpinion].id,
+            argx: tokenAmount,
+          }),
+        });
+  
+        if (response.ok) {
+          updateUserArgx((user?.argx || 0) - tokenAmount);
+        }
       }
+
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setShowConfirm(false);
+      setOrderPlaced(true);
+  
+      setTimeout(() => {
+        setOrderPlaced(false);
+        setTokenAmount(10);
+        if (mode === 'create') {
+          setNewInsightText('');
+          setNewInsightOpinion('pros');
+        }
+      }, 3000);
     }
-    setShowConfirm(false);
-    setOrderPlaced(true);
-
-    setTimeout(() => {
-      setOrderPlaced(false);
-      setTokenAmount(10);
-      if (mode === 'create') {
-        setNewInsightText('');
-        setNewInsightOpinion('pros');
-      }
-    }, 3000);
   };
 
   return (

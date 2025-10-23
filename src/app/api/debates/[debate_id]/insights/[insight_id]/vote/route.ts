@@ -1,6 +1,6 @@
 import { cookies } from "next/headers";
 
-export async function POST(request: Request, { params }: { params: { id: string } }) {
+export async function POST(request: Request, { params }: { params: { debate_id: number, insight_id: number } }) {
   try {
     const cookieStore = await cookies();
     const token = cookieStore.get("token")?.value;
@@ -11,7 +11,7 @@ export async function POST(request: Request, { params }: { params: { id: string 
 
     const body = await request.json();
 
-    const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/debates/${params.id}/insights`, {
+    const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/debates/${params.debate_id}/insights/${params.insight_id}/vote`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -29,6 +29,6 @@ export async function POST(request: Request, { params }: { params: { id: string 
     return Response.json(data);
   } catch (error) {
     console.error(error);
-    return Response.json({ error: "Failed to create insight" }, { status: 500 });
+    return Response.json({ error: "Failed to vote insight" }, { status: 500 });
   }
 }
