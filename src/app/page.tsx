@@ -4,6 +4,7 @@ import DefaultHeader from "@/components/common/DefaultHeader";
 import DebateCard from "@/components/debate/DebateCard";
 import { Debate } from "@/types/Debate";
 import { useEffect, useState } from "react";
+import { Loading } from "@/components/common/Loading";
 
 export default function Home() {
   const [debates, setDebates] = useState<Debate[]>([]);
@@ -43,7 +44,7 @@ export default function Home() {
             ))}
           </div>
         ) : (
-          <p className="text-center">No debates found</p>
+          <Loading className="flex items-center justify-center" />
         )}
       </main>
     </div>
