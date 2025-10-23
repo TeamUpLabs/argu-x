@@ -2,25 +2,31 @@ export async function POST(request: Request) {
   try {
     const { email, password } = await request.json();
 
-    const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/login`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ email, password }),
-    });
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_API_URL}/api/v1/login`,
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, password }),
+      }
+    );
 
     const data = await response.json();
 
     if (!response.ok) {
-      return Response.json({
-        success: false,
-        message: data.error || data.message || "Login failed"
-      }, { status: response.status });
+      return Response.json(
+        {
+          success: false,
+          message: data.error || data.message || "Login failed",
+        },
+        { status: response.status }
+      );
     }
 
     const formattedResponse = {
       success: true,
       token: data.token,
-      user: data.user || data
+      user: data.user || data,
     };
 
     const responseHeaders = new Headers();
@@ -32,10 +38,13 @@ export async function POST(request: Request) {
     return Response.json(formattedResponse, { headers: responseHeaders });
   } catch (error) {
     console.error(error);
-    return Response.json({
-      success: false,
-      message: "Network error occurred"
-    }, { status: 500 });
+    return Response.json(
+      {
+        success: false,
+        message: "Network error occurred",
+      },
+      { status: 500 }
+    );
   }
 }
 
@@ -51,9 +60,12 @@ export async function DELETE() {
     return Response.json({ success: true }, { headers: responseHeaders });
   } catch (error) {
     console.error(error);
-    return Response.json({
-      success: false,
-      message: "Logout failed"
-    }, { status: 500 });
+    return Response.json(
+      {
+        success: false,
+        message: "Logout failed",
+      },
+      { status: 500 }
+    );
   }
 }
