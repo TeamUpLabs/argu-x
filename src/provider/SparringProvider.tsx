@@ -9,7 +9,9 @@ interface SparringContextType {
   error: string | undefined;
   comments: Comment[];
   addComment: (content: string) => Promise<void>;
+  deleteComment: (commentId: number) => Promise<void>;
   isAddingComment: boolean;
+  isDeletingComment: boolean;
 }
 
 const SparringContext = createContext<SparringContextType | undefined>(undefined);
@@ -24,6 +26,7 @@ interface SparringProviderProps {
 export const SparringProvider = ({ children, debate, isLoading, error }: SparringProviderProps) => {
   const [comments, setComments] = useState<Comment[]>([]);
   const [isAddingComment, setIsAddingComment] = useState(false);
+  const [isDeletingComment, setIsDeletingComment] = useState(false);
 
   const addComment = useCallback(async (content: string) => {
     if (!debate || isAddingComment) return;
@@ -55,6 +58,35 @@ export const SparringProvider = ({ children, debate, isLoading, error }: Sparrin
     }
   }, [debate, isAddingComment]);
 
+  const deleteComment = useCallback(async (commentId: number) => {
+    if (!debate) return;
+
+    setIsDeletingComment(true);
+    try {
+      const response = await fetch(`/api/debates/${debate.id}/comments`, {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ 
+          comment_id: commentId,
+          debate_id: debate.id,
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to delete comment');
+      }
+
+      setComments(prev => prev.filter(comment => comment.id !== commentId));
+    } catch (error) {
+      console.error('Error deleting comment:', error);
+      throw error;
+    } finally {
+      setIsDeletingComment(false);
+    }
+  }, [debate]);
+
   // Update comments when debate changes
   useEffect(() => {
     if (debate?.comments) {
@@ -69,7 +101,9 @@ export const SparringProvider = ({ children, debate, isLoading, error }: Sparrin
       error, 
       comments, 
       addComment, 
-      isAddingComment 
+      deleteComment,
+      isAddingComment,
+      isDeletingComment 
     }}>
       {children}
     </SparringContext.Provider>

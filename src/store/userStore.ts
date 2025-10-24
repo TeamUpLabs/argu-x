@@ -3,15 +3,11 @@
 import { create } from "zustand";
 import { devtools, persist, createJSONStorage } from "zustand/middleware";
 import { useEffect } from "react";
+import { User } from "@/types/User";
 
 type State = {
   Token: string | undefined;
-  user: {
-    email: string;
-    name?: string;
-    avatar?: string;
-    argx?: number;
-  } | undefined;
+  user: User | undefined;
   isAuthenticated: () => boolean;
   debug: () => { token: string | undefined; isAuth: boolean };
   _hasHydrated: boolean;
@@ -19,7 +15,7 @@ type State = {
 
 type Action = {
   setToken: (token: string) => void;
-  setUser: (user: { email: string; name?: string; avatar?: string; argx?: number }) => void;
+  setUser: (user: User) => void;
   updateUserArgx: (argx: number) => void;
   logout: () => Promise<void>;
   setHasHydrated: (state: boolean) => void;
@@ -33,7 +29,7 @@ export const useUserStore = create<State & Action>()(
         user: undefined,
         _hasHydrated: false,
         setToken: (token: string) => set({ Token: token }),
-        setUser: (user: { email: string; name?: string; avatar?: string; argx?: number }) => set({ user }),
+        setUser: (user: User) => set({ user }),
         updateUserArgx: (argx: number) => set((state) => ({
           user: state.user ? { ...state.user, argx } : undefined
         })),
