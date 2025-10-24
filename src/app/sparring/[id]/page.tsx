@@ -278,7 +278,7 @@ export default function SparringPage() {
                     <TabsTrigger value="top_holders">Top Holders</TabsTrigger>
                   </TabsList>
                   <TabsContent value="comments">
-                    <Comments comments={debate?.comments || []} />
+                    <Comments comments={debate?.comments || []} debate={debate} />
                   </TabsContent>
                   <TabsContent value="top_holders">
 
