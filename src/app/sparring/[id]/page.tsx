@@ -22,7 +22,7 @@ import { Loading } from "@/components/common/Loading";
 import { useSparringContext } from "@/provider/SparringProvider";
 
 export default function SparringPage() {
-  const { debate, isLoading, error } = useSparringContext();
+  const { debate, isLoading, error, comments } = useSparringContext();
   const [scrollY, setScrollY] = useState(0);
   const [prosRatio, setProsRatio] = useState(0);
   const [consRatio, setConsRatio] = useState(0);
@@ -253,11 +253,11 @@ export default function SparringPage() {
 
                 <Tabs defaultValue="comments">
                   <TabsList>
-                    <TabsTrigger value="comments">Comments ({debate?.comments?.length || 0})</TabsTrigger>
+                    <TabsTrigger value="comments">Comments ({comments.length})</TabsTrigger>
                     <TabsTrigger value="top_holders">Top Holders</TabsTrigger>
                   </TabsList>
                   <TabsContent value="comments">
-                    <Comments comments={debate?.comments || []} debate={debate} />
+                    <Comments debate={debate} />
                   </TabsContent>
                   <TabsContent value="top_holders">
 

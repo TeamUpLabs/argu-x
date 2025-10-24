@@ -1,42 +1,26 @@
-import { Comment, Debate } from "@/types/Debate";
+import { Debate } from "@/types/Debate";
 import { InputGroup, InputGroupAddon, InputGroupInput, InputGroupButton } from "@/components/ui/input-group";
 import { Send } from "lucide-react";
 import { useState } from "react";
 import Image from "next/image";
+import { useSparringContext } from "@/provider/SparringProvider";
 
 interface CommentsProps {
-  comments: Comment[];
   debate?: Debate;
 }
 
-export default function Comments({ comments, debate }: CommentsProps) {
+export default function Comments({ debate }: CommentsProps) {
   const [comment, setComment] = useState('');
+  const { comments, addComment, isAddingComment } = useSparringContext();
 
   const handleSubmit = async () => {
     if (comment.trim() === '' || !debate) return;
 
     try {
-      const response = await fetch(`/api/debates/${debate.id}/comments`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ 
-          content: comment,
-          debate_id: debate.id,
-        }),
-      });
-
-      if (!response.ok) {
-        throw new Error('Failed to add comment');
-      }
-
-      const data = await response.json();
-      console.log(data);
-    } catch (error) {
-      console.error(error);
-    } finally {
+      await addComment(comment);
       setComment('');
+    } catch (error) {
+      console.error('Failed to add comment:', error);
     }
   };
 
@@ -50,7 +34,7 @@ export default function Comments({ comments, debate }: CommentsProps) {
           disabled={!debate}
         />
         <InputGroupAddon align="inline-end">
-          <InputGroupButton variant="outline" onClick={handleSubmit} disabled={!debate}>
+          <InputGroupButton variant="outline" onClick={handleSubmit} disabled={!debate || isAddingComment}>
             <Send />
           </InputGroupButton>
         </InputGroupAddon>
@@ -59,7 +43,9 @@ export default function Comments({ comments, debate }: CommentsProps) {
       {comments.length === 0 ? (
         <p className="text-muted-foreground text-center">No comments.</p>
       ) : (
-        comments.map((comment) => (
+        comments
+          .toSorted((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime())
+          .map((comment) => (
           <div key={comment.id} className="flex items-start p-2">
             <div className="bg-muted w-12 h-12 rounded-full">
               {comment.creator.avatar && (
