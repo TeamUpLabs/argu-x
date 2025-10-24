@@ -8,6 +8,9 @@ import OpinionCards from "@/components/sparring/OpinionCards";
 import ProgressBar from "@/components/sparring/ProgressBar";
 import DebateResult, { OpinionType } from "@/components/sparring/DebateResult";
 import { calculateRatiosExcludingToday, calculateRatiosIncludingToday } from "@/components/sparring/utils/calculateRatios";
+import { handleInsightVoteClick, convertInsightToOrderData } from "@/components/sparring/utils/insightUtils";
+import { generateParticipationData } from "@/components/sparring/utils/participationUtils";
+import { calculateHeaderScale, calculateHeaderOpacity, setupScrollHandler } from "@/components/sparring/utils/scrollUtils";
 import ParticipationTrend from "@/components/sparring/charts/ParticipationTrend";
 import OpinionDistribution from "@/components/sparring/charts/OpinionDistribution";
 import ChartFilter from "@/components/sparring/charts/filter";
@@ -18,13 +21,6 @@ import Comments from "@/components/sparring/Comments";
 import { decompressData } from "@/lib/compression";
 import Order from "@/components/sparring/Order";
 import { Loading } from "@/components/common/Loading";
-
-// 상수 정의
-const SCALE_MIN = 0.7;
-const SCALE_MAX = 1;
-const SCALE_DIVISOR = 300;
-const OPACITY_DIVISOR = 100;
-const SCALE_OFFSET = 0;
 
 export default function SparringPage() {
   const [scrollY, setScrollY] = useState(0);
@@ -44,84 +40,6 @@ export default function SparringPage() {
   const [chartType, setChartType] = useState<'participation' | 'opinion'>('participation');
   const [selectedInsight, setSelectedInsight] = useState<Debate['pros']['insights'][0] | Debate['cons']['insights'][0] | null>(null);
   const [selectedInsightOpinionType, setSelectedInsightOpinionType] = useState<'pros' | 'cons'>('pros');
-
-  // 선택된 인사이트를 처리하는 핸들러
-  const handleInsightVoteClick = (insight: Debate['pros']['insights'][0] | Debate['cons']['insights'][0]) => {
-    setSelectedInsight(insight);
-    setSelectedInsightOpinionType(opinionType);
-  };
-
-  // Debate 인사이트 데이터를 Order 컴포넌트 형식으로 변환
-  const convertInsightToOrderData = (insight: Debate['pros']['insights'][0] | Debate['cons']['insights'][0], opinionType: 'pros' | 'cons') => {
-    // 결정론적 토큰 스테이킹 계산 (랜덤 요소 제거)
-
-    return {
-      id: insight.id,
-      author: insight.creator.name,
-      title: insight.content,
-      opinion: opinionType,
-      currentVotes: insight.voted_count || 0,
-      totalStaked: insight.argx_amount || 0,
-    };
-  };
-
-  // 토론 참여 추이 데이터 생성 함수
-  const generateParticipationData = (debate: Debate) => {
-    if (!debate.pros?.insights || !debate.cons?.insights) {
-      return [];
-    }
-
-    const dailyParticipation: { [key: string]: { date: string; pros: number; cons: number } } = {};
-
-    // Pros 데이터 처리
-    if (debate.pros?.insights) {
-      for (const insight of debate.pros.insights) {
-        const date = new Date(insight.created_at).toISOString().split('T')[0];
-        if (!dailyParticipation[date]) {
-          dailyParticipation[date] = { date, pros: 0, cons: 0 };
-        }
-        dailyParticipation[date].pros += 1;
-      }
-    }
-
-    // Cons 데이터 처리
-    if (debate.cons?.insights) {
-      for (const insight of debate.cons.insights) {
-        const date = new Date(insight.created_at).toISOString().split('T')[0];
-        if (!dailyParticipation[date]) {
-          dailyParticipation[date] = { date, pros: 0, cons: 0 };
-        }
-        dailyParticipation[date].cons += 1;
-      }
-    }
-
-    const allUsers = [...(debate.pros?.insights || []), ...(debate.cons?.insights || [])];
-    if (allUsers.length === 0) {
-      return [];
-    }
-
-    const sortedUsers = allUsers.toSorted((a, b) => new Date(a.created_at).getTime() - new Date(b.created_at).getTime());
-    const oldestDate = new Date(sortedUsers[0].created_at);
-    const currentDateObj = new Date();
-    const currentDateString = currentDateObj.toISOString().split('T')[0];
-
-    const dateRange: string[] = [];
-    const startDate = new Date(oldestDate);
-
-    const endDate = new Date(currentDateString + 'T23:59:59.999Z');
-
-    while (startDate.getTime() <= endDate.getTime()) {
-      const dateStr = startDate.toISOString().split('T')[0];
-      dateRange.push(dateStr);
-      startDate.setDate(startDate.getDate() + 1);
-    }
-
-    return dateRange.map(date => ({
-      date,
-      pros: dailyParticipation[date]?.pros || 0,
-      cons: dailyParticipation[date]?.cons || 0,
-    }));
-  };
 
   useEffect(() => {
     const data = searchParams.get('data');
@@ -170,26 +88,14 @@ export default function SparringPage() {
   }, [searchParams]);
 
   useEffect(() => {
-    let ticking = false;
-
-    const handleScroll = () => {
-      if (!ticking) {
-        requestAnimationFrame(() => {
-          setScrollY(window.scrollY);
-          ticking = false;
-        });
-        ticking = true;
-      }
-    };
-
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
+    const cleanup = setupScrollHandler(setScrollY);
+    return cleanup;
   }, []);
 
   // 스크롤에 따른 헤더 스케일 및 투명도 계산 (최소 0.7, 최대 1.0)
   // 헤더의 높이가 24px이므로, 24px를 뺀 값으로 계산
-  const headerScale = Math.max(SCALE_MIN, Math.round((SCALE_MAX - (scrollY - SCALE_OFFSET) / SCALE_DIVISOR) * 1000) / 1000);
-  const headerOpacity = Math.max(0, Math.round((SCALE_MAX - (scrollY - SCALE_OFFSET) / OPACITY_DIVISOR) * 1000) / 1000);
+  const headerScale = calculateHeaderScale(scrollY);
+  const headerOpacity = calculateHeaderOpacity(scrollY);
 
   if (isLoading) {
     return (
@@ -292,7 +198,7 @@ export default function SparringPage() {
                               <InsightCard
                                 insight={insight}
                                 opinion={opinionType}
-                                onVoteClick={handleInsightVoteClick}
+                                onVoteClick={(insight) => handleInsightVoteClick(insight, setSelectedInsight, setSelectedInsightOpinionType, opinionType)}
                                 isSelected={selectedInsight?.id === insight.id}
                               />
                             </div>
@@ -325,7 +231,7 @@ export default function SparringPage() {
                               <InsightCard
                                 insight={insight}
                                 opinion={opinionType}
-                                onVoteClick={handleInsightVoteClick}
+                                onVoteClick={(insight) => handleInsightVoteClick(insight, setSelectedInsight, setSelectedInsightOpinionType, opinionType)}
                                 isSelected={selectedInsight?.id === insight.id}
                               />
                             </div>
