@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { useSearchParams } from "next/navigation";
 import { Debate } from "@/types/Debate";
 import Header from "@/components/sparring/header";
 import OpinionCards from "@/components/sparring/OpinionCards";
@@ -18,16 +17,13 @@ import InsightsFilter from "@/components/sparring/insights/filter";
 import InsightCard from "@/components/sparring/insights/InsightCard";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import Comments from "@/components/sparring/Comments";
-import { decompressData } from "@/lib/compression";
 import Order from "@/components/sparring/Order";
 import { Loading } from "@/components/common/Loading";
+import { useSparringContext } from "@/provider/SparringProvider";
 
 export default function SparringPage() {
+  const { debate, isLoading, error } = useSparringContext();
   const [scrollY, setScrollY] = useState(0);
-  const [debate, setDebate] = useState<Debate | undefined>();
-  const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState<string | undefined>();
-  const searchParams = useSearchParams();
   const [prosRatio, setProsRatio] = useState(0);
   const [consRatio, setConsRatio] = useState(0);
   const [opinion, setOpinion] = useState<OpinionType>('변동 없음');
@@ -42,50 +38,33 @@ export default function SparringPage() {
   const [selectedInsightOpinionType, setSelectedInsightOpinionType] = useState<'pros' | 'cons'>('pros');
 
   useEffect(() => {
-    const data = searchParams.get('data');
-    if (data) {
-      setIsLoading(true);
-      setError(undefined);
-      try {
-        const decodedData = decompressData(data) as Debate;
-        setDebate(decodedData);
+    if (debate) {
+      const participationChartData = generateParticipationData(debate);
+      setParticipationData(participationChartData);
 
-        const participationChartData = generateParticipationData(decodedData);
-        setParticipationData(participationChartData);
+      const { prosRatio: prosRatioExcludingToday, consRatio: consRatioExcludingToday, latestProsDate, latestConsDate } = calculateRatiosExcludingToday(debate);
+      const { prosRatio: prosRatioIncludingToday, consRatio: consRatioIncludingToday } = calculateRatiosIncludingToday(debate);
 
-        const { prosRatio: prosRatioExcludingToday, consRatio: consRatioExcludingToday, latestProsDate, latestConsDate } = calculateRatiosExcludingToday(decodedData);
-        const { prosRatio: prosRatioIncludingToday, consRatio: consRatioIncludingToday } = calculateRatiosIncludingToday(decodedData);
+      setProsRatio(prosRatioIncludingToday);
+      setConsRatio(consRatioIncludingToday);
+      setLatestProsDate(latestProsDate);
+      setLatestConsDate(latestConsDate);
 
-        setProsRatio(prosRatioIncludingToday);
-        setConsRatio(consRatioIncludingToday);
-        setLatestProsDate(latestProsDate);
-        setLatestConsDate(latestConsDate);
+      const prosRatioDifference = prosRatioExcludingToday - prosRatioIncludingToday;
+      const consRatioDifference = consRatioExcludingToday - consRatioIncludingToday;
 
-        const prosRatioDifference = prosRatioExcludingToday - prosRatioIncludingToday;
-        const consRatioDifference = consRatioExcludingToday - consRatioIncludingToday;
-
-        if (prosRatioDifference > consRatioDifference) {
-          setOpinion('찬성');
-          setPercentage(prosRatioDifference);
-        } else if (prosRatioDifference < consRatioDifference) {
-          setOpinion('반대');
-          setPercentage(consRatioDifference);
-        } else {
-          setOpinion('변동 없음');
-          setPercentage(0);
-        }
-
-        setIsLoading(false);
-      } catch (error) {
-        console.error('Failed to decode debate data:', error);
-        setError('데이터를 불러오는 중 오류가 발생했습니다.');
-        setIsLoading(false);
+      if (prosRatioDifference > consRatioDifference) {
+        setOpinion('찬성');
+        setPercentage(prosRatioDifference);
+      } else if (prosRatioDifference < consRatioDifference) {
+        setOpinion('반대');
+        setPercentage(consRatioDifference);
+      } else {
+        setOpinion('변동 없음');
+        setPercentage(0);
       }
-    } else {
-      setError('토론 데이터를 찾을 수 없습니다.');
-      setIsLoading(false);
     }
-  }, [searchParams]);
+  }, [debate]);
 
   useEffect(() => {
     const cleanup = setupScrollHandler(setScrollY);

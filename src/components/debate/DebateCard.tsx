@@ -9,7 +9,6 @@ import { Debate } from "@/types/Debate";
 import { getFrontImageBrightness, getTextColorClass, getTextOpacityClass } from "./utils/getFrontImageBrightness";
 import RotatingText from "@/components/RotatingText";
 import { MessageCircleMore, CircleCheckBig } from "lucide-react";
-import { compressData } from "@/lib/compression";
 
 interface DebateCardProps {
   debate: Debate;
@@ -61,9 +60,7 @@ export default function DebateCard({ debate }: DebateCardProps) {
         const remainingTime = Math.max(50, minDisplayTime - elapsedTime); // 최소 50ms 더 대기
 
         setTimeout(() => {
-          // 페이지 이동 시작
-          const debateData = compressData(debate);
-          router.push(`/sparring/${debate.id}?data=${debateData}`);
+          router.push(`/sparring/${debate.id}`);
         }, remainingTime);
       }, 100);
     } else {
