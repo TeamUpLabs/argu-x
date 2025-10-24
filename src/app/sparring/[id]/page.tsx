@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { Debate } from "@/types/Debate";
+import { Insight } from "@/types/Debate";
 import Header from "@/components/sparring/header";
 import OpinionCards from "@/components/sparring/OpinionCards";
 import ProgressBar from "@/components/sparring/ProgressBar";
@@ -22,7 +22,7 @@ import { Loading } from "@/components/common/Loading";
 import { useSparringContext } from "@/provider/SparringProvider";
 
 export default function SparringPage() {
-  const { debate, isLoading, error, comments } = useSparringContext();
+  const { debate, isLoading, error, comments, insights } = useSparringContext();
   const [scrollY, setScrollY] = useState(0);
   const [prosRatio, setProsRatio] = useState(0);
   const [consRatio, setConsRatio] = useState(0);
@@ -34,8 +34,7 @@ export default function SparringPage() {
   const [opinionType, setOpinionType] = useState<'pros' | 'cons'>('pros');
   const [sortType, setSortType] = useState<'latest' | 'popular'>('latest');
   const [chartType, setChartType] = useState<'participation' | 'opinion'>('participation');
-  const [selectedInsight, setSelectedInsight] = useState<Debate['pros']['insights'][0] | Debate['cons']['insights'][0] | null>(null);
-  const [selectedInsightOpinionType, setSelectedInsightOpinionType] = useState<'pros' | 'cons'>('pros');
+  const [selectedInsight, setSelectedInsight] = useState<Insight | null>(null);
 
   useEffect(() => {
     if (debate) {
@@ -131,7 +130,7 @@ export default function SparringPage() {
                       </div>
                       <div className="flex px-3 py-0.5 justify-center items-center bg-muted rounded-full border border-border">
                         <span className="text-xs font-medium text-foreground">
-                          {opinionType === 'pros' ? debate?.pros?.insights?.length || 0 : debate?.cons?.insights?.length || 0}개
+                          {insights.filter(insight => insight.side === opinionType).length}개
                         </span>
                       </div>
                     </div>
@@ -161,8 +160,9 @@ export default function SparringPage() {
                   {/* 인사이트 카드 그리드 */}
                   <div className="space-y-3">
                     {opinionType === 'pros' ? (
-                      debate?.pros?.insights && debate.pros.insights.length > 0 ? (
-                        debate.pros.insights
+                      insights.some(insight => insight.side === 'pros') ? (
+                        insights
+                          .filter(insight => insight.side === 'pros')
                           ?.toSorted((a, b) => {
                             return sortType === 'latest'
                               ? new Date(b.created_at).getTime() - new Date(a.created_at).getTime()
@@ -177,7 +177,7 @@ export default function SparringPage() {
                               <InsightCard
                                 insight={insight}
                                 opinion={opinionType}
-                                onVoteClick={(insight) => handleInsightVoteClick(insight, setSelectedInsight, setSelectedInsightOpinionType, opinionType)}
+                                onVoteClick={(insight) => handleInsightVoteClick(insight, setSelectedInsight)}
                                 isSelected={selectedInsight?.id === insight.id}
                               />
                             </div>
@@ -194,8 +194,9 @@ export default function SparringPage() {
                         </div>
                       )
                     ) : (
-                      debate?.cons?.insights && debate.cons.insights.length > 0 ? (
-                        debate.cons.insights
+                      insights.some(insight => insight.side === 'cons') ? (
+                        insights
+                          .filter(insight => insight.side === 'cons')
                           ?.toSorted((a, b) => {
                             return sortType === 'latest'
                               ? new Date(b.created_at).getTime() - new Date(a.created_at).getTime()
@@ -210,7 +211,7 @@ export default function SparringPage() {
                               <InsightCard
                                 insight={insight}
                                 opinion={opinionType}
-                                onVoteClick={(insight) => handleInsightVoteClick(insight, setSelectedInsight, setSelectedInsightOpinionType, opinionType)}
+                                onVoteClick={(insight) => handleInsightVoteClick(insight, setSelectedInsight)}
                                 isSelected={selectedInsight?.id === insight.id}
                               />
                             </div>
@@ -247,7 +248,7 @@ export default function SparringPage() {
 
                   {/* 토론 의견 분포 차트 */}
                   {chartType === 'opinion' && (
-                    <OpinionDistribution prosCount={debate?.pros?.insights?.length || 0} consCount={debate?.cons?.insights?.length || 0} />
+                    <OpinionDistribution prosCount={insights.filter(insight => insight.side === 'pros').length} consCount={insights.filter(insight => insight.side === 'cons').length} />
                   )}
                 </div>
 
@@ -269,7 +270,7 @@ export default function SparringPage() {
         </div>
         <div className="w-1/3 h-full pt-4 sticky top-[101px]">
           <div className="h-full max-h-[calc(100vh-120px)] overflow-y-auto pr-2">
-            <Order selectedInsight={selectedInsight ? convertInsightToOrderData(selectedInsight, selectedInsightOpinionType) : undefined} debate={debate} />
+            <Order selectedInsight={selectedInsight ? convertInsightToOrderData(selectedInsight) : undefined} debate={debate} />
           </div>
         </div>
       </div>
