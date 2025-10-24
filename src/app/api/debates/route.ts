@@ -1,18 +1,8 @@
-import { cookies } from "next/headers";
-
 export async function GET() {
   try {
-    const cookieStore = await cookies();
-    const token = cookieStore.get("token")?.value;
-
-    if (!token) {
-      return Response.json({ error: "No authentication token provided" }, { status: 401 });
-    }
-
     const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/debates/`, {
       headers: {
         "Content-Type": "application/json",
-        "Authorization": `Bearer ${token}`,
       },
     });
 
