@@ -30,7 +30,6 @@ const getUserColor = (name: string) => {
 };
 
 export default function InsightCard({ insight, opinion, onVoteClick, isSelected = false }: InsightCardProps) {
-  const [isLiked, setIsLiked] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
 
   const handleCardClick = () => {
@@ -41,7 +40,6 @@ export default function InsightCard({ insight, opinion, onVoteClick, isSelected 
 
   const handleVoteButtonClick = (e: React.MouseEvent) => {
     e.stopPropagation();
-    setIsLiked(!isLiked);
     handleCardClick();
   };
 
@@ -127,7 +125,7 @@ export default function InsightCard({ insight, opinion, onVoteClick, isSelected 
               text-xs font-medium transition-all duration-200
               ${isSelected
                 ? 'bg-foreground hover:bg-foreground/90 text-background border-foreground'
-                : `border-border hover:border-foreground hover:bg-muted/50 hover:text-foreground ${isLiked ? 'bg-red-100 border-red-300 text-red-700 hover:bg-red-200' : ''}`
+                : 'border-border hover:border-foreground hover:bg-muted/50 hover:text-foreground'
               }
             `}
             onClick={handleVoteButtonClick}
