@@ -54,8 +54,6 @@ export default function SparringPage() {
   // Debate 인사이트 데이터를 Order 컴포넌트 형식으로 변환
   const convertInsightToOrderData = (insight: Debate['pros']['insights'][0] | Debate['cons']['insights'][0], opinionType: 'pros' | 'cons') => {
     // 결정론적 토큰 스테이킹 계산 (랜덤 요소 제거)
-    const baseStake = insight.voted_count || 0;
-    const totalStaked = Math.max(100, baseStake * 50 + 100); // voted_count당 50토큰 + 기본 100토큰
 
     return {
       id: insight.id,
@@ -63,9 +61,7 @@ export default function SparringPage() {
       title: insight.content,
       opinion: opinionType,
       currentVotes: insight.voted_count || 0,
-      totalStaked: totalStaked,
-      supportRatio: 50, // 임시 데이터 - 실제로는 계산 필요
-      challengeRatio: 50 // 임시 데이터 - 실제로는 계산 필요
+      totalStaked: insight.argx_amount || 0,
     };
   };
 

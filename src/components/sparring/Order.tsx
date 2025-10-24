@@ -5,7 +5,7 @@ import { Badge } from "@/components/ui/badge";
 import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
-import { TrendingUp, TrendingDown, Info, Coins, Users, Activity, CheckCircle, PenTool, ArrowRight, AlertTriangle } from "lucide-react";
+import { TrendingUp, TrendingDown, Info, Coins, Users, CheckCircle, PenTool, ArrowRight, AlertTriangle } from "lucide-react";
 import { useUserStore } from "@/store/userStore";
 import { Debate } from "@/types/Debate";
 
@@ -16,8 +16,6 @@ interface InsightData {
   opinion: string;
   currentVotes: number;
   totalStaked: number;
-  supportRatio: number;
-  challengeRatio: number;
 }
 
 interface ParticipationOrderProps {
@@ -177,7 +175,7 @@ export default function ParticipationOrder({ selectedInsight, debate }: Particip
                   </div>
 
                   {/* Stats in a clean row */}
-                  <div className="grid grid-cols-3 gap-6 pt-4 border-t border-border">
+                  <div className="grid grid-cols-2 gap-6 pt-4 border-t border-border">
                     <div className="text-center">
                       <div className="flex items-center justify-center mb-1">
                         <Users className="h-4 w-4 text-muted-foreground" />
@@ -191,17 +189,6 @@ export default function ParticipationOrder({ selectedInsight, debate }: Particip
                       </div>
                       <div className="text-xl font-semibold text-foreground">{insight.totalStaked.toLocaleString()}</div>
                       <div className="text-xs text-gray-500">ARGX 스테이킹</div>
-                    </div>
-                    <div className="text-center">
-                      <div className="flex items-center justify-center mb-1">
-                        <Activity className="h-4 w-4 text-muted-foreground" />
-                      </div>
-                      <div className="text-lg font-semibold text-foreground">
-                        <span className="text-foreground">{insight.supportRatio}%</span>
-                        <span className="text-muted-foreground mx-1">•</span>
-                        <span className="text-foreground">{insight.challengeRatio}%</span>
-                      </div>
-                      <div className="text-xs text-gray-500">찬성 • 반대</div>
                     </div>
                   </div>
                 </div>
