@@ -62,8 +62,6 @@ export interface Insight {
     voted_at: string;
     argx: number;
   }[];
-  side?: 'pros' | 'cons';
-  debate_side_id?: number;
 }
 
 export interface Comment {

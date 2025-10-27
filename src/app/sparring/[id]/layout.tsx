@@ -39,12 +39,12 @@ export default async function SparringLayout({
   params: Promise<{ id: string }>;
 }>) {
   const { id } = await params;
-  const { debate, error } = await fetchDebate(id);
+  const { debate } = await fetchDebate(id);
 
   return (
     <>
       <DefaultHeader fixed />
-      <SparringProvider debate={debate} isLoading={false} error={error}>
+      <SparringProvider initialDebate={debate}>
         {children}
       </SparringProvider>
     </>

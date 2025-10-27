@@ -1,6 +1,6 @@
 import { cookies } from "next/headers";
 
-export async function POST(request: Request, { params }: { params: { debate_id: number } }) {
+export async function POST(request: Request, { params }: { params: Promise<{ debate_id: number }> }) {
   try {
     const cookieStore = await cookies();
     const token = cookieStore.get("token")?.value;
@@ -9,9 +9,10 @@ export async function POST(request: Request, { params }: { params: { debate_id: 
       return Response.json({ error: "No authentication token provided" }, { status: 401 });
     }
 
+    const { debate_id } = await params;
     const body = await request.json();
 
-    const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/debates/${params.debate_id}/insights`, {
+    const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/debates/${debate_id}/insights`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

@@ -22,7 +22,7 @@ import { Loading } from "@/components/common/Loading";
 import { useSparringContext } from "@/provider/SparringProvider";
 
 export default function SparringPage() {
-  const { debate, isLoading, error, comments, insights } = useSparringContext();
+  const { debate, isLoading, error } = useSparringContext();
   const [scrollY, setScrollY] = useState(0);
   const [prosRatio, setProsRatio] = useState(0);
   const [consRatio, setConsRatio] = useState(0);
@@ -130,7 +130,7 @@ export default function SparringPage() {
                       </div>
                       <div className="flex px-3 py-0.5 justify-center items-center bg-muted rounded-full border border-border">
                         <span className="text-xs font-medium text-foreground">
-                          {insights.filter(insight => insight.side === opinionType).length}개
+                          {debate?.pros.count || 0 + (debate?.cons.count || 0)}개
                         </span>
                       </div>
                     </div>
@@ -160,9 +160,8 @@ export default function SparringPage() {
                   {/* 인사이트 카드 그리드 */}
                   <div className="space-y-3">
                     {opinionType === 'pros' ? (
-                      insights.some(insight => insight.side === 'pros') ? (
-                        insights
-                          .filter(insight => insight.side === 'pros')
+                      debate?.pros?.insights && debate.pros.insights.length > 0 ? (
+                        debate.pros.insights
                           ?.toSorted((a, b) => {
                             return sortType === 'latest'
                               ? new Date(b.created_at).getTime() - new Date(a.created_at).getTime()
@@ -194,9 +193,8 @@ export default function SparringPage() {
                         </div>
                       )
                     ) : (
-                      insights.some(insight => insight.side === 'cons') ? (
-                        insights
-                          .filter(insight => insight.side === 'cons')
+                      debate?.cons?.insights && debate.cons.insights.length > 0 ? (
+                        debate.cons.insights
                           ?.toSorted((a, b) => {
                             return sortType === 'latest'
                               ? new Date(b.created_at).getTime() - new Date(a.created_at).getTime()
@@ -248,13 +246,13 @@ export default function SparringPage() {
 
                   {/* 토론 의견 분포 차트 */}
                   {chartType === 'opinion' && (
-                    <OpinionDistribution prosCount={insights.filter(insight => insight.side === 'pros').length} consCount={insights.filter(insight => insight.side === 'cons').length} />
+                    <OpinionDistribution prosCount={debate?.pros.insights.length || 0} consCount={debate?.cons.insights.length || 0} />
                   )}
                 </div>
 
                 <Tabs defaultValue="comments">
                   <TabsList>
-                    <TabsTrigger value="comments">Comments ({comments.length})</TabsTrigger>
+                    <TabsTrigger value="comments">Comments ({debate?.comments.length || 0})</TabsTrigger>
                     <TabsTrigger value="top_holders">Top Holders</TabsTrigger>
                   </TabsList>
                   <TabsContent value="comments">
@@ -270,7 +268,7 @@ export default function SparringPage() {
         </div>
         <div className="w-1/3 h-full pt-4 sticky top-[101px]">
           <div className="h-full max-h-[calc(100vh-120px)] overflow-y-auto pr-2">
-            <Order selectedInsight={selectedInsight ? convertInsightToOrderData(selectedInsight) : undefined} debate={debate} />
+            <Order selectedInsight={selectedInsight ? convertInsightToOrderData(selectedInsight) : undefined} debate={debate} opinion={opinionType} />
           </div>
         </div>
       </div>

@@ -12,7 +12,7 @@ interface CommentsProps {
 
 export default function Comments({ debate }: CommentsProps) {
   const [comment, setComment] = useState('');
-  const { comments, addComment, deleteComment, isAddingComment, isDeletingComment } = useSparringContext();
+  const { addComment, deleteComment, isAddingComment, isDeletingComment } = useSparringContext();
   const { user } = useUserStore();
 
   const handleSubmit = async () => {
@@ -50,10 +50,10 @@ export default function Comments({ debate }: CommentsProps) {
         </InputGroupAddon>
       </InputGroup>
 
-      {comments.length === 0 ? (
+      {debate?.comments.length === 0 ? (
         <p className="text-muted-foreground text-center">No comments.</p>
       ) : (
-        comments
+        debate?.comments
           .toSorted((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime())
           .map((comment) => (
             <div key={comment.id} className="flex items-start p-2">

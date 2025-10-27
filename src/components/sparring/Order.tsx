@@ -13,9 +13,10 @@ import { useSparringContext } from "@/provider/SparringProvider";
 interface ParticipationOrderProps {
   selectedInsight?: Insight;
   debate: Debate | undefined;
+  opinion: 'pros' | 'cons';
 }
 
-export default function ParticipationOrder({ selectedInsight, debate }: ParticipationOrderProps) {
+export default function ParticipationOrder({ selectedInsight, debate, opinion }: ParticipationOrderProps) {
   const [mode, setMode] = useState<'vote' | 'create'>('vote');
   const { addInsight } = useSparringContext();
   const [tokenAmount, setTokenAmount] = useState<number>(10);
@@ -180,7 +181,7 @@ export default function ParticipationOrder({ selectedInsight, debate }: Particip
               <div className="space-y-3">
                 <Label className="text-sm font-medium text-foreground">입장</Label>
                 <div className="flex">
-                  {insight.side === 'pros' ? (
+                  {opinion === 'pros' ? (
                     <button
                       className="flex-1 p-4 rounded-lg border-2 text-center transition-all duration-200 bg-blue-200/20 text-blue-500 border-blue-500 dark:bg-blue-800/20 dark:text-blue-500 dark:border-blue-800"
                     >
@@ -303,7 +304,7 @@ export default function ParticipationOrder({ selectedInsight, debate }: Particip
           >
             <span>
               {mode === 'vote' ? (
-                `${tokenAmount} ARGX로 ${insight?.side === 'pros' ? '찬성하기' : '반대하기'}`
+                `${tokenAmount} ARGX로 ${opinion === 'pros' ? '찬성하기' : '반대하기'}`
               ) : (
                 `${tokenAmount} ARGX로 ${newInsightOpinion === 'pros' ? '찬성' : '반대'} 인사이트 작성하기`
               )}
@@ -384,8 +385,8 @@ export default function ParticipationOrder({ selectedInsight, debate }: Particip
                   </div>
                   <div className="flex justify-between items-center">
                     <span className="text-sm font-medium text-muted-foreground">입장:</span>
-                    <Badge variant={insight?.side === 'pros' ? 'default' : 'destructive'}>
-                      {insight?.side === 'pros' ? '찬성' : '반대'}
+                    <Badge variant={opinion === 'pros' ? 'default' : 'destructive'}>
+                      {opinion === 'pros' ? '찬성' : '반대'}
                     </Badge>
                   </div>
                 </>
@@ -452,7 +453,7 @@ export default function ParticipationOrder({ selectedInsight, debate }: Particip
               </h3>
               <p className="text-muted-foreground text-sm leading-relaxed">
                 {mode === 'vote'
-                  ? `성공적으로 ${tokenAmount} ARGX 토큰을 스테이킹하여 이 인사이트를 ${insight?.side === 'pros' ? '찬성' : '반대'}했습니다.`
+                  ? `성공적으로 ${tokenAmount} ARGX 토큰을 스테이킹하여 이 인사이트를 ${opinion === 'pros' ? '찬성' : '반대'}했습니다.`
                   : `새 인사이트가 성공적으로 작성되었으며 ${tokenAmount} ARGX 토큰이 ${newInsightOpinion === 'pros' ? '찬성' : '반대'} 의견으로 스테이킹되었습니다.`
                 }
               </p>
