@@ -18,7 +18,7 @@ interface ParticipationOrderProps {
 
 export default function ParticipationOrder({ selectedInsight, debate, opinion }: ParticipationOrderProps) {
   const [mode, setMode] = useState<'vote' | 'create'>('vote');
-  const { addInsight } = useSparringContext();
+  const { addInsight, voteInsight, isAlreadyVoted, setIsAlreadyVoted } = useSparringContext();
   const [tokenAmount, setTokenAmount] = useState<number>(10);
   const [newInsightText, setNewInsightText] = useState('');
   const [newInsightOpinion, setNewInsightOpinion] = useState<'pros' | 'cons'>('pros');
@@ -49,19 +49,20 @@ export default function ParticipationOrder({ selectedInsight, debate, opinion }:
       if (mode === 'vote') {
         if (!debate || !insight) return;
 
-        const response = await fetch(`/api/debates/${debate.id}/insights/${insight?.id}/vote`, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            insight_id: insight.id,
-            argx: tokenAmount,
-          }),
-        });
+        try {
+          const result = await voteInsight(insight.id, tokenAmount);
 
-        if (response.ok) {
-          updateUserArgx((user?.argx || 0) - tokenAmount);
+          setShowConfirm(false);
+          if (result === "already voted") {
+            setIsAlreadyVoted(true);
+            return;
+          } else {
+            setOrderPlaced(true);
+          }
+        } catch (error) {
+          console.error('Vote failed:', error);
+          setShowConfirm(false);
+          return;
         }
       } else {
         if (!debate) return;
@@ -69,14 +70,11 @@ export default function ParticipationOrder({ selectedInsight, debate, opinion }:
         const debateSideId = newInsightOpinion === 'pros' ? debate.pros.id : debate.cons.id;
         await addInsight(newInsightText, debateSideId, tokenAmount);
 
-        updateUserArgx((user?.argx || 0) - tokenAmount);
+        setShowConfirm(false);
+        setOrderPlaced(true);
       }
 
-    } catch (error) {
-      console.error(error);
-    } finally {
-      setShowConfirm(false);
-      setOrderPlaced(true);
+      updateUserArgx((user?.argx || 0) - tokenAmount);
 
       setTimeout(() => {
         setOrderPlaced(false);
@@ -86,6 +84,10 @@ export default function ParticipationOrder({ selectedInsight, debate, opinion }:
           setNewInsightOpinion('pros');
         }
       }, 3000);
+
+    } catch (error) {
+      console.error('Error in confirmAction:', error);
+      setShowConfirm(false);
     }
   };
 
@@ -462,6 +464,44 @@ export default function ParticipationOrder({ selectedInsight, debate, opinion }:
               +{Math.floor(tokenAmount * 0.1)} 영향력 포인트 획득
             </div>
           </div>
+        </DialogContent>
+      </Dialog>
+
+      {/* Already Voted Warning Dialog */}
+      <Dialog open={isAlreadyVoted} onOpenChange={(open) => {
+        if (!open) {
+          setIsAlreadyVoted(false);
+        }
+      }}>
+        <DialogContent className="sm:max-w-md">
+          <DialogHeader className="text-center pb-4">
+            <div className="w-12 h-12 bg-yellow-100 rounded-full flex items-center justify-center mx-auto mb-3">
+              <Info className="h-6 w-6 text-yellow-500" />
+            </div>
+            <DialogTitle className="text-xl font-semibold text-foreground">
+              이미 투표하셨습니다
+            </DialogTitle>
+            <DialogDescription className="text-muted-foreground">
+              이 인사이트에는 이미 투표를 완료하셨습니다
+            </DialogDescription>
+          </DialogHeader>
+
+          <div className="space-y-4">
+            <div className="p-4 bg-muted rounded-lg">
+              <div className="text-sm text-muted-foreground text-center">
+                다른 인사이트에 투표하거나 새 인사이트를 작성해보세요
+              </div>
+            </div>
+          </div>
+
+          <DialogFooter className="flex space-x-3 pt-4">
+            <Button
+              onClick={() => setIsAlreadyVoted(false)}
+              className="flex-1 bg-foreground hover:bg-foreground/80 text-background"
+            >
+              확인
+            </Button>
+          </DialogFooter>
         </DialogContent>
       </Dialog>
     </div>
