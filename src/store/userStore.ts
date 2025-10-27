@@ -36,6 +36,7 @@ export const useUserStore = create<State & Action>()(
         logout: async () => {
           try {
             await fetch("/api/login", { method: "DELETE" });
+            globalThis.window.location.href = "/";
           } catch (error) {
             console.error("Logout API call failed:", error);
           }
