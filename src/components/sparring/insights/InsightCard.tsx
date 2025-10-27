@@ -4,6 +4,7 @@ import { Clock, TrendingUp } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import { getRelativeDate } from "@/lib/getRelativeDate";
+import Image from "next/image";
 
 interface InsightCardProps {
   insight: Insight;
@@ -68,9 +69,19 @@ export default function InsightCard({ insight, opinion, onVoteClick, isSelected 
                 w-10 h-10 rounded-full overflow-hidden border transition-all duration-200 shadow-sm
                 ${isSelected ? 'border-foreground shadow-md' : 'border-border hover:border-foreground/50'}
               `}>
-                <div className={`w-full h-full flex items-center justify-center text-white font-medium text-sm ${getUserColor(insight.creator.name)}`}>
-                  {insight.creator.name.charAt(0).toUpperCase()}
-                </div>
+                {insight.creator.avatar ? (
+                  <Image
+                    src={insight.creator.avatar}
+                    alt={insight.creator.name}
+                    className="w-full h-full object-cover"
+                    width={40}
+                    height={40}
+                  />
+                ) : (
+                  <div className={`w-full h-full flex items-center justify-center text-white font-medium text-sm ${getUserColor(insight.creator.name)}`}>
+                    {insight.creator.name.charAt(0).toUpperCase()}
+                  </div>
+                )}
               </div>
             </div>
 
