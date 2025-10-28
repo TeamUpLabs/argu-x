@@ -5,6 +5,7 @@ import { useState } from "react";
 import Image from "next/image";
 import { useSparringContext } from "@/provider/SparringProvider";
 import { useUserStore } from "@/store/userStore";
+import { getRelativeDate } from "@/lib/getRelativeDate";
 
 interface CommentsProps {
   debate?: Debate;
@@ -72,7 +73,7 @@ export default function Comments({ debate }: CommentsProps) {
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-2">
                     <span className="text-foreground font-semibold">{comment.creator.name}</span>
-                    <span className="text-muted-foreground text-xs">{comment.created_at}</span>
+                    <span className="text-muted-foreground text-xs">{getRelativeDate(comment.created_at)}</span>
                   </div>
                   {comment.creator.id === user?.id && (
                     <button
