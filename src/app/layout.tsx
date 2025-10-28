@@ -1,7 +1,17 @@
 import "./globals.css";
 import { ThemeProvider } from "@/provider/ThemeProvider";
 import { Toaster } from "@/components/ui/sonner";
-import { Metadata } from "next";
+import { Metadata, Viewport } from "next";
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 1,
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#ffffff" },
+    { media: "(prefers-color-scheme: dark)", color: "#000000" }
+  ]
+};
 
 export const metadata: Metadata = {
   title: {
@@ -69,15 +79,6 @@ export const metadata: Metadata = {
     shortcut: "/favicon.ico",
   },
   manifest: "/manifest.json",
-  themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#ffffff" },
-    { media: "(prefers-color-scheme: dark)", color: "#000000" }
-  ],
-  viewport: {
-    width: "device-width",
-    initialScale: 1,
-    maximumScale: 1,
-  },
   robots: {
     index: true,
     follow: true,
