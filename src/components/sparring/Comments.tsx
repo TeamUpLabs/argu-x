@@ -50,10 +50,10 @@ export default function Comments({ debate }: CommentsProps) {
         </InputGroupAddon>
       </InputGroup>
 
-      {debate?.comments.length === 0 ? (
+      {!debate || !debate.comments || debate.comments.length === 0 ? (
         <p className="text-muted-foreground text-center">No comments.</p>
       ) : (
-        debate?.comments
+        debate.comments
           .toSorted((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime())
           .map((comment) => (
             <div key={comment.id} className="flex items-start p-2">
