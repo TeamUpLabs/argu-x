@@ -120,7 +120,7 @@ export default function ParticipationOrder({ selectedInsight, debate, opinion }:
                   </div>
                   <div>
                     <div className={`font-medium text-sm ${mode === 'vote' ? 'text-foreground' : 'text-muted-foreground'}`}>
-                      기존 인사이트 투표
+                      인사이트 투표
                     </div>
                   </div>
                 </div>
