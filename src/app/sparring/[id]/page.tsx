@@ -20,6 +20,7 @@ import Comments from "@/components/sparring/Comments";
 import Order from "@/components/sparring/Order";
 import { Loading } from "@/components/common/Loading";
 import { useSparringContext } from "@/provider/SparringProvider";
+import TopHolders from "@/components/sparring/charts/TopHolders";
 
 export default function SparringPage() {
   const { debate, isLoading, error } = useSparringContext();
@@ -259,7 +260,15 @@ export default function SparringPage() {
                     <Comments debate={debate} />
                   </TabsContent>
                   <TabsContent value="top_holders">
-
+                    <div className="divide-y divide-border">
+                      <div className="flex items-center justify-between p-2">
+                        <span className="text-foreground font-bold text-lg">TOP HOLDERS</span>
+                        <span className="text-muted-foreground font-bold text-lg">ARGX</span>
+                      </div>
+                      {debate?.top_holders?.map((holder) => (
+                        <TopHolders key={holder.user.id} top_holder={holder} />
+                      ))}
+                    </div>
                   </TabsContent>
                 </Tabs>
               </div>

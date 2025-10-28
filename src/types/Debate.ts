@@ -35,6 +35,7 @@ export interface Debate {
   };
 
   comments: Comment[];
+  top_holders: TopHolder[];
 }
 
 export interface Insight {
@@ -77,4 +78,17 @@ export interface Comment {
     created_at: string;
     updated_at: string;
   };
+}
+
+export interface TopHolder {
+  user: {
+    id: number;
+    name: string;
+    email: string;
+    avatar: string;
+    created_at: string;
+    updated_at: string;
+  };
+  total_argx: number;
+  insights: Insight[];
 }
