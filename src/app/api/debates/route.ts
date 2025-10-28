@@ -1,6 +1,18 @@
-export async function GET() {
+import { NextRequest } from "next/server";
+
+export async function GET(request: NextRequest) {
   try {
-    const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/debates/`, {
+    let category = request.nextUrl.searchParams.get("category");
+
+    if (!category) {
+      category = request.headers.get("category");
+    }
+    
+    const url = category 
+      ? `${process.env.NEXT_PUBLIC_API_URL}/api/v1/debates?category=${category}`
+      : `${process.env.NEXT_PUBLIC_API_URL}/api/v1/debates/`;
+      
+    const response = await fetch(url, {
       headers: {
         "Content-Type": "application/json",
       },
