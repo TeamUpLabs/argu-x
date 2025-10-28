@@ -131,7 +131,7 @@ export default function SparringPage() {
                       </div>
                       <div className="flex px-3 py-0.5 justify-center items-center bg-muted rounded-full border border-border">
                         <span className="text-xs font-medium text-foreground">
-                          {debate?.pros.count || 0 + (debate?.cons.count || 0)}개
+                          {(debate?.pros.count || 0) + (debate?.cons.count || 0)}개
                         </span>
                       </div>
                     </div>
