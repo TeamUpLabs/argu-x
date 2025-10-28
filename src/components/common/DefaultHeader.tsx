@@ -10,6 +10,7 @@ import { usePathname } from "next/navigation";
 import { useState, useEffect, useRef, useCallback } from "react";
 import { Button } from "@/components/ui/button";
 import { Command, CommandList, CommandEmpty, CommandGroup, CommandItem, CommandSeparator } from "@/components/ui/command";
+import { Kbd } from "@/components/ui/kbd";
 
 interface Category {
   name: string;
@@ -100,6 +101,32 @@ export default function DefaultHeader({ fixed }: { fixed?: boolean }) {
   const [showRightArrow, setShowRightArrow] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
   const [isSearchOpen, setIsSearchOpen] = useState(false);
+  const [isMac, setIsMac] = useState(false);
+
+  useEffect(() => {
+    // Detect if the user is on a Mac
+    setIsMac(/Mac|iPod|iPhone|iPad/.test(navigator.platform));
+  }, []);
+
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      // Check for Cmd+/ (Mac) or Ctrl+/ (Windows/Linux)
+      if ((isMac ? e.metaKey : e.ctrlKey) && e.key === '/') {
+        e.preventDefault();
+        setIsSearchOpen(true);
+        // Focus the search input
+        const input = inputRef.current?.querySelector('input');
+        if (input) {
+          input.focus();
+        }
+      }
+    };
+
+    globalThis.addEventListener('keydown', handleKeyDown);
+    return () => {
+      globalThis.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [isMac]);
 
   const checkScrollArrows = () => {
     if (scrollRef.current) {
@@ -173,6 +200,9 @@ export default function DefaultHeader({ fixed }: { fixed?: boolean }) {
             />
             <InputGroupAddon>
               <Search />
+            </InputGroupAddon>
+            <InputGroupAddon align="inline-end">
+              <Kbd>{isMac ? '⌘' : 'Ctrl'} + /</Kbd>
             </InputGroupAddon>
           </InputGroup>
           {isSearchOpen && (
