@@ -20,7 +20,7 @@ import Comments from "@/components/sparring/Comments";
 import Order from "@/components/sparring/Order";
 import { Loading } from "@/components/common/Loading";
 import { useSparringContext } from "@/provider/SparringProvider";
-import TopHolders from "@/components/sparring/charts/TopHolders";
+import TopHolders from "@/components/sparring/TopHolders";
 
 export default function SparringPage() {
   const { debate, isLoading, error } = useSparringContext();
