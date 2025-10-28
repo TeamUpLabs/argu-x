@@ -1,6 +1,6 @@
 import { cookies } from "next/headers";
 
-export async function POST(request: Request, { params }: { params: { debate_id: number } }) {
+export async function POST(request: Request, { params }: { params: Promise<{ debate_id: number }> }) {
   try {
     const cookieStore = await cookies();
     const token = cookieStore.get("token")?.value;
@@ -10,8 +10,9 @@ export async function POST(request: Request, { params }: { params: { debate_id: 
     }
 
     const body = await request.json();
+    const { debate_id } = await params;
 
-    const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/debates/${params.debate_id}/comments`, {
+    const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/debates/${debate_id}/comments`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -33,7 +34,7 @@ export async function POST(request: Request, { params }: { params: { debate_id: 
   }
 }
 
-export async function DELETE(request: Request, { params }: { params: { debate_id: number, comment_id: number } }) {
+export async function DELETE(request: Request, { params }: { params: Promise<{ debate_id: number, comment_id: number }> }) {
   try {
     const cookieStore = await cookies();
     const token = cookieStore.get("token")?.value;
@@ -43,8 +44,9 @@ export async function DELETE(request: Request, { params }: { params: { debate_id
     }
 
     const body = await request.json();
+    const { debate_id } = await params;
 
-    const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/debates/${params.debate_id}/comments/${body.comment_id}`, {
+    const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/debates/${debate_id}/comments/${body.comment_id}`, {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
