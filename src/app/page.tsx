@@ -37,7 +37,7 @@ export default function Home() {
     <div className="min-h-screen flex flex-col">
       <DefaultHeader fixed />
       <main className="flex-1 py-10">
-        {debates.length > 0 ? (
+        {debates && debates.length > 0 ? (
           <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
             {debates.map((debate: Debate, index: number) => (
               <DebateCard key={index} debate={debate} />
